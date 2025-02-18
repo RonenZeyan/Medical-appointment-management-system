@@ -1,0 +1,26 @@
+
+const express = require("express");
+const connectToDB = require("./config/connectToDB");
+const cors = require("cors");
+require("dotenv").config();
+
+connectToDB(); //connec to mongodb 
+const app = express();
+app.use(express.json());
+app.use(cors());
+
+
+//import routes 
+const authRoutes = require("./routes/authRoutes");
+
+
+//use routes
+app.use("/api/auth", authRoutes);
+
+
+
+//start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is Running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+});

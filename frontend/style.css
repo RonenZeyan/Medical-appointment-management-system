@@ -1,0 +1,19 @@
+:root {
+    /* 🎨 צבעי הרקע */
+    --background-color: #f4f4f4; /* רקע כללי של הדף */
+    --body-text-color: #333; /* צבע טקסט כללי */
+    
+    /* 🎨 צבעי כפתורים */
+    --button-bg: #007bff; /* רקע של כפתור */
+    --button-hover-bg: #0056b3; /* רקע של כפתור במעבר עכבר */
+    --button-text-color: #ffffff; /* צבע טקסט בתוך כפתור */
+    
+    /* 🎨 צבעים נוספים */
+    --card-bg: #ffffff; /* רקע של כרטיסים */
+    --border-color: #ddd; /* צבע מסגרת */
+    --link-color: #007bff; /* צבע של קישורים */
+    --link-hover-color: #0056b3; /* צבע של קישורים במעבר עכבר */
+
+    --border-radius:12px;
+}
+

@@ -5,6 +5,7 @@ const validateObjectId = require("../middlewares/validateObjectId");
 const { getAllClinics, addNewClinic, deleteClinic, getSpecificClinicByName } = require("../controllers/clinicsController");
 const router = express.Router();
 
+
 router.get("/", getAllClinics);
 router.post("/new-clinic", verifyTokenIsAdmin, addNewClinic);
 router.post("/find-by-name", getSpecificClinicByName);

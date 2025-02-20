@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Document</title>
+    <!-- Bootstrap icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- CSS LINKS -->
+    <link
+        rel="stylesheet"
+        href="../../style.css"
+    >
+    <link
+        rel="stylesheet"
+        href="../dashboard.css"
+    >
+    <style>
+        .add-new-clinic{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #add-clinic-form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 8px gray;
+            width: 100%;
+            max-width: 600px;
+        }
+        .form-raw{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            gap: 10px;
+        }
+
+        .form-raw input,select{
+            width: 100%;
+            border: none;
+            background-color: var(--background-color);
+            padding: 8px 5px;
+            border-radius: var(--border-radius);
+            direction: rtl;
+        }
+
+        #add-clinic-btn{
+            background-color: var(--button-bg);
+            border: none;
+            width: 100%;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            color: var(--button-text-color);
+            font-weight: bolder;
+            transition: .6s ease-in-out;
+        }
+        #add-clinic-btn:hover{
+            background-color: var(--button-hover-bg);
+            cursor: pointer;
+            transform: scale(1.05);
+        }
+        .time-div{
+            display: flex;
+        }
+        #opening-time{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Dashboard</h1>
+        <section id="dashboard">
+            <aside id="dashboard-sidebar">
+                <h3>Admin Dashboard</h3>
+                <ul style="border-top: 3px solid var(--background-color)">
+                    <li><a href="#dashboard">dashboard</a></li>
+                    <li><a href="#appointment"><i class="bi bi-calendar-heart"></i> Appointments</a></li>
+                    <li><a href="#users"><i class="bi bi-people"></i> Users</a></li>
+                    <li><a href="#users"><i class="bi bi-person-add"></i> Add New User</a></li>
+                    <li><a href="#clinics"><i class="bi bi-building"></i> clinics</a></li>
+                    <li  class="active"><a href="#add"><i class="bi bi-building-add"></i> Add New Clinic</a></li>
+                    <li><a href="#medicalField"><i class="bi bi-file"></i> Medical Field</a></li>
+                    <li><a href="#add"><i class="bi bi-file-plus"></i> Add New MedicalField</a></li>
+                </ul>
+            </aside>
+            <div id="dashboard-content">
+                <h1 style="text-align: center;">הוספת מרפאה חדשה</h1>
+                <section class="add-new-clinic">
+                    <form id="add-clinic-form">
+                        <div class="form-raw">
+                            <label for="clinic-name">שם מרפאה</label>
+                            <input type="text" id="clinic-name">
+                        </div>
+                        <div class="form-raw">
+                            <label for="clinic-phone">טלפון</label>
+                            <input type="tel" id="clinic-phone">
+                        </div>
+                        <label for="">שעות פעילות</label>
+                        <div class="form-raw" id="opening-time">
+                            <div>
+                                <label>ראשון</label>
+                                <div class="time-div">
+                                    <input type="time" name="sunday_start">
+                                    <input type="time" name="sunday_end">
+                                </div>
+                            </div>
+                    
+                            <div>
+                                <label>שני</label>
+                                <div class="time-div">
+                                <input type="time" name="monday_start" >
+                                <input type="time" name="monday_end">
+                            </div>
+                            </div>
+                    
+                            <div>
+                                <label>שלישי</label>
+                                <div class="time-div">
+                                <input type="time" name="tuesday_start">
+                                <input type="time" name="tuesday_end">
+                            </div>
+                            </div>
+                    
+                            <div>
+                                <label>רביעי</label>
+                                <div class="time-div">
+                                <input type="time" name="wednesday_start">
+                                <input type="time" name="wednesday_end">
+                            </div>
+                            </div>
+                    
+                            <div>
+                                <label>חמישי</label>
+                                <div class="time-div">
+                                <input type="time" name="thursday_start">
+                                <input type="time" name="thursday_end">
+                            </div>
+                            </div>
+                    
+                            <div>
+                                <label>שישי</label>
+                                <div class="time-div">
+                                <input type="time" name="friday_start">
+                                <input type="time" name="friday_end">
+                            </div>
+                            </div>
+                    
+                            <div>
+                                <label>שבת</label>
+                                <div class="time-div">
+                                <input type="time" name="saturday_start">
+                                <input type="time" name="saturday_end">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="form-raw">
+                            <label for="">צירוף רופאים כולל תחום הרפואי <b>(לבחירה מרובה ללחוץ CTRL+CHOOSE DOCTORS)</b></label>
+                            <select id="doctors-select" multiple size="5">
+                                <option value="doctor1">doctor 1</option>
+                                <option value="doctor2">doctor 1</option>
+                                <option value="doctor3">doctor 1</option>
+                                <option value="doctor4">doctor 1</option>
+                            </select>
+                        </div>
+                        <div class="form-raw">
+                            <label for="location">מיקום המרפאה</label>
+                            <input type="text" placeholder="עיר">
+                            <select id="location-select">
+                                <option value="צפון">צפון</option>
+                                <option value="דרום">דרום</option>
+                                <option value="מרכז">מרכז</option>
+                            </select>
+                            <input type="text" placeholder="כתובת - ירכא כביש ראשי">
+                        </div>
+                        <button id="add-clinic-btn">הוספת מרפאה חדשה</button>
+                    </form>
+                </section>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+/* Importing main variables css */
+@import url("./../styles.css");
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--background-primary-color);
+}
+
+#register-form-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  border-radius: var(--border-radius);
+  padding: 10px;
+  background-color: var(--background-secondary-color);
+}
+
+#register-form-container-title {
+  text-align: center;
+}
+
+#register-form-input {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#register-form-button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#register-form-links {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+#register-form-button {
+  color: white;
+  text-decoration: none;
+
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: var(--border-radius);
+  background-color: var(--background-secondary-color);
+
+  transition: all 0.3s ease-in-out;
+}
+
+#register-form-button:hover {
+  background-color: #2980b9;
+  box-shadow: 0 0 15px rgba(52, 152, 219, 1);
+}
+
+#register-error {
+  display: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

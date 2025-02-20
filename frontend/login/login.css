@@ -1,0 +1,66 @@
+/* Importing main variables css */
+@import url("./../styles.css");
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--background-primary-color);
+}
+
+#login-form-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  border-radius: var(--border-radius);
+  padding: 10px;
+  background-color: var(--background-secondary-color);
+}
+
+#login-form-container-title {
+  text-align: center;
+}
+
+#login-form-input {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#login-form-button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#login-form-links {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+#login-form-button {
+  color: white;
+  text-decoration: none;
+
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: var(--border-radius);
+  background-color: var(--background-secondary-color);
+
+  transition: all 0.3s ease-in-out;
+}
+
+#login-form-button:hover {
+  background-color: #2980b9;
+  box-shadow: 0 0 15px rgba(52, 152, 219, 1);
+}
+
+#login-error {
+  display: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

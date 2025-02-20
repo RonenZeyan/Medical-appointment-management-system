@@ -1,0 +1,104 @@
+:root {
+  /* 🎨 צבעי הרקע */
+  --background-primary-color: #f4f4f4; /* רקע כללי של הדף */
+  --background-secondary-color: #007bff; /* רקע כללי של רכיב */
+  --body-text-color: #333; /* צבע טקסט כללי */
+
+  /* 🎨 צבעי כפתורים */
+  --button-bg: #007bff; /* רקע של כפתור */
+  --button-hover-bg: #0056b3; /* רקע של כפתור במעבר עכבר */
+  --button-text-color: #ffffff; /* צבע טקסט בתוך כפתור */
+
+  /* 🎨 צבעים נוספים */
+  --card-bg: #ffffff; /* רקע של כרטיסים */
+  --border-color: #ddd; /* צבע מסגרת */
+  --link-color: #007bff; /* צבע של קישורים */
+  --link-hover-color: #0056b3; /* צבע של קישורים במעבר עכבר */
+
+  --border-radius: 12px;
+}
+
+/* Basic styles */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  direction: rtl;
+}
+
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--background-secondary-color);
+}
+
+.navbar-logo a {
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.navbar-links {
+  list-style-type: none;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: var(--border-radius);
+
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-links a:hover {
+  background-color: #2980b9;
+  box-shadow: 0 0 15px rgba(52, 152, 219, 1);
+}
+
+/* 
+.navbar-links a:hover {
+    background-color: #575757;
+    border-radius: 5px;
+} */
+
+/* Hamburger menu styles */
+
+.navbar-hamburger-contant {
+  display: none;
+}
+
+.navbar-hamburger-contant.active {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.navbar-hamburger-bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+}
+
+.navbar-hamburger.active {
+  background-color: rgb(236, 3, 3);
+
+  position: absolute;
+  top: 6110px;
+  right: 0;
+  width: 100%;
+  background-color: #794646;
+  flex-direction: column;
+  align-items: center;
+  display: none;
+  padding: 1rem 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+    <link rel="stylesheet" href="register.css" />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header></header>
+
+    <!-- Main -->
+    <main class="register-container" id="register-container">
+      <div id="register-form-container">
+        <h2 id="register-form-container-title">הרשמה</h2>
+        <form id="register-form">
+          <div id="register-form-input">
+            <label id="username"><b>שם משתמש:</b></label>
+            <input type="text" id="username" placeholder="שם מתשמש" required />
+          </div>
+          <div id="register-form-input">
+            <label id="email"><b>אימייל:</b></label>
+            <input type="email" id="email" placeholder="אימייל" required />
+          </div>
+          <div id="register-form-input">
+            <label id="password"><b>סיסמה:</b></label>
+            <input type="password" id="password" placeholder="סיסמה" required />
+          </div>
+          <div id="register-error">
+            <span id="register-error-message"></span>
+          </div>
+          <div id="register-form-button-container">
+            <button type="submit" id="register-form-button">הרשם</button>
+            <div id="register-form-links">
+              <label id="password"><b>יש לך חשבון?</b></label>
+              <a href="#">התחבר</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer></footer>
+    <script src="register.js"></script>
+  </body>
+</html>

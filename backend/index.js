@@ -12,11 +12,15 @@ app.use(cors());
 
 //import routes 
 const authRoutes = require("./routes/authRoutes");
-
+const clinicsRoutes = require("./routes/clinicsRoutes");
+const medicalFieldRoutes = require("./routes/medicalFieldRoutes");
+const appointmentRoutes = require("./routes/appointmentRoutes");
 
 //use routes
 app.use("/api/auth", authRoutes);
-
+app.use("/api/medicalfield",medicalFieldRoutes);
+app.use("/api/clinic",clinicsRoutes);
+app.use("/api/appointment",appointmentRoutes);
 
 
 //start the server

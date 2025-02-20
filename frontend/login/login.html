@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header></header>
+
+    <!-- Main -->
+    <main class="login-container" id="login-container">
+      <div id="login-form-container">
+        <h2 id="login-form-container-title">התחברות</h2>
+        <form id="login-form">
+          <div id="login-form-input">
+            <label id="username"><b>שם משתמש:</b></label>
+            <input type="text" id="username" placeholder="שם מתשמש" required />
+          </div>
+          <div id="login-form-input">
+            <label id="password"><b>סיסמה:</b></label>
+            <input type="password" id="password" placeholder="סיסמה" required />
+          </div>
+          <div id="login-error">
+            <span id="login-error-message"></span>
+          </div>
+          <div id="login-form-button-container">
+            <button type="submit" id="login-form-button">התחבר</button>
+            <div id="login-form-links">
+              <label id="password"><b>אין לך חשבון?</b></label>
+              <a href="#">הרשמה</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer></footer>
+    <script src="login.js"></script>
+  </body>
+</html>

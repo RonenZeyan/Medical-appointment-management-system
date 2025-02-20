@@ -1,22 +1,35 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Template</title>
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
     <!-- Header -->
     <header>
-        <div class="logo"></div>
-        <nav class="navbar">
-            <ul>
-                <li><a href=""></a></li>
-            </ul>
-        </nav>
-        <div class="auth">
-
+      <nav class="navbar">
+        <div class="navbar-hamburger" id="navbar-hamburger">
+          <span class="navbar-hamburger-bar"></span>
+          <span class="navbar-hamburger-bar"></span>
+          <span class="navbar-hamburger-bar"></span>
         </div>
+        <div id="navbar-hamburger-contant">
+          <a href="./home/home.html">Home</a>
+          <a href="./login/login.html">Login</a>
+          <a href="./register/register.html">Register</a>
+          <a href="./dashboard/dashboard.html">Dashboard</a>
+        </div>
+
+        <ul class="navbar-links">
+          <li><a href="#">התחברות</a></li>
+        </ul>
+        <div class="navbar-logo">
+          <a href="#">MyLogo</a>
+        </div>
+      </nav>
     </header>
 
     <!-- Main -->
@@ -24,5 +37,6 @@
 
     <!-- Footer -->
     <footer>dasdsad</footer>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

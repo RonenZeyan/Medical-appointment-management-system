@@ -51,10 +51,8 @@
 }
 
 .active{
-
     background-color: var(--background-primary-color);
     border-radius: var(--border-radius);
-
 }
 li.active a{
     color: var(--link-hover-color) !important;

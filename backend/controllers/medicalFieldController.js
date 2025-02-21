@@ -15,6 +15,7 @@ const addNewMedicalField = async (req, res) => {
     const new_medicalfield = new MedicalField({
       name: req.body.name,
       description: req.body.description,
+      doctors:req.body.doctors,
     });
     await new_medicalfield.save();
     res.status(201).json({ message: "medicalField Add in successfully!" });
@@ -33,7 +34,8 @@ const addNewMedicalField = async (req, res) => {
 
 const getAllMedicalFields = async (req, res) => {
   try {
-    const medical_fields = await MedicalField.find();
+    const medical_fields = await MedicalField.find()
+    .populate("doctors",["-password"]);
     res.status(200).json(medical_fields);
   } catch (err) {
     console.error(err);
@@ -70,3 +72,83 @@ const DeleteMedicalField = async (req, res) => {
     res.status(500).json({ message: "Something went wrong!" });
   }
 };
+
+
+/**
+ * @description Get Specific MedicalField
+ * @router /api/medicalfield/:id
+ * @method GET
+ * @access public
+ */
+
+const getSpecificMedicalField = async (req, res) => {
+  try {
+    //get id medicalField
+    const id_medicalField = req.params.id;
+    const medical_field = await MedicalField.findById(id_medicalField);
+
+    if (!medical_field) {
+      return res.status(404).json({ message: "Medical field dont exit" });
+    }
+
+    res.status(200).json(medical_field);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Something went wrong!" });
+  }
+};
+
+
+
+
+/**
+ * @description Update specific medical field
+ * @router /api/medicalfield/:id
+ * @method PATCH
+ * @access private (only admin)
+ */
+
+const updateMedicalField = async (req, res) => {
+    try {
+      const { id } = req.params; // Get the medical field ID from the URL parameters
+      const updatedData = req.body; // Get the updated data from the request body
+  
+      // Check if the medical field exists
+      const medicalField = await MedicalField.findById(id);
+  
+      if (!medicalField) {
+        return res.status(404).json({ message: "Medical field not found" });
+      }
+  
+      // Update specific fields (name and description)
+      if (updatedData.name) medicalField.name = updatedData.name;
+      if (updatedData.description) medicalField.description = updatedData.description;
+      if (updatedData.doctors) medicalField.doctors = updatedData.doctors;
+
+  
+      // Save the updated medical field
+      await medicalField.save();
+  
+      // Return the updated medical field
+      res.status(200).json({
+        message: "Medical field updated successfully",
+        medicalField,
+      });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Something went wrong!" });
+    }
+  };
+
+
+
+
+module.exports = {
+  addNewMedicalField,
+  getAllMedicalFields,
+  DeleteMedicalField,
+  getSpecificMedicalField,
+  updateMedicalField
+};
+
+

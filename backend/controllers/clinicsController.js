@@ -70,3 +70,64 @@ const deleteClinic = async (req, res) => {
     res.status(500).json({ message: "Something went wrong!" });
   }
 };
+
+/**
+ * @description update Clinic
+ * @router /api/clinic/:id
+ * @method PATCH
+ * @access private (only admin)
+ */
+
+const updateClinic = async (req, res) => {
+  try {
+    //get id
+    const clinic_id = req.params.id;
+    const updatedData = req.body; // Get the updated clinic data from the request body
+
+    const clinic = await Clinic.findByIdAndUpdate(clinic_id, updatedData, {
+      new: true,
+    });
+
+    if (!clinic) {
+      return res.status(404).json({ message: "Clinit not found!" });
+    }
+
+    return res.status(200).json(clinic);
+  } catch {
+    res.status(500).json({ message: "Something went wrong!" });
+  }
+};
+
+/**
+ * @description Get specific clinic
+ * @router /api/clinic/:id
+ * @method GET
+ * @access public
+ */
+
+const getSpecificClinic = async (req, res) => {
+  try {
+    //get id
+    const clinic_id = req.params.id;
+    const clinic = await Clinic.findById(clinic_id);
+
+    if (!clinic) {
+      return res.status(404).json({ message: "Clinic Not Exist" });
+    }
+
+    res.status(200).json(clinic);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Something went wrong!" });
+  }
+};
+
+
+module.exports = {
+  addNewClinic,
+  getAllClinics,
+  deleteClinic,
+  updateClinic,
+  getSpecificClinic,
+};
+

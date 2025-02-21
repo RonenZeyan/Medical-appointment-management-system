@@ -1,3 +1,4 @@
+const { model } = require("mongoose");
 const { Appointment } = require("../models/Appointments");
 
 /**
@@ -77,14 +78,36 @@ const DeleteSpecificAppointment = async (req, res) => {
     //delete the appointment
     await Appointment.findByIdAndDelete(req.params.id);
 
-    res
-      .status(200)
-      .json({
-        message: "Appointment Has Been Deleted Successfully!",
-        exist_appointment,
-      });
+    res.status(200).json({
+      message: "Appointment Has Been Deleted Successfully!",
+      exist_appointment,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Something went wrong" });
   }
+};
+
+/**
+ * @description Get all Appointments
+ * @router /api/appointment
+ * @method GET
+ * @access private (only logged in user or doctor or admin)
+ */
+const GetallAppointments = async (req, res) => {
+  try {
+    const allAppointments = await Appointment.find();
+
+    return res.status(200).json(allAppointments);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+module.exports = {
+  addNewAppointment,
+  GetSpecificAppointment,
+  DeleteSpecificAppointment,
+  GetallAppointments,
 };

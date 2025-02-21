@@ -105,9 +105,11 @@ const GetallAppointments = async (req, res) => {
   }
 };
 
+
 module.exports = {
   addNewAppointment,
   GetSpecificAppointment,
   DeleteSpecificAppointment,
   GetallAppointments,
 };
+

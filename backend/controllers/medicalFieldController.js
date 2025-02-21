@@ -15,6 +15,7 @@ const addNewMedicalField = async (req, res) => {
     const new_medicalfield = new MedicalField({
       name: req.body.name,
       description: req.body.description,
+      doctors:req.body.doctors,
     });
     await new_medicalfield.save();
     res.status(201).json({ message: "medicalField Add in successfully!" });
@@ -33,7 +34,8 @@ const addNewMedicalField = async (req, res) => {
 
 const getAllMedicalFields = async (req, res) => {
   try {
-    const medical_fields = await MedicalField.find();
+    const medical_fields = await MedicalField.find()
+    .populate("doctors",["-password"]);
     res.status(200).json(medical_fields);
   } catch (err) {
     console.error(err);
@@ -70,6 +72,7 @@ const DeleteMedicalField = async (req, res) => {
     res.status(500).json({ message: "Something went wrong!" });
   }
 };
+
 
 /**
  * @description Get Specific MedicalField
@@ -139,6 +142,7 @@ const updateMedicalField = async (req, res) => {
 
 
 
+
 module.exports = {
   addNewMedicalField,
   getAllMedicalFields,
@@ -146,3 +150,5 @@ module.exports = {
   getSpecificMedicalField,
   updateMedicalField
 };
+
+

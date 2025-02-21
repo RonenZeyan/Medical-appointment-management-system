@@ -2,6 +2,7 @@
 const express = require("express");
 const { verifyTokenIsAdmin } = require("../middlewares/verifyToken");
 const validateObjectId = require("../middlewares/validateObjectId");
+const { getAllClinics, addNewClinic, deleteClinic } = require("../controllers/clinicsController");
 const router = express.Router();
 
 

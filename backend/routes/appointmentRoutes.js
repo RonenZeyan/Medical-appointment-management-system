@@ -1,3 +1,4 @@
+const { GetSpecificAppointment, addNewAppointment, DeleteSpecificAppointment } = require("../controllers/appointmentController");
 const validateObjectId = require("../middlewares/validateObjectId");
 const express = require("express");
 const router = express.Router();

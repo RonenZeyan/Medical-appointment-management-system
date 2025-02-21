@@ -122,6 +122,7 @@ const getSpecificClinic = async (req, res) => {
   }
 };
 
+
 module.exports = {
   addNewClinic,
   getAllClinics,
@@ -129,3 +130,4 @@ module.exports = {
   updateClinic,
   getSpecificClinic,
 };
+

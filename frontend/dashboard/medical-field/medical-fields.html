@@ -17,13 +17,16 @@
     <!-- CSS LINKS -->
     <link
         rel="stylesheet"
-        href="../../style.css"
+        href="../../styles.css"
     >
     <link
         rel="stylesheet"
         href="../dashboard.css"
     >
-    <link rel="stylesheet" href="../table.css">
+    <link
+        rel="stylesheet"
+        href="../table.css"
+    >
 </head>
 
 <body>
@@ -32,7 +35,7 @@
         <section id="dashboard">
             <aside id="dashboard-sidebar">
                 <h3>Admin Dashboard</h3>
-                <ul style="border-top: 3px solid var(--background-color)">
+                <ul style="border-top: 3px solid var(--background-primary-color)">
                     <li class="active"><a href="#dashboard">dashboard</a></li>
                     <li><a href="#appointment"><i class="bi bi-calendar-heart"></i> Appointments</a></li>
                     <li><a href="#users"><i class="bi bi-people"></i> Users</a></li>
@@ -46,61 +49,104 @@
             <div id="dashboard-content">
                 <h1 style="text-align: center;">תחום רפואי</h1>
                 <section class="table-section">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>שם תחום</th>
-                                    <th>תיאור</th>
-                                    <th>פעולות</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>צאט גיפיטי</td>
-                                    <td>chatgpt@email.com</td>
-                                    <td>
-                                        <button class="more-btn">More...</button>
-                                        <button class="delete-btn">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>צאט גיפיטי</td>
-                                    <td>chatgpt@email.com</td>
-                                    <td>
-                                        <button class="more-btn">More...</button>
-                                        <button class="delete-btn">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>צאט גיפיטי</td>
-                                    <td>chatgpt@email.com</td>
-                                    <td>
-                                        <button class="more-btn">More...</button>
-                                        <button class="delete-btn">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>צאט גיפיטי</td>
-                                    <td>chatgpt@email.com</td>
-                                    <td>
-                                        <button class="more-btn">More...</button>
-                                        <button class="delete-btn">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>צאט גיפיטי</td>
-                                    <td>chatgpt@email.com</td>
-                                    <td>
-                                        <button class="more-btn">More...</button>
-                                        <button class="delete-btn">Delete</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>שם תחום</th>
+                                <th>תיאור</th>
+                                <th>פעולות</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mdfield-table-body">
+                            <tr>
+                                <td>צאט גיפיטי</td>
+                                <td>chatgpt@email.com</td>
+                                <td>
+                                    <button class="more-btn">More...</button>
+                                    <button class="delete-btn">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>צאט גיפיטי</td>
+                                <td>chatgpt@email.com</td>
+                                <td>
+                                    <button class="more-btn">More...</button>
+                                    <button class="delete-btn">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>צאט גיפיטי</td>
+                                <td>chatgpt@email.com</td>
+                                <td>
+                                    <button class="more-btn">More...</button>
+                                    <button class="delete-btn">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>צאט גיפיטי</td>
+                                <td>chatgpt@email.com</td>
+                                <td>
+                                    <button class="more-btn">More...</button>
+                                    <button class="delete-btn">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>צאט גיפיטי</td>
+                                <td>chatgpt@email.com</td>
+                                <td>
+                                    <button class="more-btn">More...</button>
+                                    <button class="delete-btn">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
             </div>
         </section>
     </main>
+
+    <script>
+        //get widgets and set vars
+        let md_fields_table_body = document.getElementById("mdfield-table-body");
+
+        //onload of page
+        window.addEventListener("load", () => {
+            fetchMedicalFields();
+        })
+
+        //functions 
+        async function fetchMedicalFields() {
+            try {
+                let res = await fetch("http://localhost:3000/api/medicalfield");
+                if (!res.ok) {
+                    throw new Error("Failed to fetch medical fields");
+                }
+                let md_fields = await res.json();
+                console.log(md_fields);
+
+                //set data in table
+                md_fields_table_body.innerHTML = "";
+
+                md_fields.forEach(md_field => {
+                    md_fields_table_body.innerHTML += `
+                        <tr>
+                            <td>${md_field.name}</td>
+                            <td>${md_field.description}</td>
+                            <td>
+                                    <button class="more-btn">More...</button>
+                                    <button class="more-btn">Update</button>
+                                    <button class="delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                    `
+                });
+
+
+            } catch (error) {
+                console.error("Error fetching doctors:", error);
+            }
+        }
+    </script>
 </body>
 
 </html>

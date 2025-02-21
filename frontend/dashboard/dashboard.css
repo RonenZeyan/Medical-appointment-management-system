@@ -30,7 +30,7 @@
 }
 
 #dashboard-sidebar ul li:hover{
-    background-color: var(--background-color);
+    background-color: var(--background-primary-color);
     border-radius: var(--border-radius);
     transform: scale(1.1);
 }
@@ -51,7 +51,7 @@
 }
 
 .active{
-    background-color: var(--background-color);
+    background-color: var(--background-primary-color);
     border-radius: var(--border-radius);
 
 }
@@ -65,7 +65,7 @@ li.active a{
 
 #dashboard-content{
     flex: 10;
-    background-color: var(--background-color);
+    background-color: var(--background-primary-color);
     padding: 30px;
 }
 

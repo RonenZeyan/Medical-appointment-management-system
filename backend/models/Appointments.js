@@ -26,6 +26,12 @@ const appointmentsSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"Clinic",
         required:true,
+    },
+    appointment_status:{
+        type:String,
+        required:true,
+        enum: ["existing", "cancelled", "completed"],
+        default: "existing"
     }
 },
     {

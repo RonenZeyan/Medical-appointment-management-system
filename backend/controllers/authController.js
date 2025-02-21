@@ -1,5 +1,7 @@
+
 const bcrypt = require("bcryptjs");
 const { User } = require("../models/User");
+
 
 /**
  * @description Login User
@@ -84,3 +86,4 @@ module.exports = {
   loginUser,
   registerUser,
 };
+

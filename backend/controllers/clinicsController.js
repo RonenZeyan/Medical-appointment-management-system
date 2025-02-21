@@ -123,6 +123,7 @@ const getSpecificClinic = async (req, res) => {
 };
 
 
+
 /**
  * @description Get specific clinic by name
  * @router /api/clinic/search
@@ -158,7 +159,6 @@ const getSpecificClinicByName = async (req, res) => {
 
   
 
-
 module.exports = {
   addNewClinic,
   getAllClinics,
@@ -167,3 +167,4 @@ module.exports = {
   getSpecificClinic,
   getSpecificClinicByName
 };
+

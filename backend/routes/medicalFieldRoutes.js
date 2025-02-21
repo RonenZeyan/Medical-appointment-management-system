@@ -6,7 +6,7 @@ const { addNewMedicalField, DeleteMedicalField, getAllMedicalFields } = require(
 const router = express.Router();
 
 router.get("/", getAllMedicalFields);
-router.post("/new-medicalfield", verifyTokenIsAdmin, addNewMedicalField);
+router.post("/new-medicalfield", addNewMedicalField);
 router.delete("/:id", validateObjectId, verifyTokenIsAdmin, DeleteMedicalField);
 
 module.exports = router;

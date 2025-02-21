@@ -1,3 +1,4 @@
+const { GetSpecificAppointment, addNewAppointment, DeleteSpecificAppointment } = require("../controllers/appointmentController");
 const validateObjectId = require("../middlewares/validateObjectId");
 const express = require("express");
 const {GetExistingAppointmentOfPatient, GetSpecificAppointment, addNewAppointment, DeleteSpecificAppointment, getAvailableAppointments } = require("../controllers/appointmentController");

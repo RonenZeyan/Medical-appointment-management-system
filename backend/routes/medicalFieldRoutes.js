@@ -2,11 +2,12 @@
 const express = require("express");
 const { verifyTokenIsAdmin } = require("../middlewares/verifyToken");
 const validateObjectId = require("../middlewares/validateObjectId");
-const { addNewMedicalField, DeleteMedicalField, getAllMedicalFields } = require("../controllers/medicalFieldController");
+const { getAllMedicalFields, addNewMedicalField, DeleteMedicalField, getSpecificMedicalField } = require("../controllers/medicalFieldController");
 const router = express.Router();
 
 router.get("/", getAllMedicalFields);
+router.get("/:id", validateObjectId, getSpecificMedicalField);
 router.post("/new-medicalfield", addNewMedicalField);
-router.delete("/:id", validateObjectId, verifyTokenIsAdmin, DeleteMedicalField);
+router.delete("/:id", validateObjectId, DeleteMedicalField);
 
 module.exports = router;

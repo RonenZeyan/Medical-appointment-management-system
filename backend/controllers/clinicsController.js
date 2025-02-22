@@ -16,7 +16,8 @@ const addNewClinic = async (req, res) => {
       name: req.body.name,
       location: req.body.location,
       phone: req.body.phone,
-      medical_fields: req.body.medical_fields,
+      opening_hours:req.body.opening_hours,
+      doctors: req.body.doctors,
     });
     await new_clinic.save();
     res.status(201).json({ message: "Clinic Add in successfully!" });
@@ -109,7 +110,19 @@ const getSpecificClinic = async (req, res) => {
   try {
     //get id
     const clinic_id = req.params.id;
-    const clinic = await Clinic.findById(clinic_id);
+    const clinic = await Clinic.findById(clinic_id)
+    .populate(
+      {
+        path: "doctors.doctor", //populate for doctor in doctors array
+        select: "full_name" //get just one fields 
+      }
+    )
+    .populate(
+      {
+        path: "doctors.medical_field", //populate for doctor in doctors array
+        select: "name" //get just one fields 
+      }
+    );
 
     if (!clinic) {
       return res.status(404).json({ message: "Clinic Not Exist" });

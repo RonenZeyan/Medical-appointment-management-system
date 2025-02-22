@@ -16,6 +16,7 @@ const userRoutes = require("./routes/userRoutes");
 const clinicsRoutes = require("./routes/clinicsRoutes");
 const medicalFieldRoutes = require("./routes/medicalFieldRoutes");
 const appointmentRoutes = require("./routes/appointmentRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 
 //use routes
 app.use("/api/auth", authRoutes);
@@ -23,6 +24,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/medicalfield",medicalFieldRoutes);
 app.use("/api/clinic",clinicsRoutes);
 app.use("/api/appointment",appointmentRoutes);
+app.use("/api/dashboard",dashboardRoutes);
 
 
 //start the server

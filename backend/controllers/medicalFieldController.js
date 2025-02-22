@@ -35,7 +35,7 @@ const addNewMedicalField = async (req, res) => {
 const getAllMedicalFields = async (req, res) => {
   try {
     const medical_fields = await MedicalField.find()
-    .populate("doctors",["-password"]);
+    .populate("doctors","full_name email");
     res.status(200).json(medical_fields);
   } catch (err) {
     console.error(err);
@@ -85,7 +85,8 @@ const getSpecificMedicalField = async (req, res) => {
   try {
     //get id medicalField
     const id_medicalField = req.params.id;
-    const medical_field = await MedicalField.findById(id_medicalField);
+    const medical_field = await MedicalField.findById(id_medicalField)
+    .populate("doctors","full_name email");
 
     if (!medical_field) {
       return res.status(404).json({ message: "Medical field dont exit" });

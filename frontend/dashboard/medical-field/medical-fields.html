@@ -27,6 +27,10 @@
         rel="stylesheet"
         href="../table.css"
     >
+    <link
+        rel="stylesheet"
+        href="../modal-details.css"
+    >
 </head>
 
 <body>
@@ -36,13 +40,13 @@
             <aside id="dashboard-sidebar">
                 <h3>Admin Dashboard</h3>
                 <ul style="border-top: 3px solid var(--background-primary-color)">
-                    <li class="active"><a href="#dashboard">dashboard</a></li>
+                    <li><a href="#dashboard">dashboard</a></li>
                     <li><a href="#appointment"><i class="bi bi-calendar-heart"></i> Appointments</a></li>
                     <li><a href="#users"><i class="bi bi-people"></i> Users</a></li>
                     <li><a href="#users"><i class="bi bi-person-add"></i> Add New User</a></li>
                     <li><a href="#clinics"><i class="bi bi-building"></i> clinics</a></li>
                     <li><a href="#add"><i class="bi bi-building-add"></i> Add New Clinic</a></li>
-                    <li><a href="#medicalField"><i class="bi bi-file"></i> Medical Field</a></li>
+                    <li class="active"><a href="#medicalField"><i class="bi bi-file"></i> Medical Field</a></li>
                     <li><a href="#add"><i class="bi bi-file-plus"></i> Add New MedicalField</a></li>
                 </ul>
             </aside>
@@ -103,11 +107,38 @@
                 </section>
             </div>
         </section>
+
+        <section class="hide" id="details-section">
+            <button
+                id="close-details-modal"
+                onclick="closeModal()"
+            >X</button>
+            <div id="details-modal">
+                <h2 id="modal-title">פירוט על תחום רפואי</h2>
+                <p><b><u>תחום רפואי:</u></b><span id="mdfield-modal-name"> אקו לב</span></p>
+                <p><b><u>תיאור:</u></b><span id="mdfield-modal-desc"> לא יודע מה</span></p>
+                <p><b><u>רופאים מתמחים:</u></b>
+                <ol id="mdfield-modal-doctors">
+                    <li><i class="bi bi-person-hearts"></i>רופא 1</li>
+                    <li>רופא 1</li>
+                    <li>רופא 1</li>
+                    <li>רופא 1</li>
+                </ol>
+                </p>
+            </div>
+        </section>
     </main>
 
+    <script src="../deleteItem.js"></script>
     <script>
         //get widgets and set vars
         let md_fields_table_body = document.getElementById("mdfield-table-body");
+
+        //modal widgets
+        let mdfield_modal_name = document.getElementById("mdfield-modal-name");
+        let mdfield_modal_desc = document.getElementById("mdfield-modal-desc");
+        let mdfield_modal_doctors = document.getElementById("mdfield-modal-doctors");
+        let modal = document.getElementById("details-section");
 
         //onload of page
         window.addEventListener("load", () => {
@@ -132,10 +163,10 @@
                         <tr>
                             <td>${md_field.name}</td>
                             <td>${md_field.description}</td>
-                            <td>
-                                    <button class="more-btn">More...</button>
-                                    <button class="more-btn">Update</button>
-                                    <button class="delete-btn">Delete</button>
+                            <td style="display:flex;flex-direction: column;gap:5px;justify-content:center;align-items:center">
+                                    <button class="more-btn" onclick="openModal();fetchDataDetails('${md_field._id}')">צפייה</button>
+                                    <a class="update-btn" href="add-new-medicalfield.html?id=${md_field._id}">עדכון</a>
+                                    <button class="delete-btn" onclick="deleteItemById('medicalfield/${md_field._id}')">מחיקה</button>
                             </td>
                         </tr>
                     `
@@ -146,6 +177,42 @@
                 console.error("Error fetching doctors:", error);
             }
         }
+
+        //fetch specefic medical field details and display in modal
+        async function fetchDataDetails(mdfield_id) {
+            try {
+                let res = await fetch(`http://localhost:3000/api/medicalfield/${mdfield_id}`);
+                if (!res.ok) {
+                    throw new Error("Failed to fetch medical fields");
+                }
+                let md_field = await res.json(); //recieve the data from backend
+
+                //display/set medical field details in modal
+                mdfield_modal_name.textContent = md_field.name;
+                mdfield_modal_desc.textContent = md_field.description;
+                mdfield_modal_doctors.innerHTML="";
+
+                //for loop for get doctors
+                md_field.doctors.forEach((doctor)=>{
+                    mdfield_modal_doctors.innerHTML+=`
+                    <li><i class="bi bi-person-hearts"></i> ${doctor.full_name} - ${doctor.email} </li>
+                    `
+                });
+            }catch (error) {
+                console.error("Error fetching doctors:", error);
+            }
+        }
+        
+        //open modal
+        function openModal() {
+            modal.classList.remove("hide");
+        }
+
+        //close modal
+        function closeModal() {
+            modal.classList.add("hide");
+        }
+
     </script>
 </body>
 

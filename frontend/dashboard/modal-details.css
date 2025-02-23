@@ -1,0 +1,45 @@
+#details-section {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 99;
+}
+
+#details-modal {
+    background: var(--background-primary-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    text-align: right;
+}
+
+#close-details-modal{
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    border-radius: 50%;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+#modal-title{
+    text-align: center;
+}
+
+#mdfield-modal-doctors{
+    /* list-style: none; */
+    text-align: right;
+    
+}
+
+

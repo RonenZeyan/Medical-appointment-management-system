@@ -122,10 +122,48 @@ const getSpecificClinic = async (req, res) => {
   }
 };
 
+
+/**
+ * @description Get specific clinic by name
+ * @router /api/clinic/search
+ * @method POST
+ * @access public
+ */
+
+const getSpecificClinicByName = async (req, res) => {
+    try {
+      // Get the clinic name from the request body
+      const { name } = req.body;
+  
+      if (!name) {
+        return res.status(400).json({ message: "Clinic name is required" });
+      }
+  
+      // Search for the clinic by name using a case-insensitive match
+      const clinic = await Clinic.findOne({
+        name: { $regex: new RegExp(name, "i") }, // 'i' for case-insensitive search
+      });
+  
+      if (!clinic) {
+        return res.status(404).json({ message: "Clinic not found" });
+      }
+  
+      // Return the clinic data
+      res.status(200).json(clinic);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Something went wrong!" });
+    }
+  };
+
+  
+
+
 module.exports = {
   addNewClinic,
   getAllClinics,
   deleteClinic,
   updateClinic,
   getSpecificClinic,
+  getSpecificClinicByName
 };

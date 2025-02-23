@@ -1,0 +1,36 @@
+/* Importing main variables css */
+@import url("./../styles.css");
+
+.medical-appointment-main {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#medical-appointment-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid #ddd; /* Light border around boxes */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Padding inside each box */
+  text-align: center; /* Center the text */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for the boxes */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+  width: 200px;
+  height: 160px;
+}
+
+#medical-appointment-form:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+
+#medical-appointment-label{
+    margin: 5px;
+}
+
+

@@ -7,7 +7,6 @@ const router = express.Router();
 
 
 router.get("/", getAllClinics);
-
 router.post("/new-clinic", verifyTokenIsAdmin, addNewClinic);
 router.post("/find-by-name", getSpecificClinicByName);
 router.delete("/:id", validateObjectId, verifyTokenIsAdmin, deleteClinic);

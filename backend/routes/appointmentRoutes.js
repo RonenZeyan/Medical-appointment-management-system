@@ -1,7 +1,6 @@
-const { GetSpecificAppointment, addNewAppointment, DeleteSpecificAppointment, GetallAppointments } = require("../controllers/appointmentController");
 const validateObjectId = require("../middlewares/validateObjectId");
 const express = require("express");
-const {GetExistingAppointmentOfPatient, GetSpecificAppointment, addNewAppointment, DeleteSpecificAppointment, getAvailableAppointments } = require("../controllers/appointmentController");
+const {GetallAppointments,GetExistingAppointmentOfPatient, GetSpecificAppointment, addNewAppointment, DeleteSpecificAppointment, getAvailableAppointments } = require("../controllers/appointmentController");
 const { verifyTokenIsSameUserOrAdmin, verifyTokenIsAdmin, verifyTokenIsSameUser, verifyToken } = require("../middlewares/verifyToken");
 const router = express.Router();
 

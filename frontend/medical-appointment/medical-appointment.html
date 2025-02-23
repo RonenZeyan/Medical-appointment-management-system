@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+    <link rel="stylesheet" href="medical-appointment.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header></header>
+
+    <!-- Main -->
+    <main class="medical-appointment-main" id="medical-appointment-main">
+      <!-- Form starts here -->
+      <form id="medical-appointment-form">
+        <!-- Medical Field Dropdown -->
+        <label id="medical-appointment-label">בחר תחום רפואי</label>
+        <select id="medical-appointment-select" required>
+          <option value="">בחר תחום רפואי</option>
+        </select>
+
+        <!-- Clinic Search -->
+        <label id="medical-appointment-label">חיפוש מרפאה</label>
+        <input
+          type="text"
+          class="medical-appointment-input"
+          id="medical-appointment-clinic-input"
+          placeholder="Enter clinic name"
+          oninput="searchClinics()"
+        />
+
+        <!-- Doctor Search -->
+        <label id="medical-appointment-label">חיפוש רופא</label>
+        <input
+          type="text"
+          class="medical-appointment-input"
+          id="medical-appointment-doctor-input"
+          placeholder="Enter doctor name"
+          oninput="searchDoctors()"
+        />
+
+        <!-- Submit Button -->
+        <button type="submit">חיפוש</button>
+      </form>
+    </main>
+
+    <!-- Footer -->
+    <footer></footer>
+    <script src="medical-appointment.js"></script>
+  </body>
+</html>

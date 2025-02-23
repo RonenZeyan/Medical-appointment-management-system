@@ -25,7 +25,10 @@ const medicalFieldSchema = new mongoose.Schema({
     }
 );
 
-const MedicalField = mongoose.model("MedicalField", medicalFieldSchema);
+
+// Fix: Prevent OverwriteModelError
+const MedicalField = mongoose.models.MedicalField || mongoose.model("MedicalField", medicalFieldSchema);
+
 
 module.exports = {
     MedicalField

@@ -28,13 +28,13 @@ const clinicSchema = new mongoose.Schema({
         required: true,
     },
     opening_hours: {
-        sunday: { start: { type: Date }, end: { type: Date } },
-        monday: { start: { type: Date }, end: { type: Date } },
-        tuesday: { start: { type: Date }, end: { type: Date } },
-        wednesday: { start: { type: Date }, end: { type: Date } },
-        thursday: { start: { type: Date }, end: { type: Date } },
-        friday: { start: { type: Date }, end: { type: Date } }, 
-        saturday: { start: { type: Date }, end: { type: Date } }
+        sunday: { start: { type: String }, end: { type: String },status: { type: String, enum: ['open', 'closed'], default: 'open' }  },
+        monday: { start: { type: String }, end: { type: String },status: { type: String, enum: ['open', 'closed'], default: 'open' }  },
+        tuesday: { start: { type: String }, end: { type: String },status: { type: String, enum: ['open', 'closed'], default: 'open' }  },
+        wednesday: { start: { type: String }, end: { type: String },status: { type: String, enum: ['open', 'closed'], default: 'open' }  },
+        thursday: { start: { type: String }, end: { type: String },status: { type: String, enum: ['open', 'closed'], default: 'open' }  },
+        friday: { start: { type: String }, end: { type: String },status: { type: String, enum: ['open', 'closed'], default: 'open' }  }, 
+        saturday: { start: { type: String }, end: { type: String },status: { type: String, enum: ['open', 'closed'], default: 'open' }  }
     },
     doctors: [{
         doctor: {

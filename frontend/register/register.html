@@ -17,16 +17,20 @@
         <h2 id="register-form-container-title">הרשמה</h2>
         <form id="register-form">
           <div id="register-form-input">
-            <label id="username"><b>שם משתמש:</b></label>
-            <input type="text" id="username" placeholder="שם מתשמש" required />
+            <label id="fullNameLabel"><b>שם מלא:</b></label>
+            <input type="text" id="fullNameInput" placeholder="שם מלא" required />
           </div>
           <div id="register-form-input">
-            <label id="email"><b>אימייל:</b></label>
-            <input type="email" id="email" placeholder="אימייל" required />
+            <label id="emailLabel"><b>אימייל:</b></label>
+            <input type="email" id="emailInput" placeholder="אימייל" required />
           </div>
           <div id="register-form-input">
-            <label id="password"><b>סיסמה:</b></label>
-            <input type="password" id="password" placeholder="סיסמה" required />
+            <label id="phoneLabel"><b>מס' טלפון:</b></label>
+            <input type="text" id="phoneInput" placeholder="מס' טלפון:" required />
+          </div>
+          <div id="register-form-input">
+            <label id="passwordLabel"><b>סיסמה:</b></label>
+            <input type="password" id="passwordInput" placeholder="סיסמה" required />
           </div>
           <div id="register-error">
             <span id="register-error-message"></span>
@@ -35,7 +39,7 @@
             <button type="submit" id="register-form-button">הרשם</button>
             <div id="register-form-links">
               <label id="password"><b>יש לך חשבון?</b></label>
-              <a href="#">התחבר</a>
+              <a href="../login/login.html">התחבר</a>
             </div>
           </div>
         </form>

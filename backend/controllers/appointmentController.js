@@ -1,5 +1,9 @@
-const { model } = require("mongoose");
+const { default: mongoose } = require("mongoose");
 const { Appointment } = require("../models/Appointments");
+const Clinic = require("../models/Clinics");
+const { MedicalField } = require("../models/MedicalField");
+
+const { User } = require("../models/User");
 
 /**
  * @description Create New Appointment
@@ -105,9 +109,40 @@ const GetallAppointments = async (req, res) => {
   }
 };
 
+/**
+ * @description Get Existing Appointments for a specific patient
+ * @router /api/appointment
+ * @method GET
+ * @access private (only logged-in user, doctor, or admin)
+ */
+const GetExistingAppointmentOfPatient = async (req, res) => {
+  try {
+    // const patientId = req.user.id;
+
+    const patientId = new mongoose.Types.ObjectId(`${req.user.id}`);
+
+    // find appointment by patient id
+    const checkPatient = await Appointment.findOne({
+      patient_id: patientId,
+    });
+
+    if (!checkPatient) {
+      return res
+        .status(404)
+        .json({ message: "Patient not found in appointments" });
+    }
+
+    return res.status(200).json(checkPatient);
+  } catch (err) {
+    console.error("Error fetching patient:", err);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
 module.exports = {
   addNewAppointment,
   GetSpecificAppointment,
   DeleteSpecificAppointment,
   GetallAppointments,
+  GetExistingAppointmentOfPatient,
 };

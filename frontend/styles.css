@@ -1,12 +1,15 @@
 :root {
   /* 🎨 צבעי הרקע */
-  --background-primary-color: #f4f4f4; /* רקע כללי של הדף */
-  --background-secondary-color: #007bff; /* רקע כללי של רכיב */
+  --background-primary-color:  white; /* רקע כללי ראשי */
+  --background-secondary-color: rgb(160, 211, 248); /* רקע כללי משני */
+
   --body-text-color: #333; /* צבע טקסט כללי */
+  --background-page:linear-gradient(to bottom, #ffffff 0%, #e0f7fa 100%);/* רקע כללי של  כל דף */
 
   /* 🎨 צבעי כפתורים */
-  --button-bg: #007bff; /* רקע של כפתור */
-  --button-hover-bg: #0056b3; /* רקע של כפתור במעבר עכבר */
+  --button-bg: #0db7ce; /* רקע של כפתור */
+  --button-hover-bg: #008c8c; /* רקע של כפתור במעבר עכבר */
+  --button-click-bg: #006d6d; /* רקע של כפתור בלחיצת עכבר */
   --button-text-color: #ffffff; /* צבע טקסט בתוך כפתור */
 
   /* 🎨 צבעים נוספים */
@@ -23,8 +26,14 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  height: 100vh;
   direction: rtl;
+  color: #333333;
+  font-family: Arial, sans-serif;
+  background: var(--background-page);
 }
+
+
 
 /* Navbar styles */
 .navbar {
@@ -59,14 +68,6 @@ body {
   background-color: #2980b9;
   box-shadow: 0 0 15px rgba(52, 152, 219, 1);
 }
-
-/* 
-.navbar-links a:hover {
-    background-color: #575757;
-    border-radius: 5px;
-} */
-
-/* Hamburger menu styles */
 
 .navbar-hamburger-contant {
   display: none;

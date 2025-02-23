@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    direction: rtl;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h2 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background: #fff;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.completed {
+    border-left: 5px solid green;
+}
+
+.cancelled {
+    border-left: 5px solid red;
+}
+
+.date {
+    font-weight: bold;
+    color: #555;
+}
+
+.status {
+    margin-top: 5px;
+    font-size: 14px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    color: white;
+    display: inline-block;
+}
+
+.completed .status {
+    background-color: green;
+}
+
+.cancelled .status {
+    background-color: red;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: darkblue;
+}

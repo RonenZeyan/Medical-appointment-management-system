@@ -37,7 +37,6 @@
 
 #dashboard-sidebar ul li:hover a{
     color: var(--link-hover-color);
-
 }
 
 #dashboard-sidebar ul li a{
@@ -96,18 +95,18 @@ li.active a{
 }
 
 #users-number::after{
-    content:"Users"
+    content:"משתמשים"
 }
 
 #doctors-number::after{
-    content:"Doctors"
+    content:"רופאים"
 }
 
 #clinics-number::after{
-    content:"Clinics" 
+    content:"מרפאות" 
 }
 #medicalfield-number::after{
-    content:"Medical Fields" 
+    content:"תחומי רפואה" 
 }
 
 /* Appointment Table Section */

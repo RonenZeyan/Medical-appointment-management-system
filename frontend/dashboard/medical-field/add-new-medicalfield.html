@@ -102,7 +102,10 @@
                 </ul>
             </aside>
             <div id="dashboard-content">
-                <h1 style="text-align: center;">הוספת תחום רפואי חדש</h1>
+                <h1
+                    id="form-title"
+                    style="text-align: center;"
+                >הוספת תחום רפואי חדש</h1>
                 <section class="add-new-mdfield">
                     <form
                         id="add-mdfield-form"
@@ -113,12 +116,15 @@
                             <input
                                 type="text"
                                 id="mdfield-name"
+                                placeholder="מרפאת חיפה"
+                                required
                             >
                         </div>
                         <div class="form-raw">
                             <label for="mfield-textarea">תיאור</label>
                             <textarea
                                 id="mfield-textarea"
+                                placeholder="תיאור התחום"
                                 rows="10"
                             ></textarea>
                         </div>
@@ -146,18 +152,61 @@
 
     <script>
 
-        //get widgets
+        //get widgets & variables
+
+        //wedgets
         let mdfield_name = document.getElementById("mdfield-name");
         let mdfield_description = document.getElementById("mfield-textarea");
         let doctorsSelect = document.getElementById("doctors-select");
+        let form_title = document.getElementById("form-title");
+
+        //variables
+        let medicalFieldId;
 
         //onload of page
-        window.addEventListener("load", () => {
+        window.addEventListener("load", async () => {
             fetchDoctors();
+            medicalFieldId = getIdFromUrl();
+            if (medicalFieldId) {
+                await fetchMedicalFieldDetails(medicalFieldId);
+            }
         })
 
         //functions
 
+        //get id form URL (if it exist mean we want to update not create new one)
+        function getIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get("id");
+        }
+
+        //get the medicalfield details and display in form
+        async function fetchMedicalFieldDetails(id) {
+            try {
+                let res = await fetch(`http://localhost:3000/api/medicalfield/${id}`);
+                if (!res.ok) {
+                    throw new Error("Failed to fetch medical field details");
+                }
+                let medicalField = await res.json();
+
+                // add data to fields 
+                mdfield_name.value = medicalField.name;
+                mdfield_description.value = medicalField.description;
+
+                Array.from(doctorsSelect.options).forEach(option => {
+                    option.selected = medicalField.doctors.some(doctor => doctor._id === option.value);
+                });
+
+                // change button for update 
+                form_title.textContent =
+                    document.getElementById("add-mdfield-btn").textContent = "עדכון תחום רפואי";
+            }
+            catch (error) {
+                console.error("Error fetching medical field details:", error);
+            }
+        }
+
+        //get the doctors to display them in form and choose
         async function fetchDoctors() {
             try {
                 let res = await fetch("http://localhost:3000/api/user/doctors");
@@ -180,36 +229,66 @@
             }
         }
 
+        //handle the add new mdfield form 
         function handleSubmitForm(e) {
             e.preventDefault();
             let choosed_doctors = [];
             choosed_doctors = Array.from(doctorsSelect.selectedOptions).map(option => option.value);
-            let new_medicalfield = {
+            let medical_field_data = {
                 name: mdfield_name.value,
                 description: mdfield_description.value,
                 doctors: choosed_doctors,
             }
 
-            addNewMdField(new_medicalfield);
+            if (medicalFieldId) {
+                updateExistMdField(medicalFieldId, medical_field_data)
+            }
+            else {
+                addNewMdField(medical_field_data);
+            }
         }
 
-        async function addNewMdField(new_medicalfield) {
+        async function updateExistMdField(id,exist_medicalfield) {
             try {
-                let res = await fetch("http://localhost:3000/api/medicalfield/new-medicalfield", { 
-                    method: "POST", 
+                let res = await fetch(`http://localhost:3000/api/medicalfield/${id}`, {
+                    method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",
                         // "Authorization": `Bearer ${token}` dont forget to do -----------------
                     },
-                    body: JSON.stringify(new_medicalfield), 
+                    body: JSON.stringify(exist_medicalfield),
                 });
 
                 let result = await res.json();
+                window.location.href = "/frontend/dashboard/medical-field/medical-fields.html";
+                console.log("Medical field updated:", result);
+            } catch (err) {
+                console.error("Error updating medical field:", err);
+            }
+        }
+
+        //send th the new medicalfield form to backend
+        async function addNewMdField(new_medicalfield) {
+
+            try {
+                let res = await fetch("http://localhost:3000/api/medicalfield/new-medicalfield", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        // "Authorization": `Bearer ${token}` dont forget to do -----------------
+                    },
+                    body: JSON.stringify(new_medicalfield),
+                });
+
+                let result = await res.json();
+                window.location.href = "/frontend/dashboard/medical-field/medical-fields.html";
                 console.log("Medical field added:", result);
             } catch (err) {
                 console.error("Error:", err);
             }
         }
+
+
     </script>
 </body>
 

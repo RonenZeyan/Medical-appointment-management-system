@@ -1,13 +1,14 @@
 const express = require("express");
+
 const router = express.Router();
 const { 
     getUserByName, 
     getAllUsers, 
     deleteUserById, 
-    updateUserInfo 
+    updateUserInfo,
+    getAllDoctors,
 } = require("../controllers/userController");
 const { verifyTokenIsSameUserOrAdmin, verifyTokenIsAdmin, verifyTokenIsSameUser, verifyToken } = require("../middlewares/verifyToken");
-
 
 // Get user by name
 router.post("/findUser",verifyTokenIsAdmin, getUserByName);
@@ -21,4 +22,9 @@ router.delete("/:id",verifyTokenIsAdmin, deleteUserById);
 // Update user info (only admin and user)
 router.put("/:id", verifyTokenIsSameUserOrAdmin, updateUserInfo);
 
+//get doctors
+router.get("/doctors", getAllDoctors);
+
 module.exports = router;
+
+

@@ -1,0 +1,168 @@
+#dashboard{
+    display: flex;
+}
+
+/* Side bar */
+
+#dashboard-sidebar{
+    flex: 3;
+    width: fit-content;
+    background-color: var(--button-bg);
+    color: var(--button-text-color);
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+#dashboard-sidebar ul,#dashboard-sidebar ul li{
+    padding: 15px 20px;
+    margin: 5px 0;
+}
+
+#dashboard-sidebar ul{
+    list-style: none;
+    font-size: 20px;
+}
+
+#dashboard-sidebar ul li{
+    transition: .6s ease-in-out;
+}
+
+#dashboard-sidebar ul li:hover{
+    background-color: var(--background-primary-color);
+    border-radius: var(--border-radius);
+    transform: scale(1.1);
+}
+
+#dashboard-sidebar ul li:hover a{
+    color: var(--link-hover-color);
+}
+
+#dashboard-sidebar ul li a{
+    text-decoration: none;
+    color: var(--button-text-color);
+
+}
+
+#dashboard-sidebar ul li a i{
+    font-size: 20px;
+}
+
+.active{
+    background-color: var(--background-primary-color);
+    border-radius: var(--border-radius);
+}
+li.active a{
+    color: var(--link-hover-color) !important;
+
+}
+
+
+/*  content  */
+
+#dashboard-content{
+    flex: 10;
+    background-color: var(--background-primary-color);
+    padding: 30px;
+}
+
+.dashboard-card{
+    width: 200px;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 8px gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 15px;
+    font-size: 20px;
+}
+
+#general-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-card i{
+    font-size: 60px;
+}
+
+#users-number::after,#doctors-number::after,#clinics-number::after,#medicalfield-number::after{
+    display: block;
+    color: grey;
+}
+
+#users-number::after{
+    content:"משתמשים"
+}
+
+#doctors-number::after{
+    content:"רופאים"
+}
+
+#clinics-number::after{
+    content:"מרפאות" 
+}
+#medicalfield-number::after{
+    content:"תחומי רפואה" 
+}
+
+/* Appointment Table Section */
+
+/* .daily-appointments{
+    margin-top: 40px;  
+}
+
+table {
+    width: 100%;
+    background-color: var(--card-bg);
+    border-collapse: collapse;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 8px gray;
+}
+
+th {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.432);
+    padding: 30px;
+    text-align: left;
+}
+
+td {
+    padding: 10px; 
+    text-align: center;
+
+}
+
+tr:nth-child(even) {
+    background-color: #ebebeb;
+}
+
+
+.more-btn,.delete-btn {
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--button-text-color);
+    margin-right: 5px; 
+    border: none;
+    padding: 7px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+.more-btn{
+    background-color: var(--button-bg);
+}
+
+.more-btn:hover{
+    background-color: var(--button-hover-bg);
+}
+
+.delete-btn{
+    background-color: rgba(189, 0, 0, 0.774);
+}
+
+.delete-btn:hover{
+    background-color: red;
+} */

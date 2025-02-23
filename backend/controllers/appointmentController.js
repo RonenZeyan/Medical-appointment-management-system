@@ -109,6 +109,7 @@ const GetallAppointments = async (req, res) => {
   }
 };
 
+
 /**
  * @description Get Existing Appointments for a specific patient
  * @router /api/appointment
@@ -139,6 +140,7 @@ const GetExistingAppointmentOfPatient = async (req, res) => {
   }
 };
 
+
 module.exports = {
   addNewAppointment,
   GetSpecificAppointment,
@@ -146,3 +148,4 @@ module.exports = {
   GetallAppointments,
   GetExistingAppointmentOfPatient,
 };
+

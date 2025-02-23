@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Document</title>
+    <!-- Bootstrap icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- CSS LINKS -->
+    <link
+        rel="stylesheet"
+        href="../../styles.css"
+    >
+    <link
+        rel="stylesheet"
+        href="../dashboard.css"
+    >
+    <link
+        rel="stylesheet"
+        href="../table.css"
+    >
+    <link
+        rel="stylesheet"
+        href="../modal-details.css"
+    >
+</head>
+
+<body>
+    <main>
+        <h1>Dashboard</h1>
+        <section id="dashboard">
+            <aside id="dashboard-sidebar">
+                <h3>Admin Dashboard</h3>
+                <ul style="border-top: 3px solid var(--background-primary-color)">
+                    <li><a href="../dashboard.html">דשבורד</a></li>
+                    <li><a href="#appointment"><i class="bi bi-calendar-heart"></i> ניהול תורים</a></li>
+                    <li><a href="../users/users.html"><i class="bi bi-people"></i> משתמשים</a></li>
+                    <li><a href="../users/add-users.html"><i class="bi bi-person-add"></i> הוספת משתמש חדש</a></li>
+                    <li class="active"><a href="clinics.html"><i class="bi bi-building"></i> מרפאות</a></li>
+                    <li><a href="add-new-clinic.html"><i class="bi bi-building-add"></i> הוספת מרפאה חדשה</a></li>
+                    <li><a href="../medical-field/medical-fields.html"><i class="bi bi-file"></i> תחום רפואי</a></li>
+                    <li><a href="../medical-field/add-new-medicalfield.html"><i class="bi bi-file-plus"></i> הוספת תחום
+                            רפואי חדש</a></li>
+                </ul>
+            </aside>
+            <div id="dashboard-content">
+                <h1 style="text-align: center;">מרפאות</h1>
+                <section class="table-section">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>שם מרפאה</th>
+                                <th>מיקום</th>
+                                <th>טלפון</th>
+                                <th>שעות פעילות</th>
+                                <th>פעילות</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clinics_table_body">
+                            <tr>
+                                <td>צאט גיפיטי</td>
+                                <td>chatgpt@email.com</td>
+                                <td>049999999</td>
+                                <td>א: 8 -16</td>
+                                <td>
+                                    <button class="more-btn">More...</button>
+                                    <button class="delete-btn">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>צאט גיפיטי</td>
+                                <td>chatgpt@email.com</td>
+                                <td>049999999</td>
+                                <td>א: 8 -16</td>
+                                <td>
+                                    <button class="more-btn">More...</button>
+                                    <button class="delete-btn">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>צאט גיפיטי</td>
+                                <td>chatgpt@email.com</td>
+                                <td>049999999</td>
+                                <td>א: 8 -16</td>
+                                <td>
+                                    <button class="more-btn">More...</button>
+                                    <button class="delete-btn">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>צאט גיפיטי</td>
+                                <td>chatgpt@email.com</td>
+                                <td>049999999</td>
+                                <td>א: 8 -16</td>
+                                <td>
+                                    <button class="more-btn">More...</button>
+                                    <button class="delete-btn">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>צאט גיפיטי</td>
+                                <td>chatgpt@email.com</td>
+                                <td>049999999</td>
+                                <td>א: 8 -16</td>
+                                <td>
+                                    <button class="more-btn">More...</button>
+                                    <button class="delete-btn">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </section>
+        <section
+            class="hide"
+            id="details-section"
+        >
+            <button
+                id="close-details-modal"
+                onclick="closeModal()"
+            >X</button>
+            <div id="details-modal">
+                <h2 id="modal-title">פירוט על מרפאה</h2>
+                <p><b><u>מרפאה:</u></b><span id="clinic-modal-name"> אקו לב</span></p>
+                <p><b><u>טלפון:</u></b><span id="clinic-modal-phone"> לא יודע מה</span></p>
+                <p><b><u>שעות פעילות:</u></b><span id="clinic-modal-openinghours"> לא יודע מה</span></p>
+                <p>
+                    <b><u>רופאים ותחום הרפואה:</u></b>
+                <ol id="clinic-modal-doctors">
+                    <li><i class="bi bi-person-hearts"></i>רופא 1</li>
+                    <li>רופא 1</li>
+                    <li>רופא 1</li>
+                    <li>רופא 1</li>
+                </ol>
+                </p>
+                <p><b><u>מיקום:</u></b><span id="clinic-modal-location"> לא יודע מה</span></p>
+            </div>
+        </section>
+    </main>
+
+    <script src="../deleteItem.js"></script>
+    <script>
+        //get widgets and set vars
+        let clinics_table_body = document.getElementById("clinics_table_body");
+
+        //modal widgets
+        let clinic_modal_name = document.getElementById("clinic-modal-name");
+        let clinic_modal_phone = document.getElementById("clinic-modal-phone");
+        let clinic_modal_openinghours = document.getElementById("clinic-modal-openinghours");
+        let clinic_modal_doctors = document.getElementById("clinic-modal-doctors");
+        let clinic_modal_location = document.getElementById("clinic-modal-location");
+        let modal = document.getElementById("details-section");
+
+        //onload of page
+        window.addEventListener("load", () => {
+            fetchClinics();
+        })
+
+        //functions 
+        async function fetchClinics() {
+            try {
+                let res = await fetch("http://localhost:3000/api/clinic");
+                if (!res.ok) {
+                    throw new Error("Failed to fetch clinics");
+                }
+                let clinics = await res.json();
+                console.log(clinics);
+
+                //set data in table
+                clinics_table_body.innerHTML = "";
+
+                clinics.forEach(clinic => {
+                    clinics_table_body.innerHTML += `
+                        <tr>
+                            <td>${clinic.name}</td>
+                            <td>${clinic.location.region}, ${clinic.location.city} <br> הכתובת: ${clinic.location.address}</td>
+                            <td>${clinic.phone}</td>
+                            <td>${clinic.opening_hours.innerHTML =
+                        `
+                                <br> 
+                                יום א: ${clinic.opening_hours.sunday.status === "closed" ? "סגור" : `${clinic.opening_hours.sunday.start} - ${clinic.opening_hours.sunday.end}`} <br> 
+                                יום ב: ${clinic.opening_hours.monday.status === "closed" ? "סגור" : `${clinic.opening_hours.monday.start} - ${clinic.opening_hours.monday.end}`} <br>
+                                יום ג: ${clinic.opening_hours.tuesday.status === "closed" ? "סגור" : `${clinic.opening_hours.tuesday.start} - ${clinic.opening_hours.tuesday.end}`} <br>
+                                יום ד: ${clinic.opening_hours.wednesday.status === "closed" ? "סגור" : `${clinic.opening_hours.wednesday.start} - ${clinic.opening_hours.wednesday.end}`} <br>
+                                יום ה: ${clinic.opening_hours.thursday.status === "closed" ? "סגור" : `${clinic.opening_hours.thursday.start} - ${clinic.opening_hours.thursday.end}`} <br>
+                                יום ו: ${clinic.opening_hours.friday.status === "closed" ? "סגור" : `${clinic.opening_hours.friday.start} - ${clinic.opening_hours.friday.end}`} <br>
+                                יום ש: ${clinic.opening_hours.saturday.status === "closed" ? "סגור" : `${clinic.opening_hours.saturday.start} - ${clinic.opening_hours.saturday.end}`}
+                                `
+
+                        }</td>
+                            <td style="display:flex;flex-direction: column;gap:5px;justify-content:center;align-items:center">
+                                    <button class="more-btn" onclick="openModal();fetchDataDetails('${clinic._id}')">צפייה</button>
+                                    <a class="update-btn" href="add-new-clinic.html?id=${clinic._id}">עדכון</a>
+                                    <button class="delete-btn" onclick="deleteItemById('clinic/${clinic._id}')">מחיקה</button>
+                            </td>
+                        </tr>
+                    `
+                });
+            } catch (error) {
+                console.error("Error fetching doctors:", error);
+            }
+        }
+
+        //open modal
+        function openModal() {
+            modal.classList.remove("hide");
+        }
+
+        //close modal
+        function closeModal() {
+            modal.classList.add("hide");
+        }
+
+        //fetch specefic clinic details and display in modal
+        async function fetchDataDetails(clinic_id) {
+            try {
+                let res = await fetch(`http://localhost:3000/api/clinic/${clinic_id}`);
+                if (!res.ok) {
+                    throw new Error("Failed to fetch Clinic Details");
+                }
+                let clinic = await res.json(); //recieve the data from backend
+
+                console.log(clinic);
+
+                //display/set medical field details in modal
+                clinic_modal_name.textContent = clinic.name;
+                clinic_modal_phone.textContent = clinic.phone;
+                clinic_modal_openinghours.innerHTML = `
+                <br> 
+                יום א: ${clinic.opening_hours.sunday.status === "closed" ? "סגור" : `${clinic.opening_hours.sunday.start} - ${clinic.opening_hours.sunday.end}`} <br> 
+                יום ב: ${clinic.opening_hours.monday.status === "closed" ? "סגור" : `${clinic.opening_hours.monday.start} - ${clinic.opening_hours.monday.end}`} <br>
+                יום ג: ${clinic.opening_hours.tuesday.status === "closed" ? "סגור" : `${clinic.opening_hours.tuesday.start} - ${clinic.opening_hours.tuesday.end}`} <br>
+                יום ד: ${clinic.opening_hours.wednesday.status === "closed" ? "סגור" : `${clinic.opening_hours.wednesday.start} - ${clinic.opening_hours.wednesday.end}`} <br>
+                יום ה: ${clinic.opening_hours.thursday.status === "closed" ? "סגור" : `${clinic.opening_hours.thursday.start} - ${clinic.opening_hours.thursday.end}`} <br>
+                יום ו: ${clinic.opening_hours.friday.status === "closed" ? "סגור" : `${clinic.opening_hours.friday.start} - ${clinic.opening_hours.friday.end}`} <br>
+                יום ש: ${clinic.opening_hours.saturday.status === "closed" ? "סגור" : `${clinic.opening_hours.saturday.start} - ${clinic.opening_hours.saturday.end}`}
+                `;
+                clinic_modal_doctors.innerHTML = "";
+
+                //for loop for get doctors
+                clinic.doctors.forEach((doctor) => {
+                    clinic_modal_doctors.innerHTML += `
+                    <li><i class="bi bi-person-hearts"></i> ${doctor.doctor.full_name} - ${doctor.medical_field.name} </li>
+                    `
+                });
+                clinic_modal_location.innerHTML = `
+                    <br>
+                    עיר: ${clinic.location.city} <br>
+                    מחוז: ${clinic.location.region} <br>
+                    כתובת: ${clinic.location.address}
+                `;
+            } catch (error) {
+                console.error("Error fetching doctors:", error);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

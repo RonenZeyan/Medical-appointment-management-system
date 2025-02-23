@@ -1,12 +1,8 @@
+
+
 const bcrypt = require("bcryptjs");
 const { User } = require("../models/User");
 
-/**
- * @description Login User
- * @router /api/auth/login
- * @method POST
- * @access public
- */
 
 const loginUser = async (req, res) => {
   try {
@@ -84,3 +80,4 @@ module.exports = {
   loginUser,
   registerUser,
 };
+

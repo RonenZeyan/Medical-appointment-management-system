@@ -2,6 +2,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const success = urlParams.get("success");
 
+// If successfully register
 if (success === "true") {
   // Show the notification
   const notification = document.getElementById("success-notification");
@@ -16,7 +17,7 @@ if (success === "true") {
   }, 3000);
 }
 
-//login form
+// Login form
 document
   .getElementById("login-form")
   .addEventListener("submit", async function (event) {
@@ -55,7 +56,7 @@ document
         localStorage.setItem("token", data.token); // Save token to localStorage
         localStorage.setItem("full_name", data.connectedUser.full_name); // Save full name
         localStorage.setItem("email", data.connectedUser.email); // Save email
-        localStorage.setItem("id", data.connectedUser.id); // Save email
+        localStorage.setItem("id", data.connectedUser.id); // Save id
 
         window.location.href = "../dashboard-user/dashboard-user.html"; // Redirect to dashboard
       } else {

@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Template</title>
-    <link rel="stylesheet" href="dashboard-user.css" />
+    <link rel="stylesheet" href="./dashboard-user.css" />
+
+
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
@@ -18,56 +20,59 @@
     <!-- Main -->
     <main class="dashboard-user-main" id="dashboard-user-main">
       <div class="dashboard-user-container" id="dashboard-user-container">
+        
         <div class="dashboard-user-appointment-box" id="dashboard-user-box">
           <div id="dashboard-user-appointment-box-info-top">
             <i class="bi bi-calendar-range"></i> ניהול תור
           </div>
-
           <div id="dashboard-user-appointment-box-info-bottom">
             <span id="dashboard-user-appointment-exist"></span>
           </div>
+          <span id="dashboard-user-appointment-inform"></span>
         </div>
-        <div class="dashboard-user-settings-box" id="dashboard-user-box">
-          <div id="dashboard-user-appointment-box-info-top">
-            <i class="bi bi-gear"></i> הגדרות
+
+        <div class="dashboard-user-settings-box" id="dashboard-user-box" onclick="window.location.href='../search-info/search-info.html'">
+          <div id="dashboard-user-box-info-top">
+            <i class="bi bi-book"></i> חיפוש מידע
           </div>
-          <div id="dashboard-user-appointment-box-info-bottom">
-            <span id="">test</span>
+          <div id="dashboard-user-box-info-bottom">
+            <span id=""></span>
           </div>
         </div>
-        <div class="dashboard-user-details-box" id="dashboard-user-box">
-          <div id="dashboard-user-appointment-box-info-top">
+
+        <div class="dashboard-user-details-box" id="dashboard-user-box" onclick="window.location.href='../user-info/user-info.html'" >
+          <div id="dashboard-user-box-info-top">
             <i class="bi bi-person-circle"></i> פרטים
           </div>
-          <div id="dashboard-user-appointment-box-info-bottom">
-            <span id="">test</span>
+          <div id="dashboard-user-box-info-bottom">
+            <span id=""></span>
           </div>
         </div>
-        <div class="dashboard-user-history-box" id="dashboard-user-box">
-          <div id="dashboard-user-appointment-box-info-top">
+        <div class="dashboard-user-history-box" id="dashboard-user-box" onclick="navToHistory()">
+          <div id="dashboard-user-box-info-top">
             <i class="bi bi-clock"></i> היסטוריה
           </div>
-          <div id="dashboard-user-appointment-box-info-bottom">
+          <div id="dashboard-user-box-info-bottom">
             <span>*היסטוריה אחרונה </span>
           </div>
         </div>
         <div class="dashboard-user-recommended-box" id="dashboard-user-box">
-          <div id="dashboard-user-appointment-box-info-top">
+          <div id="dashboard-user-box-info-top">
             <i class="bi bi-lightbulb"></i> המלצות
           </div>
-          <div id="dashboard-user-appointment-box-info-bottom">
+          <div id="dashboard-user-box-info-bottom">
             <span>*המלצה אחרונה </span>
           </div>
         </div>
         <div class="dashboard-user-chatbot-box" id="dashboard-user-box">
-          <div id="dashboard-user-appointment-box-info-top">
+          <div id="dashboard-user-box-info-top">
             <i class="bi bi-chat-left-dots"></i> צאטבוט
             </div>
 
-            <div id="dashboard-user-appointment-box-info-bottom">
+            <div id="dashboard-user-box-info-bottom">
               <span>*המלצה אחרונה </span>
               </div>
-
+   
             </div>
           </div>
         </div>
@@ -76,6 +81,6 @@
 
     <!-- Footer -->
     <footer></footer>
-    <script src="dashboard-user.js"></script>
+    <script src="dashboard-user.js" defer></script>
   </body>
 </html>

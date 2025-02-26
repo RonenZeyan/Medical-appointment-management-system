@@ -5,11 +5,17 @@ document
 
     // Getting full name, email, phone, and password
     const full_name = document.getElementById("fullNameInput").value;
-    const email = document.getElementById("emailInput").value.trim();
+    const email = document.getElementById("emailInput").value;
     const phone = document.getElementById("phoneInput").value;
-    const password = document.getElementById("passwordInput").value.trim();
+    const password = document.getElementById("passwordInput").value;
+
+    // Error div
     const errorMessage = document.getElementById("register-error-message");
     const errorDiv = document.getElementById("register-error");
+
+
+
+    
 
     // Ensures at least 5 characters of any type
     const minFullNameLengthRegex = /^.{5,}$/;

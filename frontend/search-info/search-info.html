@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MAMS</title>
+    <link rel="stylesheet" href="./search-info.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header></header>
+
+    <!-- Main -->
+    <main class="search-info" id="search-info">
+      <!-- Editable User Info Form -->
+
+      <h2>חיפוש פרטים</h2>
+
+      <form id="search-info-form">
+        <label>בחר נושא לחיפוש:</label>
+        <select id="search-info-form-options" required>
+          <option value="" disabled selected>בחר אפשרות</option>
+          <option value="מרפאות">מרפאות</option>
+          <option value="רופאים">רופאים</option>
+        </select>
+        <label>שם:</label>
+        <input type="text" id="name" placeholder="שם" />
+        <button type="submit" onclick="searchInfo(event)">חפש</button>
+      </form>
+
+      <div id="response-message">
+        <span id="response-message-contant"></span>
+      </div>
+      
+      <div id="search-info-details">
+        <h2>תוצאות חיפוש</h2>
+        <ul id="clinic-list" class="clinic-list">
+        </ul>
+
+        <!--  Modal for Displaying Clinic Details -->
+        <div id="clinic-modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="modal-clinic-name"></h3>
+            <table id="clinic-details-table">
+              <tbody>
+                <tr>
+                  <th><i class="bi bi-building"></i> עיר:</th>
+                  <td id="modal-clinic-city"></td>
+                </tr>
+                <tr>
+                  <th><i class="bi bi-pin-map-fill"></i> אזור:</th>
+                  <td id="modal-clinic-region"></td>
+                </tr>
+                <tr>
+                  <th><i class="bi bi-geo-alt"></i> כתובת:</th>
+                  <td id="modal-clinic-address"></td>
+                </tr>
+                <tr>
+                  <th><i class="bi bi-telephone"></i> טלפון:</th>
+                  <td id="modal-clinic-phone"></td>
+                </tr>
+                <tr>
+                  <th><i class="bi bi-clock"></i> שעות פתיחה:</th>
+                  <td id="modal-clinic-hours"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+
+        <ul id="doctor-list" class="doctor-list">
+        </ul>
+      
+              <!--  Modal for Displaying Clinic Details -->
+              <div id="doctor-modal" class="doctor-modal">
+                <div class="doctor-modal-content">
+                  <span class="doctor-close">&times;</span>
+                  <h3 id="modal-doctor-name"></h3>
+                  <table id="doctor-details-table">
+                    <tbody>
+                      <tr>
+                        <th><i class="bi bi-building"></i> שם מלא:</th>
+                        <td id="modal-doctor-full_name"></td>
+                      </tr>
+                      <tr>
+                        <th><i class="bi bi-person-workspace"></i></i> תחום:</th>
+                        <td id="modal-doctor-medicalField"></td>
+                      </tr>
+                      <tr>
+                        <th><i class="bi bi-pin-map-fill"></i> מס' טלפון:</th>
+                        <td id="modal-doctor-phone"></td>
+                      </tr>
+                      <tr>
+                        <th><i class="bi bi-geo-alt"></i> אימייל:</th>
+                        <td id="modal-doctor-email"></td>
+                      </tr>
+               
+              
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+      
+
+
+        <div id="search-result-display"></div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer></footer>
+    <script src="search-info.js" defer></script>
+  </body>
+</html>

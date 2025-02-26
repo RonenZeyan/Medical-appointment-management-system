@@ -1,10 +1,13 @@
 :root {
   /* 🎨 צבעי הרקע */
-  --background-primary-color:  white; /* רקע כללי ראשי */
+  --background-primary-color: white; /* רקע כללי ראשי */
   --background-secondary-color: rgb(160, 211, 248); /* רקע כללי משני */
-
   --body-text-color: #333; /* צבע טקסט כללי */
-  --background-page:linear-gradient(to bottom, #ffffff 0%, #e0f7fa 100%);/* רקע כללי של  כל דף */
+  --background-page: linear-gradient(
+    to bottom,
+    #ffffff 0%,
+    #a1f4ff 100%
+  ); /* רקע כללי של  כל דף */
 
   /* 🎨 צבעי כפתורים */
   --button-bg: #0db7ce; /* רקע של כפתור */
@@ -12,6 +15,19 @@
   --button-click-bg: #006d6d; /* רקע של כפתור בלחיצת עכבר */
   --button-text-color: #ffffff; /* צבע טקסט בתוך כפתור */
 
+  /* 🎨 צבעי צללים */
+  --button-box-shadow: 0 0 15px rgba(52, 152, 219, 1); /* צל של כפתור */
+  --container-box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3); /* צל מסגרת */
+
+
+  /* 🎨 צבעי זכוכית */
+  --container-border-glassy: 2px solid rgba(255, 255, 255, 0.2); /* מסגרת זכוכית */
+  --container-background-glassy: rgba(255, 255, 255, 0.15); /* זכוכית רקע */
+  --container-box-shadow-flaoting: 0px 8px 16px rgba(0, 0, 0, 0.2); /* זכוכית צללים */
+
+  /* 🎨 צבעי טבלה */
+  --table-bg: #007bff; /* רקע של טבלה */
+ 
   /* 🎨 צבעים נוספים */
   --card-bg: #ffffff; /* רקע של כרטיסים */
   --border-color: #ddd; /* צבע מסגרת */
@@ -32,8 +48,6 @@ body {
   font-family: Arial, sans-serif;
   background: var(--background-page);
 }
-
-
 
 /* Navbar styles */
 .navbar {
@@ -65,8 +79,8 @@ body {
 }
 
 .navbar-links a:hover {
-  background-color: #2980b9;
-  box-shadow: 0 0 15px rgba(52, 152, 219, 1);
+  background-color: var(--link-color);
+  box-shadow: var(--button-box-shadow)
 }
 
 .navbar-hamburger-contant {
@@ -100,7 +114,7 @@ body {
   padding: 1rem 0;
 }
 
-.hide{
+.hide {
   display: none !important;
 }
 

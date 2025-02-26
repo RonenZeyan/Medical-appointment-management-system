@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MAMS</title>
+    <link rel="stylesheet" href="./user-info.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header></header>
+
+    <!-- Main -->
+    <main class="user-info" id="user-info">
+      <div class="user-info-details">
+        <h2>פרטי משתמש</h2>
+        <div id="user-details-display">
+          <p><strong>אימייל:</strong> <span id="displayEmail"></span></p>
+          <p><strong>שם מלא:</strong> <span id="displayFullName"></span></p>
+          <p><strong>מס' טלפון:</strong> <span id="displayPhone"></span></p>
+        </div>
+      </div>
+
+      <hr />
+
+      <!--  User Info Form -->
+      <form id="user-info-form">
+        <h2>עידכון פרטים</h2>
+        <div id="user-info-form-inputs">
+        <label>אימייל:</label>
+        <input type="email" id="email" placeholder="אימייל" />
+        <label>שם מלא:</label>
+        <input type="text" id="full_name" placeholder="שם מלא" />
+        <label>מס' טלפון:</label>
+        <input type="text" id="phone" placeholder="מס' טלפון" />
+        </div>
+        <div>
+          <button type="button" onclick="saveUserInfo()">שמור</button>
+        </div>
+      </form>
+    </div>
+
+
+    <div id="response-message">
+      <span id="response-message-contant"></span>
+    </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer></footer>
+    <script src="user-info.js" defer></script>
+  </body>
+</html>

@@ -35,6 +35,8 @@ const addNewClinic = async (req, res) => {
  */
 
 const getAllClinics = async (req, res) => {
+
+
   try {
     const clinics = await Clinic.find();
     res.status(200).json(clinics);
@@ -145,6 +147,8 @@ const getSpecificClinic = async (req, res) => {
  */
 
 const getSpecificClinicByName = async (req, res) => {
+
+
     try {
       // Get the clinic name from the request body
       const { name } = req.body;

@@ -71,6 +71,31 @@ const getUserByName = async (req, res) => {
 };
 
 /**
+ * @description Get user by ID
+ * @router /api/users/:id
+ * @method GET
+ * @access Private (only admin)
+ */
+const getUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    // חיפוש משתמש לפי ID
+    const user = await User.findById(id).select("-password"); // Exclude password
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Something went wrong!" });
+  }
+};
+
+
+/**
  * @description Get all users
  * @router /api/users
  * @method GET
@@ -248,6 +273,7 @@ module.exports = {
   deleteUserById,
   updateUserInfo,
   getAllDoctors,
+  getUserById
   getUserInfo,
   getDoctorByName,
 };

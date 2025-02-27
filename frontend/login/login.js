@@ -56,8 +56,8 @@ document
         localStorage.setItem("token", data.token); // Save token to localStorage
         localStorage.setItem("full_name", data.connectedUser.full_name); // Save full name
         localStorage.setItem("email", data.connectedUser.email); // Save email
-        localStorage.setItem("id", data.connectedUser.id); // Save email
-        localStorage.setItem("role", data.connectedUser.role); // Save email
+        localStorage.setItem("id", data.connectedUser.id); // Save id
+        localStorage.setItem("role", data.connectedUser.role); // Save role
 
         if(data.connectedUser.role === "admin"){
           window.location.href = "../dashboard/dashboard.html";

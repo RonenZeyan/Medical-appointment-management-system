@@ -83,6 +83,7 @@ const registerValidation = (user_data) => {
     return errors.length>0 ? {error:errors} : {success:true};
 };
 
+
 module.exports = {
     User,
     registerValidation,

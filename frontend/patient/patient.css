@@ -1,0 +1,129 @@
+:root {
+    /* 🎨 צבעי הרקע */
+    --background-color: #f4f4f4;
+    /* רקע כללי של הדף */
+    --body-text-color: #333;
+    /* צבע טקסט כללי */
+    /* 🎨 צבעי כפתורים */
+    --button-bg: #007bff;
+    /* רקע של כפתור */
+    --button-hover-bg: #0056b3;
+    /* רקע של כפתור במעבר עכבר */
+    --button-text-color: #ffffff;
+    /* צבע טקסט בתוך כפתור */
+    /* 🎨 צבעים נוספים */
+    --card-bg: #ffffff;
+    /* רקע של כרטיסים */
+    --border-color: #ddd;
+    /* צבע מסגרת */
+    --link-color: #007bff;
+    /* צבע של קישורים */
+    --link-hover-color: #0056b3;
+    /* צבע של קישורים במעבר עכבר */
+    --border-radius: 12px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    direction: rtl;
+    background-color: var(--background-color);
+    color: var(--body-text-color);
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    margin: 20px auto;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+input,
+button {
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1em;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--button-bg);
+    box-shadow: 0 0 5px var(--button-bg);
+}
+
+button {
+    background-color: var(--button-bg);
+    color: var(--button-text-color);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    background-color: var(--card-bg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.cancel-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background-color: darkred;
+}
+
+.urgent {
+    background-color: #ffe6e6;
+    border-left: 5px solid red;
+}
+
+.urgent::before {
+    content: "⚠️";
+    position: absolute;
+    left: 10px;
+    font-size: 1.2em;
+}
+
+
+/* קישורים */
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}

@@ -54,6 +54,7 @@
                 <form
                     class="appointment-form"
                     onsubmit="handleSubmitForm(event)"
+                    style="display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 15px;"
                 >
                     <select
                         id="md-field-select"
@@ -88,7 +89,9 @@
                     <select id="appointment-time">
                         <option value="">בחר זמן</option>
                     </select>
-                    <button>הזמין תור</button>
+                    <button
+                        style="padding: 10px 20px; border: none; background-color: var(--button-bg); border-radius: var(--border-radius); color: white; font-weight: bold;"
+                    >הזמין תור</button>
                 </form>
             </div>
         </section>

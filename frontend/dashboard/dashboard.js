@@ -17,7 +17,7 @@ const medicalFields_card = document.getElementById("medicalfield-number");
 window.addEventListener("load", () => {
     //authorized if admin access and not patient or dactor
     if (localStorage.getItem("role") !== "admin") {
-        window.location.href = "../../authorization/authorized.html"
+        window.location.href = "../authorization/authorized.html"
     }
     token = window.localStorage.getItem("token");
     fetchLatestAppointments();
@@ -160,6 +160,8 @@ function displayUserDetails(user_details) {
 
 //display appointments in latest appointments table
 function displayAppointments(latestAppointments) {
+    console.log(latestAppointments);
+    
     const table = document.getElementById("appointments-table-body");
     table.innerHTML = "";
     table.innerHTML = latestAppointments.length === 0 && `<tr><td colspan="4" style="text-align: center; font-weight:bolder; font-size: 20px;">אין תורים להיום או בעתיד</td></tr>`;

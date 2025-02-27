@@ -23,6 +23,10 @@
         rel="stylesheet"
         href="../dashboard.css"
     >
+    <link
+        rel="stylesheet"
+        href="../success-modal/success-modal.css"
+    >
     <style>
         .add-new-clinic {
             width: 100%;
@@ -173,16 +177,18 @@
         <h1>Dashboard</h1>
         <section id="dashboard">
             <aside id="dashboard-sidebar">
-                <h3>Admin Dashboard</h3>
+                <h3>אדמין דשבורד</h3>
                 <ul style="border-top: 3px solid var(--background-primary-color)">
-                    <li><a href="#dashboard">dashboard</a></li>
-                    <li><a href="#appointment"><i class="bi bi-calendar-heart"></i> Appointments</a></li>
-                    <li><a href="#users"><i class="bi bi-people"></i> Users</a></li>
-                    <li><a href="#users"><i class="bi bi-person-add"></i> Add New User</a></li>
-                    <li><a href="#clinics"><i class="bi bi-building"></i> clinics</a></li>
-                    <li class="active"><a href="#add"><i class="bi bi-building-add"></i> Add New Clinic</a></li>
-                    <li><a href="#medicalField"><i class="bi bi-file"></i> Medical Field</a></li>
-                    <li><a href="#add"><i class="bi bi-file-plus"></i> Add New MedicalField</a></li>
+                    <li><a href="../dashboard.html">דשבורד</a></li>
+                    <li><a href="../appointments/appointments.html"><i class="bi bi-calendar-heart"></i> ניהול תורים</a>
+                    </li>
+                    <li><a href="../users/users.html"><i class="bi bi-people"></i> משתמשים</a></li>
+                    <li><a href="../users/add-users.html"><i class="bi bi-person-add"></i> הוספת משתמש חדש</a></li>
+                    <li><a href="clinics.html"><i class="bi bi-building"></i> מרפאות</a></li>
+                    <li class="active"><a href="add-new-clinic.html"><i class="bi bi-building-add"></i> הוספת מרפאה חדשה</a></li>
+                    <li><a href="../medical-field/medical-fields.html"><i class="bi bi-file"></i> תחום רפואי</a></li>
+                    <li><a href="../medical-field/add-new-medicalfield.html"><i class="bi bi-file-plus"></i> הוספת תחום
+                            רפואי חדש</a></li>
                 </ul>
             </aside>
             <div id="dashboard-content">
@@ -366,7 +372,7 @@
                                             type="button"
                                             style="border: none; border-radius: 50%; background-color: transparent;"
                                         >?</button>
-                                        <span class="tooltip-text">כדי לבחור שהמרפאה סגורה ביום אז נא <b><u>לא
+                                        <span class="tooltip-text">כדי לבחור שהמרפאה סגורה ביום מסוים אז נא <b><u>לא
                                                     למלא</u></b> הזמן ביום הזה</span>
                                     </div>
                                     <button
@@ -423,6 +429,8 @@
         </section>
     </main>
 
+    <script src="../../auth.js"></script>
+    <script src="../success-modal/successModal.js"></script>
     <script>
         //get widgets
         let clinic_name = document.getElementById("clinic-name");
@@ -460,10 +468,19 @@
 
         //set variables
         let clinic_id;
+        let token;
 
         //onload of page
         window.addEventListener("load", async () => {
+            token = window.localStorage.getItem("token");
+            
+            //authorized if admin access and not patient or dactor
+            if (localStorage.getItem("role") !== "admin") {
+                window.location.href = "../../authorization/authorized.html"
+            }
             fetchMedicalFields();
+
+            //check if in href there is param and if yes that mean we want to edit not add new one 
             clinic_id = getIdFromUrl();
             if (clinic_id) {
                 await fetchClinicDetails(clinic_id);
@@ -641,17 +658,17 @@
         async function updateExistClinic(clinic_id, exist_clinic) {
             try {
                 let res = await fetch(`http://localhost:3000/api/clinic/${clinic_id}`, {
-                    method: "PUT", // כאן חשוב לוודא שזה PUT
+                    method: "PUT", //PUT HTTP REQUEST 
                     headers: {
                         "Content-Type": "application/json",
-                        // "Authorization": `Bearer ${token}`  // אל תשכח להוסיף אימות אם צריך
+                        "Authorization": `Bearer ${token}`
                     },
                     body: JSON.stringify(exist_clinic),
                 });
 
                 let result = await res.json();
-                console.log("Clinic updated:", result);
-                window.location.href = "/frontend/dashboard/clinics/clinics.html";
+                showSuccessModal("/frontend/dashboard/clinics/clinics.html",`עדכון המרפאה <i style='color: green;'>${exist_clinic.name}</i> התבצעה בהצלחה!`);
+                // window.location.href = "/frontend/dashboard/clinics/clinics.html";
                 if (!res.ok) {
                     throw new Error(result.message || "Failed to update clinic");
                 }
@@ -669,13 +686,14 @@
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        // "Authorization": `Bearer ${token}` dont forget to do -----------------
+                        "Authorization": `Bearer ${token}` 
                     },
                     body: JSON.stringify(new_clinic),
                 });
 
                 let result = await res.json();
-                window.location.href = "/frontend/dashboard/clinics/clinics.html";
+                showSuccessModal("/frontend/dashboard/clinics/clinics.html",`הוספת מרפאה <i style='color: green;'>${new_clinic.name}</i> התבצעה בהצלחה!`);
+                // window.location.href = "/frontend/dashboard/clinics/clinics.html";
                 console.log("clinic added:", result);
             } catch (err) {
                 console.error("Error:", err);

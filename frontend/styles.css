@@ -1,6 +1,6 @@
 :root {
   /* 🎨 צבעי הרקע */
-  --background-primary-color:  white; /* רקע כללי ראשי */
+  --background-primary-color:  rgb(236, 236, 236); /* רקע כללי ראשי */
   --background-secondary-color: rgb(160, 211, 248); /* רקע כללי משני */
 
   --body-text-color: #333; /* צבע טקסט כללי */

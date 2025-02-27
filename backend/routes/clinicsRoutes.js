@@ -11,6 +11,6 @@ router.post("/new-clinic", verifyTokenIsAdmin, addNewClinic);
 router.post("/find-by-name", getSpecificClinicByName);
 router.delete("/:id", validateObjectId, verifyTokenIsAdmin, deleteClinic);
 router.get("/:id", getSpecificClinic);
-router.put("/:id",validateObjectId,updateClinic);
+router.put("/:id",validateObjectId,verifyTokenIsAdmin,updateClinic);
 
 module.exports = router;

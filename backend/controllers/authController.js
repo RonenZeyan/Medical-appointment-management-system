@@ -24,7 +24,7 @@ const loginUser = async (req, res) => {
     // Generate JWT token using the method defined in the User model
     const token = user.generateAuthToken();
 
-    let connectedUser = { full_name: user.full_name, email: user.email, id:user._id };
+    let connectedUser = { full_name: user.full_name, email: user.email, id:user._id, role:user.role };
 
     return res.status(200).json({
       token,

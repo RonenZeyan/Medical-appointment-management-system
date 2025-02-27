@@ -7,8 +7,8 @@ const router = express.Router();
 
 router.get("/", getAllMedicalFields);
 router.get("/:id", validateObjectId, getSpecificMedicalField);
-router.patch("/:id", validateObjectId, updateMedicalField);
-router.post("/new-medicalfield", addNewMedicalField);
-router.delete("/:id", validateObjectId, DeleteMedicalField);
+router.patch("/:id", validateObjectId,verifyTokenIsAdmin, updateMedicalField);
+router.post("/new-medicalfield",verifyTokenIsAdmin, addNewMedicalField);
+router.delete("/:id", validateObjectId,verifyTokenIsAdmin, DeleteMedicalField);
 
 module.exports = router;

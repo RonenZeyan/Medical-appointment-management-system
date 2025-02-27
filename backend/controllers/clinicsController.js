@@ -35,8 +35,22 @@ const addNewClinic = async (req, res) => {
  */
 
 const getAllClinics = async (req, res) => {
+  let clinics;
   try {
-    const clinics = await Clinic.find();
+    const { medicalFieldId } = req.query;
+
+    //in case there is query 
+    if(medicalFieldId){
+      clinics = await Clinic.find({"doctors.medical_field":medicalFieldId})
+      .populate({
+        path: "doctors.doctor",
+        select: "full_name phone email"
+      });
+      return res.status(200).json(clinics)
+    }
+
+    //in case there is no query sended then we need all clinics
+    clinics = await Clinic.find();
     res.status(200).json(clinics);
   } catch (err) {
     console.error(err);
@@ -90,7 +104,7 @@ const updateClinic = async (req, res) => {
     });
 
     if (!clinic) {
-      return res.status(404).json({ message: "Clinit not found!" });
+      return res.status(404).json({ message: "Clinic not found!" });
     }
 
     return res.status(200).json(clinic);

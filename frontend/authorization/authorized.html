@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>403</title>
+</head>
+
+<body style="text-align: center;">
+    <h1 style="font-size: 90px; color: rgb(52, 105, 250);">403</h1>
+    <h3 style="font-size: 50px; color: black;">FORBIDDEN</h3>
+    <p style="font-size: 30px; color: gray;">You don't have permission to access this page.<button
+            style="background-color:transparent;border:none; color: rgb(52, 105, 250); cursor: pointer;font-size: 22px;"
+            onclick="redirectUserForCorrectDashboard()"
+        ><b><u>Go To Dashboard Page</u></b></button>
+    </p>
+    <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8eWib7UG208Bztl98c8nnNpuocdaQ7IW-hQ&s"
+        alt="UpsetFaceIMG"
+    >
+
+    <script>
+        function redirectUserForCorrectDashboard() {
+            if (!localStorage.getItem("role")) {
+                window.location.href = "../login/login.html";
+            }
+            else if (localStorage.getItem("role") === "admin") {
+                window.location.href = "../dashboard/dashboard.html";
+            } else { //in case patient or doctor
+                window.location.href = "../dashboard-user/dashboard-user.html"; // Redirect to user dashboard
+            }
+        }
+    </script>
+</body>
+
+</html>

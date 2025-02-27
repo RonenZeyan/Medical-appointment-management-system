@@ -11,18 +11,48 @@ body {
 #login-form-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-width: 300px;
+  padding: 20px;
   border-radius: var(--border-radius);
-  padding: 10px;
-  border: 2px solid #e0f7fa;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-  transition: all 1s ease; 
+  border: var(--container-color-glassy); /* Glassy border */
+
+  /*  Glassy Effect */
+  background: rgba(255, 255, 255, 0.15); /* Semi-transparent */
+  backdrop-filter: blur(12px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(12px); /* For Safari */
+
+  /*  Floating Shadow */
+  box-shadow: var(--container-box-shadow-flaoting);
+
+  /*  Initial Hidden State */
+  opacity: 0;
+  transform: scale(0.9);
+  animation: popup 0.5s ease-out forwards;
+
+  /*  Smooth Hover Effect */
+  transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
 }
 
 #login-form-container:hover {
-  border: 6px solid #e0f7fa; 
+  border: 4px solid #e0f7fa;
+  transform: scale(1.05);
+  box-shadow: var(--container-box-shadow);
 }
 
+/*  Pop-Up Animation */
+@keyframes popup {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 #login-form-container-title {
   text-align: center;
 }
@@ -61,11 +91,11 @@ body {
 
 #login-form-button:hover {
   background-color: var(--button-hover-bg);
-  box-shadow: 0 0 15px rgba(52, 152, 219, 1);
+  box-shadow: var(--button-box-shadow)
 }
 
 #login-form-button:active {
-    background-color: var(--button-click-bg);
+  background-color: var(--button-click-bg);
 }
 
 #login-error {
@@ -74,8 +104,7 @@ body {
   margin-bottom: 5px;
 }
 
-
-/* Notification styling (common for success & error) */
+/* Notification success*/
 .notification {
   position: fixed;
   top: 20px;
@@ -93,15 +122,31 @@ body {
   animation: fadeIn 0.5s ease-in-out;
 }
 
-
 /* Fade-in animation */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 /* Fade-out animation */
 @keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  #login-form-container {
+    min-width: 250px;
+    width: auto;
+  }
 }

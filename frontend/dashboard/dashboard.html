@@ -188,7 +188,6 @@
                     throw new Error("Failed to fetch numbers");
                 }
                 let nums = await res.json();
-                console.log(nums);
                 users_card.textContent = nums.users;
                 doctors_card.textContent = nums.doctors;
                 clinics_card.textContent = nums.clinics;

@@ -1,0 +1,271 @@
+/* importing main css */
+@import url("./../styles.css");
+
+.search-info {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 150px;
+}
+
+#search-info-form {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#search-info-form-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: flex;
+  margin-top: 5px;
+}
+
+input,
+select {
+  width: 200px;
+}
+
+button {
+  width: 100px;
+  margin-top: 10px;
+}
+
+#search-info-details {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#listItem {
+  text-align: right;
+}
+
+button {
+  color: white;
+  text-decoration: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: var(--border-radius);
+  background-color: var(--button-bg);
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: var(--button-hover-bg);
+  box-shadow: var(--button-box-shadow);
+}
+
+button:active {
+  background-color: var(--button-click-bg);
+}
+
+@media (max-width: 1100px) {
+  label {
+    margin-top: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  input {
+    margin-bottom: 5px;
+  }
+
+  #search-info-form-inputs {
+    flex-direction: column;
+    text-align: right;
+  }
+
+  #search-info-form {
+    flex-direction: column;
+    align-items: center;
+  }
+  button {
+    margin-top: 10px;
+  }
+}
+
+.clinic-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.clinic-table th,
+.clinic-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  background-color: var(--table-bg);
+  color: white;
+}
+
+.clinic-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#clinic-details-table i,
+#doctor-details-table i {
+  color: var(--button-bg);
+  margin-left: 5px;
+}
+
+.clinic-title,
+.doctor-title {
+  text-align: center;
+  color: var(--table-bg);
+}
+
+.clinic-list,
+.docotr-list {
+  list-style: none;
+  padding: 0;
+
+  max-width: 600px;
+  min-width: 300px;
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px); /* Glassy effect */
+}
+
+.clinic-list li,
+.doctor-list li {
+  cursor: pointer;
+  background: white;
+  max-width: 600px;
+  min-width: 300px;
+  padding: 15px;
+  list-style: none;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.clinic-list li:hover,
+.doctor-list li:hover {
+  transform: scale(1.05);
+  box-shadow: var(--container-box-shadow-flaoting);
+}
+
+/*  Modal Styling */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark background */
+}
+
+.modal-content {
+  background: white;
+  margin: 10% auto;
+  padding: 20px;
+  width: 50%;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: right;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  left: 15px;
+  top: 10px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th,
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/*  Modal Styling */
+.doctor-modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark background */
+}
+
+.doctor-modal-content {
+  background: white;
+  margin: 10% auto;
+  padding: 20px;
+  width: 50%;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: right;
+  position: relative;
+}
+
+.doctor-close {
+  position: absolute;
+  left: 15px;
+  top: 10px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th,
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+@media (max-width: 850px) {
+  .modal-content,
+  .doctor-modal-content {
+    width: 85%;
+  }
+}
+
+@media (max-width: 450px) {
+  .clinic-list,
+  .docotr-list {
+    max-width: 270px;
+    min-width: 270px;
+  }
+
+  .clinic-list li,
+  .doctor-list li {
+    max-width: 215px;
+    min-width: 227px;
+  }
+}

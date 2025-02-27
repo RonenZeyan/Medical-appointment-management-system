@@ -6,7 +6,7 @@ const { User } = require("../models/User");
 
 const loginUser = async (req, res) => {
   try {
-    //get email and password from request body
+    // Get email and password from request body
     const { email, password } = req.body;
 
     // Find the user by email
@@ -45,7 +45,7 @@ const loginUser = async (req, res) => {
 
 const registerUser = async (req, res) => {
   try {
-    //get email,password and name from request body
+    // Get email,password and name from request body
     const { full_name, email, password, phone } = req.body;
 
     // Find the user by email

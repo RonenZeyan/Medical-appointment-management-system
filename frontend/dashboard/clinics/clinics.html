@@ -31,6 +31,10 @@
         rel="stylesheet"
         href="../modal-details.css"
     >
+    <link
+        rel="stylesheet"
+        href="../success-modal/success-modal.css"
+    >
 </head>
 
 <body>
@@ -38,10 +42,11 @@
         <h1>Dashboard</h1>
         <section id="dashboard">
             <aside id="dashboard-sidebar">
-                <h3>Admin Dashboard</h3>
+                <h3>אדמין דשבורד</h3>
                 <ul style="border-top: 3px solid var(--background-primary-color)">
                     <li><a href="../dashboard.html">דשבורד</a></li>
-                    <li><a href="#appointment"><i class="bi bi-calendar-heart"></i> ניהול תורים</a></li>
+                    <li><a href="../appointments/appointments.html"><i class="bi bi-calendar-heart"></i> ניהול תורים</a>
+                    </li>
                     <li><a href="../users/users.html"><i class="bi bi-people"></i> משתמשים</a></li>
                     <li><a href="../users/add-users.html"><i class="bi bi-person-add"></i> הוספת משתמש חדש</a></li>
                     <li class="active"><a href="clinics.html"><i class="bi bi-building"></i> מרפאות</a></li>
@@ -146,8 +151,9 @@
             </div>
         </section>
     </main>
-
+    <script src="../../auth.js"></script>
     <script src="../deleteItem.js"></script>
+    <script src="../success-modal/successModal.js"></script>
     <script>
         //get widgets and set vars
         let clinics_table_body = document.getElementById("clinics_table_body");
@@ -160,8 +166,16 @@
         let clinic_modal_location = document.getElementById("clinic-modal-location");
         let modal = document.getElementById("details-section");
 
+        //let clinics
+        let token;
+
         //onload of page
         window.addEventListener("load", () => {
+            token = window.localStorage.getItem("token");
+            //authorized if admin access and not patient or dactor
+            if (localStorage.getItem("role") !== "admin") {
+                window.location.href = "../authorization/authorized.html"
+            }
             fetchClinics();
         })
 

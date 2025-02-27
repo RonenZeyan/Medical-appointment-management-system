@@ -50,15 +50,22 @@ document
       }
 
       const data = await response.json(); // Parse the JSON response
-
+      
       // Check if token exists in the response
       if (data.token) {
         localStorage.setItem("token", data.token); // Save token to localStorage
         localStorage.setItem("full_name", data.connectedUser.full_name); // Save full name
         localStorage.setItem("email", data.connectedUser.email); // Save email
-        localStorage.setItem("id", data.connectedUser.id); // Save id
 
-        window.location.href = "../dashboard-user/dashboard-user.html"; // Redirect to dashboard
+        localStorage.setItem("id", data.connectedUser.id); // Save email
+        localStorage.setItem("role", data.connectedUser.role); // Save email
+
+        if(data.connectedUser.role === "admin"){
+          window.location.href = "../dashboard/dashboard.html";
+        }else{ //in case patient or doctor
+          window.location.href = "../dashboard-user/dashboard-user.html"; // Redirect to user dashboard
+        }
+
       } else {
         throw new Error("שגיאת התחברות, אנא נסה שנית .");
       }

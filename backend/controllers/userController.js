@@ -187,7 +187,6 @@ const getAllDoctors = async (req, res) => {
   try {
     //  Fetch all doctors (excluding password)
     const doctors = await User.find({ role: "doctor" }).select("-password");
-
     // If couldn't find doctors
     if (!doctors || doctors.length === 0) {
       return res.status(404).json({ message: "No doctors found." });
@@ -202,7 +201,7 @@ const getAllDoctors = async (req, res) => {
         field.doctors.find((doc) => doc.equals(doctor._id))
       );
       return {
-        id: doctor._id,
+        _id: doctor._id,
         full_name: doctor.full_name,
         email: doctor.email,
         phone: doctor.phone,
@@ -273,7 +272,7 @@ module.exports = {
   deleteUserById,
   updateUserInfo,
   getAllDoctors,
-  getUserById
+  getUserById,
   getUserInfo,
   getDoctorByName,
 };

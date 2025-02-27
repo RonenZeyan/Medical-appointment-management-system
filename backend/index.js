@@ -17,6 +17,8 @@ const clinicsRoutes = require("./routes/clinicsRoutes");
 const medicalFieldRoutes = require("./routes/medicalFieldRoutes");
 const appointmentRoutes = require("./routes/appointmentRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const botRoutes = require("./routes/botRoutes");
+const { notFound, errorHandler } = require("./middlewares/error");
 
 //use routes
 app.use("/api/auth", authRoutes);
@@ -25,6 +27,11 @@ app.use("/api/medicalfield",medicalFieldRoutes);
 app.use("/api/clinic",clinicsRoutes);
 app.use("/api/appointment",appointmentRoutes);
 app.use("/api/dashboard",dashboardRoutes);
+app.use("/api/chat",botRoutes);
+
+//in case send Route and not Founded in every Route then send notFound error and also handle errors in case not a page 
+app.use(notFound);
+app.use(errorHandler);
 
 
 //start the server

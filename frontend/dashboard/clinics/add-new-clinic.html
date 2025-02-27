@@ -23,6 +23,10 @@
         rel="stylesheet"
         href="../dashboard.css"
     >
+    <link
+        rel="stylesheet"
+        href="../success-modal/success-modal.css"
+    >
     <style>
         .add-new-clinic {
             width: 100%;
@@ -187,7 +191,7 @@
         <h1>Dashboard</h1>
         <section id="dashboard">
             <aside id="dashboard-sidebar">
-                <h3>Admin Dashboard</h3>
+                <h3>אדמין דשבורד</h3>
                 <ul style="border-top: 3px solid var(--background-primary-color)">
                     <li><a href="/frontend/dashboard/dashboard.html">לוח</a></li>
                     <li><a href="/frontend/appointment-details/appointment-details.html"><i class="bi bi-calendar-heart"></i> פגישות</a></li>
@@ -380,7 +384,7 @@
                                             type="button"
                                             style="border: none; border-radius: 50%; background-color: transparent;"
                                         >?</button>
-                                        <span class="tooltip-text">כדי לבחור שהמרפאה סגורה ביום אז נא <b><u>לא
+                                        <span class="tooltip-text">כדי לבחור שהמרפאה סגורה ביום מסוים אז נא <b><u>לא
                                                     למלא</u></b> הזמן ביום הזה</span>
                                     </div>
                                     <button
@@ -440,6 +444,9 @@
         <p>יצירת קשר: <a href="mailto:medAi@gmail.com">contact@example.com</a></p>
         <p>טלפון: 04-6784439</p>
       </footer>
+
+    <script src="../../auth.js"></script>
+    <script src="../success-modal/successModal.js"></script>
     <script>
        function logout() {
         localStorage.clear();
@@ -483,10 +490,19 @@
 
         //set variables
         let clinic_id;
+        let token;
 
         //onload of page
         window.addEventListener("load", async () => {
+            token = window.localStorage.getItem("token");
+            
+            //authorized if admin access and not patient or dactor
+            if (localStorage.getItem("role") !== "admin") {
+                window.location.href = "../../authorization/authorized.html"
+            }
             fetchMedicalFields();
+
+            //check if in href there is param and if yes that mean we want to edit not add new one 
             clinic_id = getIdFromUrl();
             if (clinic_id) {
                 await fetchClinicDetails(clinic_id);
@@ -664,17 +680,17 @@
         async function updateExistClinic(clinic_id, exist_clinic) {
             try {
                 let res = await fetch(`http://localhost:3000/api/clinic/${clinic_id}`, {
-                    method: "PUT", // כאן חשוב לוודא שזה PUT
+                    method: "PUT", //PUT HTTP REQUEST 
                     headers: {
                         "Content-Type": "application/json",
-                        // "Authorization": `Bearer ${token}`  // אל תשכח להוסיף אימות אם צריך
+                        "Authorization": `Bearer ${token}`
                     },
                     body: JSON.stringify(exist_clinic),
                 });
 
                 let result = await res.json();
-                console.log("Clinic updated:", result);
-                window.location.href = "/frontend/dashboard/clinics/clinics.html";
+                showSuccessModal("/frontend/dashboard/clinics/clinics.html",`עדכון המרפאה <i style='color: green;'>${exist_clinic.name}</i> התבצעה בהצלחה!`);
+                // window.location.href = "/frontend/dashboard/clinics/clinics.html";
                 if (!res.ok) {
                     throw new Error(result.message || "Failed to update clinic");
                 }
@@ -692,13 +708,14 @@
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        // "Authorization": `Bearer ${token}` dont forget to do -----------------
+                        "Authorization": `Bearer ${token}` 
                     },
                     body: JSON.stringify(new_clinic),
                 });
 
                 let result = await res.json();
-                window.location.href = "/frontend/dashboard/clinics/clinics.html";
+                showSuccessModal("/frontend/dashboard/clinics/clinics.html",`הוספת מרפאה <i style='color: green;'>${new_clinic.name}</i> התבצעה בהצלחה!`);
+                // window.location.href = "/frontend/dashboard/clinics/clinics.html";
                 console.log("clinic added:", result);
             } catch (err) {
                 console.error("Error:", err);

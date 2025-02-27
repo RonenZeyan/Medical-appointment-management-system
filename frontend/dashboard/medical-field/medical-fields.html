@@ -31,6 +31,10 @@
         rel="stylesheet"
         href="../modal-details.css"
     >
+    <link
+        rel="stylesheet"
+        href="../success-modal/success-modal.css"
+    >
 </head>
 
 <body>
@@ -52,7 +56,7 @@
         <h1>Dashboard</h1>
         <section id="dashboard">
             <aside id="dashboard-sidebar">
-                <h3>Admin Dashboard</h3>
+                <h3>אדמין דשבורד</h3>
                 <ul style="border-top: 3px solid var(--background-primary-color)">
                     <li><a href="/frontend/dashboard/dashboard.html">לוח</a></li>
                     <li><a href="/frontend/appointment-details/appointment-details.html"><i class="bi bi-calendar-heart"></i> פגישות</a></li>
@@ -122,7 +126,10 @@
             </div>
         </section>
 
-        <section class="hide" id="details-section">
+        <section
+            class="hide"
+            id="details-section"
+        >
             <button
                 id="close-details-modal"
                 onclick="closeModal()"
@@ -146,7 +153,10 @@
         <p>יצירת קשר: <a href="mailto:medAi@gmail.com">contact@example.com</a></p>
         <p>טלפון: 04-6784439</p>
       </footer>
+    <script src="../../auth.js"></script>
     <script src="../deleteItem.js"></script>
+    <script src="../success-modal/successModal.js"></script>
+
     <script>
       function logout() {
         localStorage.clear();
@@ -165,6 +175,10 @@
 
         //onload of page
         window.addEventListener("load", () => {
+            //authorized if admin access and not patient or dactor
+            if (localStorage.getItem("role") !== "admin") {
+                window.location.href = "../../authorization/authorized.html"
+            }
             fetchMedicalFields();
         })
 
@@ -213,19 +227,19 @@
                 //display/set medical field details in modal
                 mdfield_modal_name.textContent = md_field.name;
                 mdfield_modal_desc.textContent = md_field.description;
-                mdfield_modal_doctors.innerHTML="";
+                mdfield_modal_doctors.innerHTML = "";
 
                 //for loop for get doctors
-                md_field.doctors.forEach((doctor)=>{
-                    mdfield_modal_doctors.innerHTML+=`
+                md_field.doctors.forEach((doctor) => {
+                    mdfield_modal_doctors.innerHTML += `
                     <li><i class="bi bi-person-hearts"></i> ${doctor.full_name} - ${doctor.email} </li>
                     `
                 });
-            }catch (error) {
+            } catch (error) {
                 console.error("Error fetching doctors:", error);
             }
         }
-        
+
         //open modal
         function openModal() {
             modal.classList.remove("hide");

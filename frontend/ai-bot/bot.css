@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    direction: rtl;
+    background-color: #eef2f3;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+
+   .chat-container {
+    width: 70%;
+    background-color: transparent;
+    padding: 30px;
+    border-radius: 30px;
+    text-align: center;
+    position: relative; 
+    height: 100vh;
+  }
+  
+  #output {
+    margin-top: 20px;
+    min-height: 500px; 
+    overflow-x: hidden;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 30px;
+    position: relative; 
+    padding-bottom: 100px; 
+  }
+  
+  textarea {
+    width: calc(100% - 20px); 
+    height: 80px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 30px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border: none;
+    border-top: 1px solid #ccc;
+    resize: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: white;
+  }
+
+  button {
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  .me,.bot{
+    margin: 10px 17px;
+  }
+
+  .me p,.bot p{
+    margin-top: 0;
+    font-size: 20px;
+  }
+
+  .me::before,.bot::before{
+    font-weight: bolder;
+    font-size: 18px;
+  }
+
+  .me::before{
+    content:"🧑אתה";
+  }
+
+
+  .bot::before {
+    content: "הרופא הבוט🤖";
+  }

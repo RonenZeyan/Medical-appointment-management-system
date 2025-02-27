@@ -8,6 +8,10 @@ body {
   height: 100vh;
 }
 
+footer{
+  padding: 0px;
+}
+
 #login-form-container {
   display: flex;
   flex-direction: column;
@@ -37,7 +41,6 @@ body {
 }
 
 #login-form-container:hover {
-  border: 4px solid #e0f7fa;
   transform: scale(1.05);
   box-shadow: var(--container-box-shadow);
 }

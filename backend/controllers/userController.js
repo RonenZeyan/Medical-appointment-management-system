@@ -39,7 +39,7 @@ const getUserInfo = async (req, res) => {
 
 /**
  * @description Get user by name
- * @router /api/users/findUser
+ * @router /api/user/findUser
  * @method POST
  * @access Private (admin and user)
  */
@@ -184,6 +184,7 @@ const updateUserInfo = async (req, res) => {
  * @access Private (only admin)
  */
 const getAllDoctors = async (req, res) => {
+
   try {
     //  Fetch all doctors (excluding password)
     const doctors = await User.find({ role: "doctor" }).select("-password");
@@ -218,7 +219,7 @@ const getAllDoctors = async (req, res) => {
 
 /**
  * @description Get user by name
- * @router /api/users/findUser
+ * @router /api/user/findUser
  * @method POST
  * @access Private (only admin)
  */
@@ -258,13 +259,55 @@ const getDoctorByName = async (req, res) => {
       full_name: doctor.full_name,
       email: doctor.email,
       phone: doctor.phone,
-      medicalField: findMedicalField.name,
+      medicalField: findMedicalField?.name,
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Something went wrong!" });
   }
 };
+
+
+
+/**
+ * @description Add User
+ * @router /api/user/AdminAddUser
+ * @method POST
+ * @access Private (only admin)
+ */
+const AddUser = async (req, res) => {
+  try {
+    //get email,password and name from request body
+    const { full_name, email, password, phone,role } = req.body;
+
+    // Find the user by email
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ message: "User already exist" });
+    }
+
+    // Hash and Salt the password using bcrypt
+    const salt = await bcrypt.genSalt(10); // 10 is the default number of rounds for bcrypt salt
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create a new user with the hashed password
+    user = new User({
+      full_name,
+      email,
+      password: hashedPassword, // Store the hashed password,
+      phone,
+    });
+    if(role){ user['role'] = role}
+     // Save the user to the database
+    await user.save();
+
+    res.status(201).json({ message: "User have been registered successfuly" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Something went wrong!");
+  }
+};
+
 
 module.exports = {
   getUserByName,
@@ -275,4 +318,5 @@ module.exports = {
   getUserById,
   getUserInfo,
   getDoctorByName,
+  AddUser
 };

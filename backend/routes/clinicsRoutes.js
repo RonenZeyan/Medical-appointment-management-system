@@ -6,7 +6,7 @@ const { getAllClinics, addNewClinic, deleteClinic, getSpecificClinic,getSpecific
 const router = express.Router();
 
 
-router.get("/",verifyToken, getAllClinics);
+router.get("/", getAllClinics);
 router.post("/new-clinic", verifyTokenIsAdmin, addNewClinic);
 router.post("/find-by-name",verifyToken, getSpecificClinicByName);
 router.delete("/:id", validateObjectId, verifyTokenIsAdmin, deleteClinic);

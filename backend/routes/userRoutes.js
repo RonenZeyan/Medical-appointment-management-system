@@ -27,7 +27,7 @@ router.post("/findUser", verifyTokenIsAdmin, getUserByName);
 router.post("/userInfo/:id",verifyTokenIsSameUserOrAdmin, getUserInfo);
 
 // Get user by ID
-router.get("/:id", verifyTokenIsAdmin, getUserById);
+// router.get("/:id", verifyTokenIsAdmin, getUserById);
 
 
 // Get all users (only admin)
@@ -40,7 +40,9 @@ router.delete("/:id", verifyTokenIsAdmin, deleteUserById);
 router.put("/:id", verifyTokenIsSameUserOrAdmin, updateUserInfo);
 
 //get doctors
-router.get("/doctors",verifyToken, getAllDoctors);
+router.get("/doctors", getAllDoctors);
 // Get user by name
 router.post("/findDoctor",verifyToken, getDoctorByName);
+
+
 module.exports = router;

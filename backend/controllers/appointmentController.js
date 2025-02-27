@@ -139,6 +139,101 @@ const GetExistingAppointmentOfPatient = async(req, res) => {
         res.status(500).json({ message: "Something went wrong" });
     }
 };
+
+
+/**
+ * @description Get Free Time that user can choose to create a appointments in specific day
+ * @router /api/appointment/free-time
+ * @method GET
+ * @access private (only logged-in user, doctor, or admin)
+ */
+const getFreeTimesForAppointments = async(req, res) => {
+    try {
+        const { date, doctorId, clinic } = req.query;
+
+        // בדיקה שכל הפרמטרים קיימים
+        if (!date || !doctorId || !clinic) {
+            return res.status(400).json({ message: "Missing required parameters" });
+        }
+
+        // בדיקה שהתאריך בפורמט חוקי
+        const appointmentDate = new Date(date);
+        if (isNaN(appointmentDate.getTime())) {
+            return res.status(400).json({ message: "Invalid date format" });
+        }
+
+        const daysOfWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+        const specific_clinic = await Clinic.findById(clinic);
+
+        // בדיקה שהקליניקה קיימת
+        if (!specific_clinic) {
+            return res.status(404).json({ message: "Clinic not found" });
+        }
+
+        const dayOfWeek = appointmentDate.getDay();
+        const opening_time_day = specific_clinic.opening_hours[daysOfWeek[dayOfWeek]];
+
+        let time_arr = [];
+
+        if (opening_time_day.status === "open") {
+            time_arr = generateTimeSlots(opening_time_day.start, opening_time_day.end);
+        }
+
+        // מציאת התורים שכבר קיימים באותו יום ואצל אותו רופא
+        const existingAppointments = await Appointment.find({
+            doctor: doctorId,
+            clinic_address: clinic,
+            appointment_status: "existing",
+            appointment_date: {
+                $gte: new Date(appointmentDate.setHours(0, 0, 0, 0)), // תחילת היום
+                $lt: new Date(appointmentDate.setHours(23, 59, 59, 999)) // סוף היום
+            }
+        });
+
+        // חילוץ השעות של התורים הקיימים
+        const takenTimes = existingAppointments.map(app => {
+            const hours = app.appointment_date.getHours().toString().padStart(2, '0');
+            const minutes = app.appointment_date.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
+        });
+
+        // סינון השעות הפנויות - השארת רק שעות שלא תפוסות
+        time_arr = time_arr.filter(time => !takenTimes.includes(time));
+
+        res.status(200).json({ availableTimes: time_arr });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Something went wrong!" });
+    }
+};
+
+
+
+
+function generateTimeSlots(start, end) {
+    const slots = [];
+    let [startHour, startMinute] = start.split(':').map(Number);
+    let [endHour, endMinute] = end.split(':').map(Number);
+
+    while (startHour < endHour || (startHour === endHour && startMinute <= endMinute)) {
+        // הוספת הזמן הנוכחי למערך
+        slots.push(`${String(startHour).padStart(2, '0')}:${String(startMinute).padStart(2, '0')}`);
+
+        // הוספת 30 דקות
+        startMinute += 30;
+        if (startMinute >= 60) {
+            startMinute = 0;
+            startHour += 1;
+        }
+    }
+
+    return slots;
+}
+
+
+
+
 const getDoctorAppointments = async(req, res) => {
     try {
         const db = req.app.locals.db;
@@ -218,6 +313,7 @@ module.exports = {
     DeleteSpecificAppointment,
     GetallAppointments,
     GetExistingAppointmentOfPatient,
+    getFreeTimesForAppointments,
     getDoctorAppointments,
     markAppointmentAsCompleted,
     cancelAppointment,

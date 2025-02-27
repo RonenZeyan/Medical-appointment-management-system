@@ -6,7 +6,7 @@
 
 #dashboard-sidebar{
     flex: 3;
-    width: fit-content;
+    width: 150px;
     background-color: var(--button-bg);
     color: var(--button-text-color);
     display: flex;

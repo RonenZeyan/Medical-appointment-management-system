@@ -3,79 +3,125 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Template</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="dashboard-user.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
+    <style>
+      #logout-button {
+        background-color: #d9534f;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+      }
+      #logout-button:hover {
+        background-color: #c9302c;
+      }
+      .dashboard-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+    </style>
   </head>
-
   <body>
-    <!-- Header -->
-    <header></header>
+    <nav>
+      <img src="/frontend/logo.png">
+      <button id="logout-button" onclick="logout()" style="  background-color: #f44336;
+      position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #f44336;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 5px;">Logout</button>
+  </nav>
+   
 
     <!-- Main -->
     <main class="dashboard-user-main" id="dashboard-user-main">
       <div class="dashboard-user-container" id="dashboard-user-container">
-        <div class="dashboard-user-appointment-box" id="dashboard-user-box">
-          <div id="dashboard-user-appointment-box-info-top">
-            <i class="bi bi-calendar-range"></i> ניהול תור
-          </div>
-
-          <div id="dashboard-user-appointment-box-info-bottom">
-            <span id="dashboard-user-appointment-exist"></span>
-          </div>
-        </div>
-        <div class="dashboard-user-settings-box" id="dashboard-user-box">
-          <div id="dashboard-user-appointment-box-info-top">
-            <i class="bi bi-gear"></i> הגדרות
-          </div>
-          <div id="dashboard-user-appointment-box-info-bottom">
-            <span id="">test</span>
-          </div>
-        </div>
-        <div class="dashboard-user-details-box" id="dashboard-user-box">
-          <div id="dashboard-user-appointment-box-info-top">
-            <i class="bi bi-person-circle"></i> פרטים
-          </div>
-          <div id="dashboard-user-appointment-box-info-bottom">
-            <span id="">test</span>
-          </div>
-        </div>
-        <div class="dashboard-user-history-box" id="dashboard-user-box">
-          <div id="dashboard-user-appointment-box-info-top">
-            <i class="bi bi-clock"></i> היסטוריה
-          </div>
-          <div id="dashboard-user-appointment-box-info-bottom">
-            <span>*היסטוריה אחרונה </span>
-          </div>
-        </div>
-        <div class="dashboard-user-recommended-box" id="dashboard-user-box">
-          <div id="dashboard-user-appointment-box-info-top">
-            <i class="bi bi-lightbulb"></i> המלצות
-          </div>
-          <div id="dashboard-user-appointment-box-info-bottom">
-            <span>*המלצה אחרונה </span>
-          </div>
-        </div>
-        <div class="dashboard-user-chatbot-box" id="dashboard-user-box">
-          <div id="dashboard-user-appointment-box-info-top">
-            <i class="bi bi-chat-left-dots"></i> צאטבוט
+        <a href="appointment.html" class="dashboard-link">
+          <div class="dashboard-user-appointment-box" id="dashboard-user-box">
+            <div id="dashboard-user-appointment-box-info-top">
+              <i class="bi bi-calendar-range"></i> ניהול תור
             </div>
-
             <div id="dashboard-user-appointment-box-info-bottom">
-              <span>*המלצה אחרונה </span>
-              </div>
-
+              <span id="dashboard-user-appointment-exist"></span>
             </div>
           </div>
-        </div>
+        </a>
+        <a href="settings.html" class="dashboard-link">
+          <div class="dashboard-user-settings-box" id="dashboard-user-box">
+            <div id="dashboard-user-appointment-box-info-top">
+              <i class="bi bi-gear"></i> הגדרות
+            </div>
+            <div id="dashboard-user-appointment-box-info-bottom">
+              <span>test</span>
+            </div>
+          </div>
+        </a>
+        <a href="details.html" class="dashboard-link">
+          <div class="dashboard-user-details-box" id="dashboard-user-box">
+            <div id="dashboard-user-appointment-box-info-top">
+              <i class="bi bi-person-circle"></i> פרטים
+            </div>
+            <div id="dashboard-user-appointment-box-info-bottom">
+              <span>test</span>
+            </div>
+          </div>
+        </a>
+        <a href="history.html" class="dashboard-link">
+          <div class="dashboard-user-history-box" id="dashboard-user-box">
+            <div id="dashboard-user-appointment-box-info-top">
+              <i class="bi bi-clock"></i> היסטוריה
+            </div>
+            <div id="dashboard-user-appointment-box-info-bottom">
+              <span>*היסטוריה אחרונה</span>
+            </div>
+          </div>
+        </a>
+        <a href="recommendations.html" class="dashboard-link">
+          <div class="dashboard-user-recommended-box" id="dashboard-user-box">
+            <div id="dashboard-user-appointment-box-info-top">
+              <i class="bi bi-lightbulb"></i> המלצות
+            </div>
+            <div id="dashboard-user-appointment-box-info-bottom">
+              <span>*המלצה אחרונה</span>
+            </div>
+          </div>
+        </a>
+        <a href="chatbot.html" class="dashboard-link">
+          <div class="dashboard-user-chatbot-box" id="dashboard-user-box">
+            <div id="dashboard-user-appointment-box-info-top">
+              <i class="bi bi-chat-left-dots"></i> צ'אטבוט
+            </div>
+            <div id="dashboard-user-appointment-box-info-bottom">
+              <span>*המלצה אחרונה</span>
+            </div>
+          </div>
+        </a>
       </div>
     </main>
 
     <!-- Footer -->
     <footer></footer>
+
     <script src="dashboard-user.js"></script>
+    <script>
+      function logout() {
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = "../login/login.html";
+      }
+    </script>
   </body>
 </html>

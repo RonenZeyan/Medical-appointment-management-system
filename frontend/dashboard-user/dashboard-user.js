@@ -68,6 +68,11 @@ window.onload = async function () {
   // }
 };
 
+function logout() {
+  localStorage.clear();
+  sessionStorage.clear();
+  window.location.href = "../login/login.html";
+}
 function navToHistory() {
   // window.location.href = "../history/history.html";
 }

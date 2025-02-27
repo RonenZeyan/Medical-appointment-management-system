@@ -11,47 +11,103 @@
 
 #dashboard-user-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  grid-gap: 40px; 
-  padding: 20px; 
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 28px;
+  padding: 20px;
 }
 
 #dashboard-user-box {
+  cursor: pointer;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 2px solid #ddd; 
-  border-radius: 8px; 
-  padding: 20px; 
-  text-align: center; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease; 
+  align-items: center;
+  border: var(--container-color-glassy); /* Soft glass-like border */
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
   width: 200px;
   height: 160px;
+
+  /* ✅ Glassy Effect */
+  background: rgba(255, 255, 255, 0.15); /* Semi-transparent */
+  backdrop-filter: blur(12px); /* Blurred background */
+  -webkit-backdrop-filter: blur(12px); /* For Safari */
+
+  /* ✅ Floating Shadow */
+  box-shadow: var(--container-box-shadow-flaoting);
+
+  /* ✅ Pop-Up Animation */
+  transform: scale(0.9);
+  animation: popup 0.3s ease-out forwards;
+
+  /* ✅ Smooth Hover Effect */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+/* ✅ Hover Effect */
 #dashboard-user-box:hover {
-  transform: scale(1.05); 
+  transform: scale(1.05);
+  box-shadow: var(--container-box-shadow);
+}
+
+/* ✅ Pop-Up Animation */
+@keyframes popup {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 #dashboard-user-box i {
-  font-size: 50px; 
+  font-size: 50px;
+  color: #000000; /* Default color */
+  transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
 }
 
-#dashboard-user-appointment-box-info-top {
+#dashboard-user-box:hover i {
+  color: #a855f7; /* Soft purple */
+  text-shadow: 0px 0px 8px rgba(168, 85, 247, 0.5),
+    0px 0px 16px rgba(168, 85, 247, 0.3);
+}
+#dashboard-user-appointment-box-info-top,
+#dashboard-user-box-info-top {
   display: flex;
   flex-direction: column;
   flex: 3;
   margin-top: 30px;
 }
 
-#dashboard-user-appointment-box-info-bottom {
+#dashboard-user-appointment-box-info-bottom,
+#dashboard-user-box-info-bottom {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-#dashboard-user-appointment-exist-second{
-    margin-top: 2px;
-    font-size: 10px;
+#dashboard-user-appointment-exist-second,
+#dashboard-user-exist-second {
+  margin-top: 2px;
+  font-size: 10px;
+}
+
+@media (max-width: 870px) {
+  #dashboard-user-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px; /* Space between grid items */
+    padding: 5px;
+  }
+
+  #dashboard-user-box {
+    width: 170px;
+    height: 150px;
+  }
 }

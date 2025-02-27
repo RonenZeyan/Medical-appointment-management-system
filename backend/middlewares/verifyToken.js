@@ -32,7 +32,7 @@ const verifyToken = async (req, res, next) => {
 const verifyTokenIsSameUserOrAdmin = (req, res, next) => {
   // First, check if the token is valid by calling verifyToken
   verifyToken(req, res, () => {
-    
+
     // Check if the user is authorized (same user or admin)
     if (req.user.id === req.params.id || req.user.role == "admin") {
       next(); // Proceed to the next middleware or route handler

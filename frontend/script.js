@@ -1,3 +1,4 @@
+
 const hamburger = document.getElementById('navbar-hamburger');
 const navLinks = document.querySelector('.navbar-hamburger-contant');
 

@@ -35,6 +35,7 @@ const addNewClinic = async (req, res) => {
  */
 
 const getAllClinics = async (req, res) => {
+
   let clinics;
   try {
     const { medicalFieldId } = req.query;
@@ -159,6 +160,8 @@ const getSpecificClinic = async (req, res) => {
  */
 
 const getSpecificClinicByName = async (req, res) => {
+
+
     try {
       // Get the clinic name from the request body
       const { name } = req.body;

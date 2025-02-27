@@ -2,6 +2,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const success = urlParams.get("success");
 
+// If successfully register
 if (success === "true") {
   // Show the notification
   const notification = document.getElementById("success-notification");
@@ -16,7 +17,7 @@ if (success === "true") {
   }, 3000);
 }
 
-//login form
+// Login form
 document
   .getElementById("login-form")
   .addEventListener("submit", async function (event) {

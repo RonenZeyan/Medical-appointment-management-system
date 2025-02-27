@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* צבע רקע כחול בהיר */
+    color: #333; /* צבע טקסט כהה */
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #0073e6; /* צבע כחול כהה */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    color: #0073e6; /* צבע כחול כהה */
+}
+h2 {
+    color: #005bb5; /* צבע כחול בינוני */
+}
+p {
+    line-height: 1.6;
+}
+.contact-info {
+    background-color: #e6f3ff; /* צבע כחול בהיר מאוד */
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.contact-info h3 {
+    color: #0073e6; /* צבע כחול כהה */
+}
+.services {
+    margin-top: 20px;
+}
+.services ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+.services li {
+    margin-bottom: 10px;
+}
+footer {
+    background-color: #0073e6; /* צבע כחול כהה */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}

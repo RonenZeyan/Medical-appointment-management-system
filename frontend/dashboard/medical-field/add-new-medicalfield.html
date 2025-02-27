@@ -69,6 +69,10 @@
             direction: rtl;
         }
 
+        .form-raw label {
+            font-weight: bold;
+        }
+
         #add-mdfield-btn {
             background-color: var(--button-bg);
             border: none;
@@ -239,8 +243,13 @@
         //get the medicalfield details and display in form
         async function fetchMedicalFieldDetails(id) {
             try {
-                let res = await fetch(`http://localhost:3000/api/medicalfield/${id}`);
-                if (!res.ok) {
+                let res = await fetch(`http://localhost:3000/api/medicalfield/${id}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}` // הוספת ה-Token לבקשה
+                    }
+                }); if (!res.ok) {
                     throw new Error("Failed to fetch medical field details");
                 }
                 let medicalField = await res.json();
@@ -265,13 +274,18 @@
         //get the doctors to display them in form and choose
         async function fetchDoctors() {
             try {
-                let res = await fetch("http://localhost:3000/api/user/doctors");
+                let res = await fetch("http://localhost:3000/api/user/doctors", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
                 if (!res.ok) {
                     throw new Error("Failed to fetch doctors");
                 }
-                let doctors = await res.json();
+                let doctors = await res.json();                
                 doctorsSelect.innerHTML = "";
-
                 //add doctors to select
                 doctors.forEach(doctor => {
                     let option = document.createElement("option");
@@ -314,9 +328,9 @@
                     },
                     body: JSON.stringify(exist_medicalfield),
                 });
-                
+
                 let result = await res.json();
-                showSuccessModal("/frontend/dashboard/medical-field/medical-fields.html",`עדכון התחום הרפואי <i style='color: green;'>${exist_medicalfield.name}</i> התבצעה בהצלחה!`);
+                showSuccessModal("/frontend/dashboard/medical-field/medical-fields.html", `עדכון התחום הרפואי <i style='color: green;'>${exist_medicalfield.name}</i> התבצעה בהצלחה!`);
                 // window.location.href = "/frontend/dashboard/medical-field/medical-fields.html";
                 console.log("Medical field updated:", result);
             } catch (err) {
@@ -337,7 +351,7 @@
                     body: JSON.stringify(new_medicalfield),
                 });
                 let result = await res.json();
-                showSuccessModal("/frontend/dashboard/medical-field/medical-fields.html",`הוספת התחום הרפואי <i style='color: green;'>${new_medicalfield.name}</i> התבצעה בהצלחה!`);
+                showSuccessModal("/frontend/dashboard/medical-field/medical-fields.html", `הוספת התחום הרפואי <i style='color: green;'>${new_medicalfield.name}</i> התבצעה בהצלחה!`);
                 // window.location.href = "/frontend/dashboard/medical-field/medical-fields.html";
                 console.log("Medical field added:", result);
             } catch (err) {

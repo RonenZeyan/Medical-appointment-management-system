@@ -434,6 +434,18 @@
                 <p><b><u>טלפון:</u></b><span id="user-phone-modal">רונן</span></p>
                 <p><b><u>מייל:</u></b><span id="user-email-modal">רונן</span></p>
                 <p><b><u>תאריך הצטרפות:</u></b><span id="user-registerdate-modal">רונן</span></p>
+            </div>
+        </section>
+        <section
+            class="hide"
+            id="display-user-modal-section"
+        >
+            <div id="display-user-modal">
+                <button onclick="document.getElementById('display-user-modal-section').classList.add('hide')">X</button>
+                <p><b><u>שם משתמש:</u></b><span id="user-fullname-modal"> רונן</span></p>
+                <p><b><u>טלפון:</u></b><span id="user-phone-modal">רונן</span></p>
+                <p><b><u>מייל:</u></b><span id="user-email-modal">רונן</span></p>
+                <p><b><u>תאריך הצטרפות:</u></b><span id="user-registerdate-modal">רונן</span></p>
 >>>>>>> 58efa83 (add bot and somefiles)
             </div>
             <br>
@@ -444,7 +456,6 @@
             <p>טלפון: 04-6784439</p>
           </footer>
     </main>
-
     <script>
  function logout() {
         localStorage.clear();
@@ -452,33 +463,6 @@
     
         window.location.href = "/frontend/login/login.html";
       }
-        //get widgets
-        const users_card = document.getElementById("users-number");
-        const doctors_card = document.getElementById("doctors-number");
-        const clinics_card = document.getElementById("clinics-number");
-        const medicalFields_card = document.getElementById("medicalfield-number");
-
-        window.addEventListener("load", () => {
-            fetchData();
-        })
-
-        //functions 
-        async function fetchData() {
-            try {
-                let res = await fetch("http://localhost:3000/api/dashboard/general-num");
-                if (!res.ok) {
-                    throw new Error("Failed to fetch numbers");
-                }
-                let nums = await res.json();
-                users_card.textContent = nums.users;
-                doctors_card.textContent = nums.doctors;
-                clinics_card.textContent = nums.clinics;
-                medicalFields_card.textContent = nums.medical_fields;
-            } catch (err) {
-                console.error(err);
-            }
-
-        }
         
         function updateDateTime() {
             const now = new Date();
@@ -501,6 +485,7 @@
         setInterval(updateDateTime, 1000); // Update every second
        
     </script>
+
     <script src="../auth.js"></script>
     <script src="dashboard.js"></script>
 </body>

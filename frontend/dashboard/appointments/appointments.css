@@ -1,9 +1,8 @@
-
-#dashboard-content{
+#dashboard-content {
     padding: 0;
 }
 
-.search-user{
+.search-user {
     width: 100%;
     height: 65px;
     background-color: var(--button-bg);
@@ -16,7 +15,7 @@
     margin-bottom: 30px;
 }
 
-#search-user-input{
+#search-user-input {
     border-radius: var(--border-radius);
     width: 60%;
     padding: 12px;
@@ -26,16 +25,16 @@
     font-weight: bold;
 }
 
-.search-user i{
+.search-user i {
     position: absolute;
     top: 50%;
     left: 22%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     cursor: pointer;
-    
+
 }
 
-.display-users{
+.display-users {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -44,7 +43,7 @@
     margin-bottom: 30px;
 }
 
-.user-container{
+.user-container {
     width: 80%;
     background-color: white;
     box-shadow: 0 0 20px gray;
@@ -58,12 +57,12 @@
     transition: 1s all;
 }
 
-.user-container:hover{
+.user-container:hover {
     transform: scale(1.05);
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
-.build-appointment-user{
+.build-appointment-user {
     background-color: var(--button-bg);
     border: none;
     border-radius: 5px;
@@ -75,8 +74,8 @@
 
 /* Display Appointments for Admin HTML PAGE */
 
-#filter-appointments-container{
-    width:100%;
+#filter-appointments-container {
+    width: 100%;
     max-width: fit-content;
     padding: 7px 15px;
     background-color: rgba(172, 172, 172, 0.432);
@@ -89,7 +88,7 @@
     border-radius: 5px;
 }
 
-#filter-appointments-container button{
+#filter-appointments-container button {
     background-color: transparent;
     border: none;
     font-weight: bold;
@@ -97,7 +96,7 @@
     cursor: pointer;
 }
 
-#filter-appointments-container button.btn-active{
+#filter-appointments-container button.btn-active {
     background-color: white;
     padding: 7px;
     border-radius: 5px;
@@ -106,7 +105,7 @@
 
 /* Display Appointments */
 
-.appointments-container{
+.appointments-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -114,7 +113,7 @@
     margin-bottom: 30px;
 }
 
-.appointment-container{
+.appointment-container {
     width: 90%;
     margin: 0 auto;
     background-color: white;
@@ -126,20 +125,20 @@
     box-shadow: 0 0 8px gray;
 }
 
-.appointment-data{
+.appointment-data {
     display: flex;
     align-items: center;
     gap: 50px;
-    
+
 }
 
-#filter-add-btn-container{
+#filter-add-btn-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#add-appointment{
+#add-appointment {
     text-decoration: none;
     margin-left: 40px;
     background-color: var(--button-bg);
@@ -150,22 +149,23 @@
     transition: .6s all;
 }
 
-#add-appointment:hover{
+#add-appointment:hover {
     transform: scale(1.1);
 }
 
-.appointment-data-date{
+.appointment-data-date {
     font-weight: bold;
     padding: 10px;
     border-left: 2px solid rgba(128, 128, 128, 0.2);
     min-width: 100px;
 }
 
-.appointment-data-timeaddress,.appointment-data-patient{
+.appointment-data-timeaddress,
+.appointment-data-patient {
     font-weight: bold;
 }
 
-.cancel-appointment-btn{
+.cancel-appointment-btn {
     background-color: rgb(255, 69, 69);
     padding: 10px 15px;
     border: none;
@@ -176,7 +176,7 @@
     transition: .7s all;
 }
 
-.cancel-appointment-btn:hover{
+.cancel-appointment-btn:hover {
     background-color: red;
     transform: scale(1.1);
 }
@@ -184,7 +184,7 @@
 
 /* Appointments */
 
-.appointment-form{
+.appointment-form {
     background-color: white;
     margin: 0 auto;
     width: 50%;
@@ -193,7 +193,8 @@
     box-shadow: 0 0 8px gray;
 }
 
-.appointment-form select,input[type="date"]{
+.appointment-form select,
+input[type="date"] {
     width: 80%;
     border-radius: var(--border-radius);
     background-color: var(--background-primary-color);
@@ -201,16 +202,31 @@
     font-weight: bold;
 }
 
-.appointment-form input[type="date"]{
+.appointment-form input[type="date"] {
     width: 72%;
 }
 
-.appointment-form button{
+.appointment-form button {
     width: 80%;
     transition: .6s all;
     cursor: pointer;
 }
 
-.appointment-form button:hover{
+.appointment-form button:hover {
     transform: scale(1.1);
+}
+
+/* responsive */
+@media (max-width: 520px) {
+    #dashboard-content {
+        width: auto;
+    }
+
+    #filter-add-btn-container{
+        flex-direction: column;
+        gap: 10px;
+    }
+    #add-appointment{
+        margin-bottom: 20px;
+    }
 }

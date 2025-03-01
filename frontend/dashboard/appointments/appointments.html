@@ -256,6 +256,8 @@
                     }
 
                     let freeTime = await res.json();
+                    console.log(freeTime);
+                    
                     return freeTime.availableTimes;
                 } catch (error) {
                     console.error("Error fetching available times:", error);

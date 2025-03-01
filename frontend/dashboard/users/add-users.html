@@ -99,15 +99,14 @@
           border-radius: 5px;">Logout</button>
     </nav>
     <main>
-        <h1>Dashboard</h1>
         <section id="dashboard">
             <aside id="dashboard-sidebar">
                 <h3>Admin Dashboard</h3>
                 <ul style="border-top: 3px solid var(--background-primary-color)">
                     <li><a href="/frontend/dashboard/dashboard.html">לוח</a></li>
-                    <li><a href="/frontend/appointment-details/appointment-details.html"><i class="bi bi-calendar-heart"></i> פגישות</a></li>
-                    <li class="active"><a href="../users/users.html"><i class="bi bi-people"></i> משתמשים</a></li>
-                    <li><a href="../users/add-users.html"><i class="bi bi-person-add"></i>הוספת משתמש חדש</a></li>
+                    <li><a href="../appointments/displayAppointmentsAdmin.html"><i class="bi bi-calendar-heart"></i> פגישות</a></li>
+                    <li><a href="../users/users.html"><i class="bi bi-people"></i> משתמשים</a></li>
+                    <li class="active"><a href="../users/add-users.html"><i class="bi bi-person-add"></i>הוספת משתמש חדש</a></li>
                     <li><a href="../clinics/clinics.html"><i class="bi bi-building"></i> מרפאות</a></li>
                     <li><a href="../clinics/add-new-clinic.html"><i class="bi bi-building-add"></i>הוספת מרפאה חדשה</a></li>
                     <li><a href="../medical-field/medical-fields.html"><i class="bi bi-file"></i> תחומי רפואה</a></li>
@@ -231,9 +230,9 @@
                     errorDiv.style.display = "block";
                     errorMessage.textContent = "אנא בדוק את הפרטים שוב..";
                  } 
-                 //else {
-                //     window.location.href = "../users/users.html";
-                // }
+                 else {
+                    window.location.href = "users.html";
+                }
             } catch (error) {
                 console.error(error);
                 errorDiv.style.display = "block";

@@ -53,18 +53,17 @@
           border-radius: 5px;">Logout</button>
     </nav>
     <main>
-        <h1>Dashboard</h1>
         <section id="dashboard">
             <aside id="dashboard-sidebar">
                 <h3>אדמין דשבורד</h3>
                 <ul style="border-top: 3px solid var(--background-primary-color)">
                     <li><a href="/frontend/dashboard/dashboard.html">לוח</a></li>
-                    <li><a href="/frontend/appointment-details/appointment-details.html"><i class="bi bi-calendar-heart"></i> פגישות</a></li>
-                    <li class="active"><a href="../users/users.html"><i class="bi bi-people"></i> משתמשים</a></li>
+                    <li><a href="../appointments/displayAppointmentsAdmin.html"><i class="bi bi-calendar-heart"></i> פגישות</a></li>
+                    <li><a href="../users/users.html"><i class="bi bi-people"></i> משתמשים</a></li>
                     <li><a href="../users/add-users.html"><i class="bi bi-person-add"></i>הוספת משתמש חדש</a></li>
                     <li><a href="../clinics/clinics.html"><i class="bi bi-building"></i> מרפאות</a></li>
                     <li><a href="../clinics/add-new-clinic.html"><i class="bi bi-building-add"></i>הוספת מרפאה חדשה</a></li>
-                    <li><a href="../medical-field/medical-fields.html"><i class="bi bi-file"></i> תחומי רפואה</a></li>
+                    <li class="active"><a href="../medical-field/medical-fields.html"><i class="bi bi-file"></i> תחומי רפואה</a></li>
                     <li><a href="../medical-field/add-new-medicalfield.html"><i class="bi bi-file-plus"></i>הוספת תחום רפואי</a></li>
                 </ul>
             </aside>
@@ -194,7 +193,7 @@
 
                 //set data in table
                 md_fields_table_body.innerHTML = "";
-
+                md_fields.length===0? md_fields_table_body.innerHTML="<tr><td style='font-weight:bold;text-align:center' colspan='3'>לא נמצאות תחומים רפואים</td></tr>":
                 md_fields.forEach(md_field => {
                     md_fields_table_body.innerHTML += `
                         <tr>

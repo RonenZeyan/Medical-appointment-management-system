@@ -35,6 +35,13 @@ router.get("/:id", verifyTokenIsAdmin, getUserById);
 // Get all users (only admin)
 router.get("/", verifyTokenIsAdmin, getAllUsers);
 
+// Get user by name
+router.post("/findDoctor",verifyToken, getDoctorByName);
+
+// Get user by id
+router.post("/userInfo/:id",verifyTokenIsSameUserOrAdmin, getUserInfo);
+
+
 // Delete user by ID (only admin)
 router.delete("/:id", verifyTokenIsAdmin, deleteUserById);
 

@@ -12,18 +12,22 @@ const {
     cancelAppointment,
     bookAppointment,
     getAvailableAppointments,
-    getFreeTimesForAppointments
+    getFreeTimesForAppointments,
+    updateAppointmentStatus, 
+    getTodaysAndFutureAppointments,
 } = require("../controllers/appointmentController");
 
 const router = express.Router();
 
-
-router.get("/existing-appointment/:id", verifyTokenIsSameUserOrAdmin, GetExistingAppointmentOfPatient);
 router.get("/", GetallAppointments);
-router.get("/:id", validateObjectId, GetSpecificAppointment);
-router.post("/new-appointment", addNewAppointment);
-router.delete("/:id", validateObjectId, DeleteSpecificAppointment);
-router.get("/free-time", getFreeTimesForAppointments);
+router.get("/free-time",getFreeTimesForAppointments);
+router.get("/future-appointments",getTodaysAndFutureAppointments);
+router.patch("/:id",updateAppointmentStatus);
+router.get("/existing-appointment/:id",verifyTokenIsSameUserOrAdmin, GetExistingAppointmentOfPatient); //get existing appointment
+router.get("/",GetallAppointments);
+router.get("/:id", validateObjectId, GetSpecificAppointment); //get specific appointment
+router.post("/new-appointment", addNewAppointment); //add new appointment
+router.delete("/:id", validateObjectId, DeleteSpecificAppointment); //delete specfic appointment
 router.get("/doctor", getDoctorAppointments);
 router.patch("/complete/:id", markAppointmentAsCompleted);
 router.delete("/cancel/:id", cancelAppointment);

@@ -1,5 +1,6 @@
 const Clinic = require('../models/Clinics');
 const { run } = require('../services/botService');
+const Clinic = require("../models/Clinics");
 
 /**
  * @description Chat With Medical Bot
@@ -36,6 +37,11 @@ const chat = async (req, res) => {
     if (!userMessage) {
         return res.status(400).json({ error: "❌ Please provide a message." });
     }
+    //extract clinics + mdfields + doctors details and send to bot 
+
+    let clinicsDetails = await Clinic.find();
+
+    //build string include doctor and his medical fields and witch clinics he work
 
     try {
         // 🔹 1. שליפת כל המרפאות כולל רופאים ותחומי ההתמחות שלהם

@@ -111,7 +111,7 @@ li.active a{
 
 /* display User details Modal */
 
-#display-user-modal-section{
+#display-user-modal-section,#display-appointment-modal-section{
     position: fixed;
     top: 0;
     left: 0;
@@ -125,7 +125,7 @@ li.active a{
     align-items: center;
 }
 
-#display-user-modal{
+#display-user-modal,#display-appointment-modal{
     position: relative;
     background-color: white;
     z-index: 1001;

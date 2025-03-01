@@ -250,6 +250,9 @@
                                 <p class="appointment-data-time">
                                     <i class="bi bi-alarm-fill"></i> ${new Date(appoin.appointment_date).toLocaleTimeString("he-IL", { hour: "2-digit", minute: "2-digit" })}
                                 </p>
+                                <p>
+                                    <i class="bi bi-hospital-fill"></i> ${appoin.clinic_address.name}
+                                </p>
                                 <p class="appointment-data-location">
                                     <i class="bi bi-geo-alt-fill"></i> ${appoin.clinic_address.location.region},${appoin.clinic_address.location.city} <br> ${appoin.clinic_address.location.address}
                                 </p>
@@ -287,6 +290,9 @@
                                 <p class="appointment-data-time">
                                     <i class="bi bi-alarm-fill"></i> ${new Date(appoin.appointment_date).toLocaleTimeString("he-IL", { hour: "2-digit", minute: "2-digit" })}
                                 </p>
+                                <p>
+                                    <i class="bi bi-hospital-fill"></i> ${appoin.clinic_address.name}
+                                </p>
                                 <p class="appointment-data-location">
                                     <i class="bi bi-geo-alt-fill"></i> ${appoin.clinic_address.location.region},${appoin.clinic_address.location.city} <br> ${appoin.clinic_address.location.address}
                                 </p>
@@ -323,6 +329,9 @@
                                 <p class="appointment-data-time">
                                     <i class="bi bi-alarm-fill"></i> ${new Date(appoin.appointment_date).toLocaleTimeString("he-IL", { hour: "2-digit", minute: "2-digit" })}
                                 </p>
+                                <p>
+                                    <i class="bi bi-hospital-fill"></i> ${appoin.clinic_address.name}
+                                </p>
                                 <p class="appointment-data-location">
                                     <i class="bi bi-geo-alt-fill"></i> ${appoin.clinic_address.location.region},${appoin.clinic_address.location.city} <br> ${appoin.clinic_address.location.address}
                                 </p>
@@ -357,6 +366,9 @@
                             <div class="appointment-data-timeaddress">
                                 <p class="appointment-data-time">
                                     <i class="bi bi-alarm-fill"></i> ${new Date(appoin.appointment_date).toLocaleTimeString("he-IL", { hour: "2-digit", minute: "2-digit" })}
+                                </p>
+                                <p>
+                                    <i class="bi bi-hospital-fill"></i> ${appoin.clinic_address.name}
                                 </p>
                                 <p class="appointment-data-location">
                                     <i class="bi bi-geo-alt-fill"></i> ${appoin.clinic_address.location.region},${appoin.clinic_address.location.city} <br> ${appoin.clinic_address.location.address}
@@ -402,14 +414,14 @@
 
             function searchClinic() {
                 let filtered_appointments = save_appointments.filter(appoi => appoi.clinic_address.location.city.toLowerCase().includes(search_user_input.value.toLowerCase()));
-                appointments_container.innerHTML = ``; 
+                appointments_container.innerHTML = ``;
                 filtered_appointments.length === 0 ? appointments_container.innerHTML = "<h2 style='text-align:center'>לא נמצאו תוצאות</h2>"
-                :
-                filtered_appointments.forEach(appoin => {
-                    let appointmentDate = new Date(appoin.appointment_date);
-                    let weekday = appointmentDate.toLocaleString('default', { weekday: 'short' });
-                    let dayOfMonth = appointmentDate.getDate();
-                    appointments_container.innerHTML += `
+                    :
+                    filtered_appointments.forEach(appoin => {
+                        let appointmentDate = new Date(appoin.appointment_date);
+                        let weekday = appointmentDate.toLocaleString('default', { weekday: 'short' });
+                        let dayOfMonth = appointmentDate.getDate();
+                        appointments_container.innerHTML += `
                                         <div class="appointment-container">
                         <div class="appointment-data">
                             <div class="appointment-data-date">
@@ -433,7 +445,7 @@
                         </div>
                     </div>
                     `
-                })
+                    })
             }
 
         </script>

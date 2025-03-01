@@ -22,14 +22,6 @@ const {
 
 
 
-// Get user by name route
-router.post("/findUser", verifyTokenIsAdmin, getUserByName);
-
-// Get user by id
-router.post("/userInfo/:id", verifyTokenIsSameUserOrAdmin, getUserInfo);
-
-// Get user by ID
-router.get("/:id", verifyTokenIsAdmin, getUserById);
 //get doctors
 router.get("/doctors", getAllDoctors);
 
@@ -39,6 +31,11 @@ router.get("/", verifyTokenIsAdmin, getAllUsers);
 // Get user by name
 router.post("/findDoctor",verifyToken, getDoctorByName);
 
+// Add User
+router.post("/AdminAddUser", AddUser);
+
+// Get user by ID
+router.get("/:id", verifyTokenIsAdmin, getUserById);
 
 // Delete user by ID (only admin)
 router.delete("/:id", verifyTokenIsAdmin, deleteUserById);
@@ -46,8 +43,12 @@ router.delete("/:id", verifyTokenIsAdmin, deleteUserById);
 // Update user info (only admin and user)
 router.put("/:id", verifyTokenIsSameUserOrAdmin, updateUserInfo);
 
-// Add User
-router.post("/AdminAddUser", AddUser);
+// Get user by name route
+router.post("/findUser", verifyTokenIsAdmin, getUserByName);
+
+// Get user by id
+router.post("/userInfo/:id", verifyTokenIsSameUserOrAdmin, getUserInfo);
+
 
 
 module.exports = router;

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ניהול תורים רפואיים</title>
+    <link rel="stylesheet" href="patient.css">
+</head>
+
+<body>
+    <h1>ניהול תורים רפואיים</h1>
+
+    <form id="appointment-form">
+        <label>שם משתמש:</label>
+        <input type="text" id="userName" required>
+
+        <label>תחום רפואי:</label>
+        <input type="text" id="specialty" required>
+
+        <label>שם הרופא:</label>
+        <input type="text" id="doctor" required>
+
+        <label>אזור:</label>
+        <select id="region" required>
+            <option value="">בחר אזור</option>
+            <option value="מרכז">מרכז</option>
+            <option value="צפון">צפון</option>
+            <option value="דרום">דרום</option>
+        </select>
+
+        <label>תאריך ושעה:</label>
+        <input type="datetime-local" id="dateTime" required>
+
+        <button type="submit">הזמן תור</button>
+    </form>
+
+    <h2>התורים שלי</h2>
+    <ul id="appointments-list"></ul>
+
+    <script src="patient.js"></script>
+</body>
+
+</html>

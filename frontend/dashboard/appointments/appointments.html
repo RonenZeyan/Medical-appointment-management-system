@@ -27,35 +27,57 @@
         rel="stylesheet"
         href="../table.css"
     >
+    <link
+        rel="stylesheet"
+        href="appointments.css"
+    >
 </head>
 
 <body>
+    <nav>
+        <img src="/frontend/logo.png">
+        <button
+            id="logout-button"
+            onclick="logout()"
+            style="  background-color: #f44336;
+        position: absolute;
+          top: 10px;
+          right: 10px;
+          background-color: #f44336;
+          color: white;
+          border: none;
+          padding: 5px 10px;
+          font-size: 14px;
+          cursor: pointer;
+          border-radius: 5px;"
+        >Logout</button>
+    </nav>
     <main>
-        <h1>Dashboard</h1>
         <section id="dashboard">
             <aside id="dashboard-sidebar">
                 <h3>אדמין דשבורד</h3>
                 <ul style="border-top: 3px solid var(--background-primary-color)">
-                    <li><a href="./dashboard.html">דשבורד</a></li>
-                    <li class="active"><a href="./appointments/appointments.html"><i class="bi bi-calendar-heart"></i>
-                            ניהול תורים</a>
+                    <li><a href="../dashboard.html">לוח</a></li>
+                    <li class="active"><a href="displayAppointmentsAdmin.html"><i class="bi bi-calendar-heart"></i>
+                            פגישות</a>
                     </li>
-                    <li><a href="./users/users.html"><i class="bi bi-people"></i> משתמשים</a></li>
-                    <li><a href="./users/add-users.html"><i class="bi bi-person-add"></i> הוספת משתמש חדש</a></li>
-                    <li><a href="./clinics/clinics.html"><i class="bi bi-building"></i> מרפאות</a></li>
-                    <li><a href="./clinics/add-new-clinic.html"><i class="bi bi-building-add"></i> הוספת מרפאה חדשה</a>
+                    <li><a href="../users/users.html"><i class="bi bi-people"></i> משתמשים</a></li>
+                    <li><a href="../users/add-users.html"><i class="bi bi-person-add"></i> הוספת משתמש חדש</a></li>
+                    <li><a href="../clinics/clinics.html"><i class="bi bi-building"></i> מרפאות</a></li>
+                    <li><a href="../clinics/add-new-clinic.html"><i class="bi bi-building-add"></i> הוספת מרפאה חדשה</a>
                     </li>
-                    <li><a href="./medical-field/medical-fields.html"><i class="bi bi-file"></i> תחום רפואי</a></li>
-                    <li><a href="./medical-field/add-new-medicalfield.html"><i class="bi bi-file-plus"></i> הוספת תחום
+                    <li><a href="../medical-field/medical-fields.html"><i class="bi bi-file"></i> תחום רפואי</a></li>
+                    <li><a href="../medical-field/add-new-medicalfield.html"><i class="bi bi-file-plus"></i> הוספת תחום
                             רפואי חדש</a></li>
                 </ul>
             </aside>
-            <div id="dashboard-content">
+            <div id="dashboard-content" style="display: flex;justify-content: center;align-items: center;">
                 <form
                     class="appointment-form"
                     onsubmit="handleSubmitForm(event)"
                     style="display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 15px;"
                 >
+                <h2>בחירת תור למשתמש</h2>
                     <select
                         id="md-field-select"
                         onchange="fetchClinicsByMedicalField(this.value)"
@@ -104,11 +126,13 @@
             let appointment_div = document.getElementById("appointment-form");
             let appointment_date = document.getElementById("appointment-date");
             let appointment_time = document.getElementById("appointment-time");
+            let urlParams = new URLSearchParams(window.location.search);
+            let patientId = urlParams.get("patient_id");
             let md_fields_arr = [];
             let save_clinics;
             let save_clinic;
             let appointment = {
-                patient_id: localStorage.getItem("id"),
+                patient_id: patientId,
                 doctor: "",
                 medical_field: "",
                 appointment_date: "",
@@ -117,6 +141,8 @@
             //onload
             window.addEventListener("load", () => {
                 fetchMedicalFields();
+                console.log(appointment);
+
             })
 
 

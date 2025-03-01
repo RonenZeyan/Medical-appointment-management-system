@@ -20,8 +20,7 @@ const {
   verifyToken,
 } = require("../middlewares/verifyToken");
 
-//get doctors
-router.get("/doctors", verifyToken, getAllDoctors);
+
 
 // Get user by name route
 router.post("/findUser", verifyTokenIsAdmin, getUserByName);
@@ -31,9 +30,15 @@ router.post("/userInfo/:id", verifyTokenIsSameUserOrAdmin, getUserInfo);
 
 // Get user by ID
 router.get("/:id", verifyTokenIsAdmin, getUserById);
+//get doctors
+router.get("/doctors", getAllDoctors);
 
 // Get all users (only admin)
 router.get("/", verifyTokenIsAdmin, getAllUsers);
+
+// Get user by name
+router.post("/findDoctor",verifyToken, getDoctorByName);
+
 
 // Delete user by ID (only admin)
 router.delete("/:id", verifyTokenIsAdmin, deleteUserById);
@@ -41,10 +46,8 @@ router.delete("/:id", verifyTokenIsAdmin, deleteUserById);
 // Update user info (only admin and user)
 router.put("/:id", verifyTokenIsSameUserOrAdmin, updateUserInfo);
 
-// Get doctor by name
-router.post("/findDoctor", verifyToken, getDoctorByName);
-
 // Add User
 router.post("/AdminAddUser", AddUser);
+
 
 module.exports = router;

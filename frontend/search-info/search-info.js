@@ -219,7 +219,7 @@ async function searchInfo(event) {
         });
 
         const data = await response.json(); // Parse the JSON response
-
+        console.log(data)
         // Populate the clinic list dynamically
         data.forEach((user) => {
           let listItem = document.createElement("li");

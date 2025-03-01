@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תורי רופא</title>
+    <link rel="stylesheet" href="doctor.css">
+</head>
+
+<body>
+    <h1>תורים לרופא</h1>
+
+    <label for="search">חפש מטופל:</label>
+    <input type="text" id="search" placeholder="הקלד שם מטופל...">
+    <button onclick="searchPatient()">🔍 חיפוש</button>
+
+    <h2>רשימת תורים</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>שם מטופל</th>
+                <th>מספר מזהה</th>
+                <th>תאריך</th>
+                <th>שעת תור</th>
+                <th>הערות</th>
+                <th>בוצע</th>
+                <th>ביטול</th>
+            </tr>
+        </thead>
+        <tbody id="appointments-list">
+            <!-- התורים יוצגו כאן -->
+        </tbody>
+    </table>
+
+    <script src="doctor.js"></script>
+    <script>
+        async function loadAppointments() {
+            const response = await fetch("http://localhost:3000/appointments/doctor");
+            let appointments = await response.json();
+
+            // מיון התורים לפי תאריך ושעה בסדר יורד
+            appointments.sort((a, b) => {
+                const dateTimeA = new Date(`${a.date} ${a.time}`);
+                const dateTimeB = new Date(`${b.date} ${b.time}`);
+                return dateTimeB - dateTimeA; // סדר יורד
+            });
+
+            const list = document.getElementById("appointments-list");
+            list.innerHTML = "";
+
+            appointments.forEach(app => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${app.patientName}</td>
+                    <td>${app.patientId}</td>
+                    <td>${app.date}</td>
+                    <td>${app.time}</td>
+                    <td>${app.notes || ""}</td>
+                    <td><input type="checkbox" onchange="markAsCompleted('${app._id}', this.checked)"></td>
+                    <td><button onclick="cancelAppointment('${app._id}')">❌ ביטול</button></td>
+                `;
+                list.appendChild(row);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", loadAppointments);
+    </script>
+</body>
+
+</html>

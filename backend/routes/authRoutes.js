@@ -5,8 +5,6 @@ const router = express.Router();
 
 // User registration route
 router.post("/register", registerUser);
-router.post("/AdminAddUser", AddUser);
-
 
 // User login route
 router.post("/login", loginUser);

@@ -125,11 +125,6 @@ const updateAppointmentStatus = async (req, res) => {
  * @method GET
  * @access private (only logged in user or doctor or admin)
  */
-<<<<<<< HEAD
-const GetallAppointments = async(req, res) => {
-    try {
-        const allAppointments = await Appointment.find();
-=======
 const GetallAppointments = async (req, res) => {
   try {
     const { status } = req.query;
@@ -144,7 +139,6 @@ const GetallAppointments = async (req, res) => {
         .populate("medical_field")
         .populate("clinic_address");
     }
->>>>>>> 0b144d7 (add appointments to admin side)
 
         return res.status(200).json(allAppointments);
     } catch (err) {

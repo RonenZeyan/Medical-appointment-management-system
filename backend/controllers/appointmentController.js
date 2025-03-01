@@ -93,6 +93,33 @@ const DeleteSpecificAppointment = async (req, res) => {
 };
 
 /**
+ * @description Delete Specific Appointment
+ * @router /api/appointment/:id
+ * @method PUT
+ * @access private (only logged in user or doctor or admin)
+ */
+const updateAppointmentStatus = async (req, res) => {
+  try {
+      const { id } = req.params; // מזהה התור
+      const updatedAppointment = await Appointment.findByIdAndUpdate(
+          id, 
+          { appointment_status: "cancelled" }, 
+          { new: true } // מחזיר את המסמך המעודכן
+      );
+
+      if (!updatedAppointment) {
+          return res.status(404).json({ message: "Appointment not found" });
+      }
+
+      return res.status(200).json(updatedAppointment);
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+
+/**
  * @description Get all Appointments
  * @router /api/appointment
  * @method GET
@@ -100,7 +127,18 @@ const DeleteSpecificAppointment = async (req, res) => {
  */
 const GetallAppointments = async (req, res) => {
   try {
-    const allAppointments = await Appointment.find();
+    const { status } = req.query;
+    //if there is query then get by query and not all appointments 
+    const filter = status ? { appointment_status: status } : {};
+    let allAppointments = await Appointment.find(filter);
+    
+    if (status) {
+      allAppointments = await Appointment.find(filter)
+        .populate("patient_id")
+        .populate("doctor")
+        .populate("medical_field")
+        .populate("clinic_address");
+    }
 
     return res.status(200).json(allAppointments);
   } catch (err) {
@@ -231,6 +269,53 @@ function generateTimeSlots(start, end) {
   return slots;
 }
 
+/**
+ * @description Get Today's and Future Appointments (after the current time)
+ * @router /api/appointment/today-and-future
+ * @method GET
+ * @access private (only logged in user, doctor, or admin)
+ */
+const getTodaysAndFutureAppointments = async (req, res) => {
+  try {
+    const currentDate = new Date();
+
+    // חיפוש תורים עתידיים
+    const appointments = await Appointment.find({
+      appointment_date: {
+        $gte: currentDate,  // רק תורים עם תאריך עתידי או היום
+      },
+      appointment_status: "existing",
+    })
+      .populate("patient_id")  // מביאים את תעודת הזהות של המטופל
+      .populate("doctor")  // מביאים את תעודת הזהות של הרופא
+      .populate("clinic_address");  // מביאים את כתובת המרפאה
+      console.log(appointments); // הדפס את התוצאה כדי לבדוק את הערכים
+
+
+    // מחזירים את התורים העתידיים
+    const result = appointments.map(appointment => {
+      if (!appointment.patient_id || !appointment.doctor) {
+        return null; // או החזר אובייקט ריק במקרה של נתונים חסרים
+      }
+    
+      const patientId = appointment.patient_id ? appointment.patient_id.id : null;
+      const doctorId = appointment.doctor ? appointment.doctor.id : null;
+    
+      return {
+        patientId: patientId,
+        doctorId: doctorId,
+        appointmentDate: appointment.appointment_date,
+      };
+    }).filter(appointment => appointment !== null);  // מסנן את התורים שאין להם מידע
+    
+
+    res.status(200).json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "משהו השתבש" });
+  }
+};
+
 
 
 module.exports = {
@@ -240,5 +325,7 @@ module.exports = {
   GetallAppointments,
   GetExistingAppointmentOfPatient,
   getFreeTimesForAppointments,
+  updateAppointmentStatus,
+  getTodaysAndFutureAppointments,
 };
 

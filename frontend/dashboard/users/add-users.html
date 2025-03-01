@@ -99,7 +99,6 @@
           border-radius: 5px;">Logout</button>
     </nav>
     <main>
-        <h1>Dashboard</h1>
         <section id="dashboard">
             <aside id="dashboard-sidebar">
                 <h3>Admin Dashboard</h3>
@@ -231,9 +230,9 @@
                     errorDiv.style.display = "block";
                     errorMessage.textContent = "אנא בדוק את הפרטים שוב..";
                  } 
-                 //else {
-                //     window.location.href = "../users/users.html";
-                // }
+                 else {
+                    window.location.href = "users.html";
+                }
             } catch (error) {
                 console.error(error);
                 errorDiv.style.display = "block";

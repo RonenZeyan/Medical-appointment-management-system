@@ -7,7 +7,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
-    <title>Document</title>
+    <title>Dashboard</title>
     <!-- Bootstrap icons -->
     <link
         rel="stylesheet"
@@ -22,10 +22,6 @@
         href="../styles.css"
     >
     <link
-    rel="stylesheet"
-    href="footer.css"
->
-    <link
         rel="stylesheet"
         href="./dashboard.css"
     >
@@ -35,23 +31,28 @@
     >
 
     <style>
-    
-   
-    #dashboard-content {
-    /* display: flex; */
-    flex-direction: row; /* יאפשר להניח את התרשים לצד הסרגל ניווט */
-    justify-content: space-between; /* יפזר את האלמנטים בצורה נכונה */
-    width: 100%;
-}
-#chart-container {
-    width: 60%; /* הגדרת רוחב לתרשים */
-    height: 400px;
-    margin-top: 0px;
-    margin-left: auto; /* ממרכז את התרשים */
-    margin-right: auto;
-    position: relative; /* נוכל להשתמש במיקום יחסי */
-}
-#date-time {
+        #dashboard-content {
+            /* display: flex; */
+            flex-direction: row;
+            /* יאפשר להניח את התרשים לצד הסרגל ניווט */
+            justify-content: space-between;
+            /* יפזר את האלמנטים בצורה נכונה */
+            width: 100%;
+        }
+
+        #chart-container {
+            width: 60%;
+            /* הגדרת רוחב לתרשים */
+            height: 400px;
+            margin-top: 0px;
+            margin-left: auto;
+            /* ממרכז את התרשים */
+            margin-right: auto;
+            position: relative;
+            /* נוכל להשתמש במיקום יחסי */
+        }
+
+        #date-time {
             font-size: 1.2em;
             color: var(--primary-color);
             margin-top: 20px;
@@ -62,6 +63,7 @@
         #current-date {
             font-size: 1.5em;
             color: #333;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -69,7 +71,10 @@
 <body>
     <nav>
         <img src="/frontend/logo.png">
-        <button id="logout-button" onclick="logout()" style="  background-color: #f44336;
+        <button
+            id="logout-button"
+            onclick="logout()"
+            style="  background-color: #f44336;
         position: absolute;
           top: 10px;
           right: 10px;
@@ -79,7 +84,8 @@
           padding: 5px 10px;
           font-size: 14px;
           cursor: pointer;
-          border-radius: 5px;">Logout</button>
+          border-radius: 5px;"
+        >Logout</button>
     </nav>
     <main>
 
@@ -88,17 +94,20 @@
                 <h3>אדמין דשבורד</h3>
                 <ul style="border-top: 3px solid var(--background-primary-color)">
                     <li class="active"><a href="dashboard.html">לוח</a></li>
-                    <li><a href="appointments/displayAppointmentsAdmin.html"><i class="bi bi-calendar-heart"></i> פגישות</a></li>
+                    <li><a href="appointments/displayAppointmentsAdmin.html"><i class="bi bi-calendar-heart"></i>
+                            פגישות</a></li>
                     <li><a href="users/users.html"><i class="bi bi-people"></i> משתמשים</a></li>
                     <li><a href="users/add-users.html"><i class="bi bi-person-add"></i>הוספת משתמש חדש</a></li>
                     <li><a href="clinics/clinics.html"><i class="bi bi-building"></i> מרפאה</a></li>
-                    <li><a href="clinics/add-new-clinic.html"><i class="bi bi-building-add"></i> הוספת מרפאה חדשה</a></li>
+                    <li><a href="clinics/add-new-clinic.html"><i class="bi bi-building-add"></i> הוספת מרפאה חדשה</a>
+                    </li>
                     <li><a href="medical-field/medical-fields.html"><i class="bi bi-file"></i> תחומי רפואה</a></li>
-                    <li><a href="medical-field/add-new-medicalfield.html"><i class="bi bi-file-plus"></i> הוספת תחום רפואי</a></li>
+                    <li><a href="medical-field/add-new-medicalfield.html"><i class="bi bi-file-plus"></i> הוספת תחום
+                            רפואי</a></li>
 
                 </ul>
             </aside>
-           
+
             <div id="dashboard-content">
                 <div id="date-time">
                     <div id="current-date"><br></div>
@@ -165,8 +174,9 @@
                                             style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                                             <p style="font-weight:bolder; font-size: 20px">תורים אחרונים</p>
                                             <a
-                                                href="appointments/appointments.html"
-                                                style="text-decoration: none; border: none; background-color: var(--button-bg); padding: 7px 15px; border-radius: var(--border-radius); color: var(--button-text-color); font-weight: bold; cursor: pointer;">לצפייה
+                                                href="appointments/displayAppointmentsAdmin.html"
+                                                style="text-decoration: none; border: none; background-color: var(--button-bg); padding: 7px 15px; border-radius: var(--border-radius); color: var(--button-text-color); font-weight: bold; cursor: pointer;"
+                                            >לצפייה
                                                 בהכל</a>
                                         </div>
                                     </th>
@@ -303,7 +313,8 @@
                                             <p style="font-weight:bolder; font-size: 18px;">משתמשים אחרונים</p>
                                             <a
                                                 href="users/users.html"
-                                                style="text-decoration: none;border: none; background-color: var(--button-bg); padding: 7px 15px; border-radius: var(--border-radius); color: var(--button-text-color); font-weight: bold; cursor: pointer;">לצפייה
+                                                style="text-decoration: none;border: none; background-color: var(--button-bg); padding: 7px 15px; border-radius: var(--border-radius); color: var(--button-text-color); font-weight: bold; cursor: pointer;"
+                                            >לצפייה
                                                 בהכל</a>
 
                                         </div>
@@ -439,49 +450,35 @@
         </section>
         <section
             class="hide"
-            id="display-user-modal-section"
+            id="display-appointment-modal-section"
         >
-            <div id="display-user-modal">
-                <button onclick="document.getElementById('display-user-modal-section').classList.add('hide')">X</button>
-                <p><b><u>שם משתמש:</u></b><span id="user-fullname-modal"> רונן</span></p>
-                <p><b><u>טלפון:</u></b><span id="user-phone-modal">רונן</span></p>
-                <p><b><u>מייל:</u></b><span id="user-email-modal">רונן</span></p>
-                <p><b><u>תאריך הצטרפות:</u></b><span id="user-registerdate-modal">רונן</span></p>
+            <div id="display-appointment-modal">
+                <button onclick="document.getElementById('display-appointment-modal-section').classList.add('hide')">X</button>
+                <p><b><u>שם משתמש:</u></b><span id="appointment-fullname-modal"> רונן</span></p>
+                <p><b><u>טלפון:</u></b><span id="appointment-phone-modal">רונן</span></p>
+                <p><b><u>מייל:</u></b><span id="appointment-email-modal">רונן</span></p>
             </div>
         </section>
-        <section
-            class="hide"
-            id="display-user-modal-section"
-        >
-            <div id="display-user-modal">
-                <button onclick="document.getElementById('display-user-modal-section').classList.add('hide')">X</button>
-                <p><b><u>שם משתמש:</u></b><span id="user-fullname-modal"> רונן</span></p>
-                <p><b><u>טלפון:</u></b><span id="user-phone-modal">רונן</span></p>
-                <p><b><u>מייל:</u></b><span id="user-email-modal">רונן</span></p>
-                <p><b><u>תאריך הצטרפות:</u></b><span id="user-registerdate-modal">רונן</span></p>
->>>>>>> 58efa83 (add bot and somefiles)
-            </div>
-            <br>
-        </section>
-          
-        <footer>
-            <p>יצירת קשר: <a href="mailto:medAi@gmail.com">contact@example.com</a></p>
-            <p>טלפון: 04-6784439</p>
-          </footer>
     </main>
+    <footer>
+        <p>יצירת קשר: <a href="mailto:medAi@gmail.com">contact@example.com</a></p>
+        <p>טלפון: 04-6784439</p>
+    </footer>
+    <script src="../auth.js"></script>
+    <script src="dashboard.js"></script>
     <script>
- function logout() {
-        localStorage.clear();
-        sessionStorage.clear();
-    
-        window.location.href = "/frontend/login/login.html";
-      }
-        
+        function logout() {
+            localStorage.clear();
+            sessionStorage.clear();
+
+            window.location.href = "/frontend/login/login.html";
+        }
+
         function updateDateTime() {
             const now = new Date();
             const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            
+
             const day = days[now.getDay()];
             const date = now.getDate();
             const month = months[now.getMonth()];
@@ -491,16 +488,14 @@
             const seconds = now.getSeconds().toString().padStart(2, '0');
 
             const formattedDateTime = `${day}, ${date} ${month} ${year} - ${hours}:${minutes}:${seconds}`;
-            
+
             document.getElementById('current-date').innerText = formattedDateTime;
         }
 
         setInterval(updateDateTime, 1000); // Update every second
-       
+
     </script>
 
-    <script src="../auth.js"></script>
-    <script src="dashboard.js"></script>
 </body>
 
 </html>

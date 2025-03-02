@@ -4,23 +4,22 @@ const ChatLog = require('../models/chatLogs');
 const sessionHistory = {}
 
 
-
 async function run(userMessage, userId, medicalFields) {
     // The Gemini 1.5 models are versatile and work with multi-turn conversations (like chat)
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-    const medicalFieldsText = medicalFields.map(field => {
+    const medicalFieldsText = medicalFields.map(field => {        
         // אם יש רופאים, ניצור רשימה עם שמות הרופאים ותחום ההתמחות
         const doctors = field.doctors.length > 0 
-            ? field.doctors.map(doctor => `${doctor.doctor_name} - ${doctor.medical_field}`).join(", ") 
+            ? field.doctors.map(doctor => `${doctor.doctor_name} - ${doctor.medical_field}- ${doctor.description}`).join(", ") 
             : "No doctors available";
     
         return `
             Medical Field: ${field.name}
-            Description: ${field.description}
+            Description: ${field.doctors.description}
             Doctors: ${doctors}
         `;
     }).join("\n\n");
+    
     
     console.log(medicalFieldsText);
     
@@ -28,22 +27,14 @@ async function run(userMessage, userId, medicalFields) {
     // ההנחיות הקבועות לבוט
     const botInstructions = `
 
-    You are a medical bot providing preliminary advice based on medical data. You are part of a health service provider and can provide the names of clinics, doctors, and their specializations based on the symptoms provided.
+    basic: You are part of a health service provider and can provide the names of clinics, doctors, and their specializations based on the symptoms provided.
+    Use this infomation, Its include information about exist clincs and the medical fields in this clincs and doctors: ${medicalFieldsText}.
 
-    You must not answer non-medical questions. If a question is not related to health, respond with:  
-    "Sorry, I am a medical bot and cannot help with a question that is not related to health or emergency medicine."
-    
-    **We are part of your health service provider. Here are the clinics available:**
-    ${medicalFieldsText}
-    
-    If the user's symptoms match the services provided by a clinic, recommend the relevant clinic and its doctors based on their specialization.
-    If you cannot find a match, suggest seeing a general practitioner within the health provider system.
-    
     Follow this 7 guidelines:
  
     1.Act as a Doctor – The AI should provide guidance like a medical professional.
     2.Medical Queries Only – Ignore or redirect non-medical inquiries.
-    3.Provide Recommendations, Not Diagnosis – Suggest possible conditions based on symptoms but advise users to consult a doctor for confirmation.
+    3.Provide Recommendations, Not Diagnosis – Suggest possible conditions based on symptoms and also advise users to consult a doctor for confirmation based the clinics above.
     4.Use Clear and Professional Language – Avoid jargon when possible; explain in simple terms.
     5.Emphasize Seeing a Doctor – Always recommend consulting a healthcare professional for any serious symptoms.
     6.Avoid Emergency Situations – If symptoms are severe, advise the patient to seek immediate medical attention.
@@ -231,18 +222,18 @@ async function run(userMessage, userId, medicalFields) {
     Unexplained Weight Gain or Loss → Endocrinologist (Hormone & Metabolism Doctor)
     Thyroid Problems (Fatigue, Hair Loss, Swelling in Neck) → Endocrinologist
     
-    
+    #at the end and after you ask all questions and the problem is analyzed and its medical field identified, recommend a clinic from the above and doctor name, rather than relying on internet searches for clinics.#
+
     
     and dont forget:
     
     1.When providing recommendations or when telling the user to take action they should take, use # marks at the beginning and also at end of that sentence
     2.Always tell user when mentioning doctor, which medical field this doctor is.
-    3.Also provide information About clinics and doctors, check here (without waiting for user): ${medicalFieldsText}.
+    3.Also provide information About clinics and doctors
     
 
     but speak in hebrew
     `;
-
 
 
 
@@ -260,7 +251,7 @@ async function run(userMessage, userId, medicalFields) {
     const chat = model.startChat({
         history: sessionHistory[userId],
         generationConfig: {
-            maxOutputTokens: 100,
+            maxOutputTokens: 200,
         },
     });
 

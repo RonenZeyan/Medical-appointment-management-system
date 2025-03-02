@@ -10,26 +10,6 @@ const Clinic = require("../models/Clinics");
  */
 
 
-// const chat = async (req, res) => {
-//     const userMessage = req.body.message;
-//     const userId = req.user?.id
-
-//     if (!userMessage) {
-//         return res.status(400).json({ error: "❌ Please provide a message." });
-//     }
-
-//     try {
-//         const botMessage = await run(userMessage, userId);
-//         res.json({ response: botMessage });
-//     } catch (error) {
-//         console.error("❌ Error sending to model:", error.message);
-//         res.status(503).json({ error: error.message });
-//     }
-// }
-
-
-
-
 const chat = async (req, res) => {
     const userMessage = req.body.message;
     const userId = req.user?.id;
@@ -37,11 +17,6 @@ const chat = async (req, res) => {
     if (!userMessage) {
         return res.status(400).json({ error: "❌ Please provide a message." });
     }
-    //extract clinics + mdfields + doctors details and send to bot 
-
-    let clinicsDetails = await Clinic.find();
-
-    //build string include doctor and his medical fields and witch clinics he work
 
     try {
         // 🔹 1. שליפת כל המרפאות כולל רופאים ותחומי ההתמחות שלהם
@@ -52,7 +27,7 @@ const chat = async (req, res) => {
             })
             .populate({
                 path: "doctors.medical_field", // שליפת תחום ההתמחות של כל רופא
-                select: "name"
+                select: "name description"
             });
 
         // 🔹 2. יצירת JSON שיכיל את המידע שצריך לשלוח לבוט
@@ -67,7 +42,6 @@ const chat = async (req, res) => {
                 description: doctorEntry.medical_field.description, // תחום ההתמחות של הרופא
             }))
         }));
-
         // 🔹 3. קריאה לבוט עם המידע ממסד הנתונים
         const botMessage = await run(userMessage, userId, formattedClinics);
 
@@ -77,7 +51,6 @@ const chat = async (req, res) => {
         res.status(503).json({ error: error.message });
     }
 };
-
 
 module.exports = {
     chat,

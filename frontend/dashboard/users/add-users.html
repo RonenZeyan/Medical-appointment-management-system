@@ -72,15 +72,21 @@
         transform: scale(1.05);
       }
 
-      /* עיצוב אחיד עבור שדות */
-      .form-input {
-        width: 100%;
-        border: none;
-        background-color: var(--background-primary-color);
-        padding: 8px 5px;
-        border-radius: var(--border-radius);
-        direction: rtl;
-      }
+        /* עיצוב אחיד עבור שדות */
+        .form-input {
+            width: 100%;
+            border: none;
+            background-color: var(--background-primary-color);
+            padding: 8px 5px;
+            border-radius: var(--border-radius);
+            direction: rtl;
+        }
+                /* responsive */
+                @media (max-width: 520px) {
+            #dashboard-content {
+                width: auto;
+            }
+        }
     </style>
   </head>
 

@@ -1,7 +1,7 @@
 /* Appointment Table Section */
 
-.table-section{
-    margin-top: 40px;  
+.table-section {
+    margin-top: 40px;
 }
 
 
@@ -19,7 +19,7 @@ th {
 }
 
 td {
-    padding: 20px; 
+    padding: 20px;
     text-align: right;
 
 }
@@ -29,11 +29,13 @@ tr:nth-child(even) {
 }
 
 
-.more-btn,.delete-btn,.update-btn {
+.more-btn,
+.delete-btn,
+.update-btn {
     font-weight: bold;
     font-size: 16px;
     color: var(--button-text-color);
-    margin-right: 5px; 
+    margin-right: 5px;
     border: none;
     padding: 7px 15px;
     border-radius: var(--border-radius);
@@ -41,44 +43,82 @@ tr:nth-child(even) {
     min-width: 100px;
 }
 
-.more-btn{
+.more-btn {
     background-color: var(--button-bg);
 }
 
-.more-btn:hover{
+.more-btn:hover {
     background-color: var(--button-hover-bg);
 }
 
-.delete-btn{
+.delete-btn {
     background-color: rgba(189, 0, 0, 0.774);
 }
 
-.delete-btn:hover{
+.delete-btn:hover {
     background-color: red;
 }
-.update-btn{
+
+.update-btn {
     background-color: rgb(0, 192, 0);
     text-decoration: none;
     display: inline-block;
     text-align: center;
     padding: 7px 0;
 }
-.update-btn:hover{
+
+.update-btn:hover {
     background-color: green;
 }
 
-#appointment-table{
+#appointment-table {
     width: 70%;
 }
 
 
-#users-table{
+#users-table {
     width: 30%;
 }
 
-#appointment-table td,#users-table td{
+#appointment-table td,
+#users-table td {
     min-height: 50px;
-    height: 50px; 
+    height: 50px;
     vertical-align: middle;
     text-align: center;
+}
+
+
+@media (max-width: 520px) {
+
+    #users-table,
+    #appointment-table {
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    #dashboard-content {
+        width: auto;
+    }
+
+    tbody, tr {
+        display: block; /* הופך כל שורה (tr) למיכל בלוק */
+        width: 100%;
+    }
+
+    td {
+        display: block; /* כל תא (td) מוצג בשורה נפרדת */
+        text-align: center; /* יישור טקסט בתוך התא */
+        padding: 15px 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    td::before {
+        content: attr(data-label); /* הוספת תווית לכל שדה */
+        font-weight: bold;
+        display: block;
+    }
 }

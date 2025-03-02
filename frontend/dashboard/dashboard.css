@@ -146,3 +146,22 @@ li.active a{
     cursor: pointer;
 
 }
+
+@media (max-width: 520px) {
+    #dashboard{
+        flex-direction: column;
+    }
+    #dashboard-sidebar{
+        width: 100%;
+    }
+    #dashboard-content{
+        width: 100%;
+    }
+    #general-details{
+        flex-direction: column;
+        gap: 10px;
+    }
+    #section-of-table{
+        flex-direction: column;
+    }
+}

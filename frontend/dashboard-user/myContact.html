@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הפניות שלי</title>
+    <link rel="stylesheet" href="/frontend/dashboard/table.css">
+    <link rel="stylesheet" href="dashboard-user.css" />
+
+    <link rel="stylesheet" href="../styles.css" />
+
+    <style>
+        /* body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        } */
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #loading {
+            text-align: center;
+            font-size: 18px;
+            color: #888;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+       
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>הפניות שלי</h1>
+    <div id="loading">טוען הפניות...</div>
+    <!-- טבלה להציג את הפניות -->
+    <table id="contactsTable">
+        <thead>
+            <tr>
+                <th>נושא</th>
+                <th>הודעה</th>
+                <th>סטטוס</th>
+                <th>תשובה</th>
+            </tr>
+        </thead>
+        <tbody id="contactsList"></tbody>
+    </table>
+</div>
+
+<script>
+    // קבלת המייל מה-localStorage
+    const email = localStorage.getItem("email");  // לדוגמה, המייל נשמר ב-localStorage עם המפתח "userEmail"
+
+    // אם יש מייל, נבצע את הבקשה
+    if (email) {
+        fetch(`http://localhost:3000/api/contacts/user/${email}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log("פניות:", data);
+                displayContacts(data);
+            })
+            .catch(error => {
+                console.error("שגיאה בקבלת הפניות:", error);
+                document.getElementById("loading").textContent = "שגיאה בהבאת הפניות";
+            });
+    }
+
+    // פונקציה להציג את הפניות בטבלה
+    function displayContacts(contacts) {
+        const contactsList = document.getElementById("contactsList");
+        const loading = document.getElementById("loading");
+        
+        // אם אין פניות
+        if (contacts.length === 0) {
+            loading.textContent = "אין פניות";
+            return;
+        }
+
+        // מחיקת הטעינה
+        loading.style.display = "none";
+
+        // יצירת שורות לטבלה
+        contacts.forEach(contact => {
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${contact.subject}</td>
+                <td>${contact.message}</td>
+                <td>${contact.status}</td>
+                <td>${contact.reply || "לא נענתה עדיין"}</td>
+            `;
+
+            contactsList.appendChild(row);
+        });
+    }
+</script>
+
+</body>
+</html>

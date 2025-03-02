@@ -6,14 +6,14 @@ const {
     GetExistingAppointmentOfPatient,
     GetSpecificAppointment,
     addNewAppointment,
+    updateAppointmentStatus,
     DeleteSpecificAppointment,
     getDoctorAppointments,
     markAppointmentAsCompleted,
     cancelAppointment,
     bookAppointment,
     getAvailableAppointments,
-    getFreeTimesForAppointments,
-    updateAppointmentStatus, 
+    getFreeTimesForAppointments, 
     getTodaysAndFutureAppointments,
 } = require("../controllers/appointmentController");
 
@@ -21,7 +21,6 @@ const router = express.Router();
 
 router.get("/", GetallAppointments);
 router.get("/free-time",getFreeTimesForAppointments);
-router.get("/future-appointments",getTodaysAndFutureAppointments);
 router.patch("/:id",updateAppointmentStatus);
 router.get("/existing-appointment/:id",verifyTokenIsSameUserOrAdmin, GetExistingAppointmentOfPatient); //get existing appointment
 router.get("/",GetallAppointments);
@@ -32,5 +31,8 @@ router.get("/doctor", getDoctorAppointments);
 router.patch("/complete/:id", markAppointmentAsCompleted);
 router.delete("/cancel/:id", cancelAppointment);
 router.post("/book", bookAppointment);
+router.get("/future-appointments", verifyTokenIsAdmin, getTodaysAndFutureAppointments);  // רק מנהל יכול לגשת לזה
+
 
 module.exports = router;
+

@@ -173,6 +173,13 @@
             visibility: visible;
             opacity: 1;
         }
+
+        /* responsive */
+        @media (max-width: 520px) {
+            #dashboard-content {
+                width: auto;
+            }
+        }
     </style>
 </head>
 
@@ -204,6 +211,8 @@
                     <li class="active"><a href="../clinics/add-new-clinic.html"><i class="bi bi-building-add"></i> הוספת מרפאה חדשה</a></li>
                     <li><a href="../medical-field/medical-fields.html"><i class="bi bi-file"></i> תחום רפואי</a></li>
                     <li><a href="../medical-field/add-new-medicalfield.html"><i class="bi bi-file-plus"></i> הוספת תחום רפואי</a></li>
+                    <li><a href="/frontend/dashboard/AdmnContacts.html"><i class="bi bi-chat"></i> פניות</a></li>
+
                 </ul>
             </aside>
             <div id="dashboard-content">

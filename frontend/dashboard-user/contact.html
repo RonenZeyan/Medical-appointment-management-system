@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="dashboard-user.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>צור קשר</title>
+    <style>
+        /* Custom styles for Contact Form */
+#contactForm {
+    width: 100%;
+    background-color: var(--background-primary-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 8px gray;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#contactForm h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid #ddd;
+    background-color: var(--background-primary-color);
+    font-size: 16px;
+}
+
+#submit-btn {
+    background-color: var(--button-bg);
+    color: var(--button-text-color);
+    padding: 12px 20px;
+    border-radius: var(--border-radius);
+    width: 100%;
+    transition: .6s ease-in-out;
+    border: none;
+}
+
+#submit-btn:hover {
+    background-color: var(--button-hover-bg);
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    display: none;
+    margin-top: 10px;
+}
+
+/* Additional Responsiveness */
+@media (max-width: 768px) {
+    #contactForm {
+        padding: 15px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <h2>צור קשר</h2>
+   <form id="contactForm">
+    <h2>צור קשר</h2>
+
+    <div class="form-group">
+        <label for="email">אימייל:</label>
+        <input type="email" id="email" required>
+    </div>
+
+    <div class="form-group">
+        <label for="phone">מספר טלפון:</label>
+        <input type="tel" id="phone" required>
+    </div>
+
+    <div class="form-group">
+        <label for="subject">נושא הפנייה:</label>
+        <select id="subject">
+            <option value="תמיכה טכנית">תמיכה טכנית</option>
+            <option value="שירות לקוחות">שירות לקוחות</option>
+            <option value="חשבונות ותשלומים">חשבונות ותשלומים</option>
+            <option value="אחר">אחר</option>
+        </select>
+    </div>
+
+    <div class="form-group" id="otherSubjectContainer" style="display: none;">
+        <label for="otherSubject">נא לציין נושא אחר:</label>
+        <input type="text" id="otherSubject">
+    </div>
+
+    <div class="form-group">
+        <label for="message">תוכן הפנייה:</label>
+        <textarea id="message" required></textarea>
+    </div>
+
+    <button type="submit" id="submit-btn">שלח</button>
+</form>
+
+<script>
+    document.getElementById("subject").addEventListener("change", function() {
+        document.getElementById("otherSubjectContainer").style.display = this.value === "אחר" ? "block" : "none";
+    });
+
+    document.getElementById("contactForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        let subject = document.getElementById("subject").value;
+        if (subject === "אחר") {
+            subject = document.getElementById("otherSubject").value;
+        }
+        const message = document.getElementById("message").value;
+
+        console.log("שולח נתונים:", { email, phone, subject, message });
+
+        const response = await fetch("http://localhost:3000/api/contact", { 
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, phone, subject, message })
+        });
+
+        if (response.ok) {
+            alert("ההודעה נשלחה בהצלחה!");
+            document.getElementById("contactForm").reset();
+        } else {
+            alert("אירעה שגיאה, נסה שוב.");
+        }
+    });
+</script>
+
+</body>
+</html>

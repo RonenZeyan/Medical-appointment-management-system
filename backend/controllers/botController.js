@@ -1,5 +1,7 @@
 const { run } = require('../services/botService');
 const Clinic = require("../models/Clinics");
+const ChatLog = require("../models/chatLogs");
+const mongoose = require("mongoose");
 
 /**
  * @description Chat With Medical Bot
@@ -7,28 +9,6 @@ const Clinic = require("../models/Clinics");
  * @method POST
  * @access private (only admin or doctor or logged in user )
  */
-
-// const chat = async (req, res) => {
-//     const userMessage = req.body.message;
-//     const userId = req.user?.id
-
-//     if (!userMessage) {
-//         return res.status(400).json({ error: "❌ Please provide a message." });
-//     }
-//     //extract clinics + mdfields + doctors details and send to bot 
-
-//     let clinicsDetails = await Clinic.find();
-
-//     //build string include doctor and his medical fields and witch clinics he work
-
-//     try {
-//         const botMessage = await run(userMessage, userId);
-//         res.json({ response: botMessage });
-//     } catch (error) {
-//         console.error("❌ Error sending to model:", error.message);
-//         res.status(503).json({ error: error.message });
-//     }
-// }
 
 const chat = async (req, res) => {
     const userMessage = req.body.message;
@@ -73,6 +53,38 @@ const chat = async (req, res) => {
     }
 };
 
+
+/**
+ * @description Get Chat History of a Specific User
+ * @router /api/bot/history
+ * @method GET
+ * @access private (only admin, doctor, or logged-in user)
+ */
+
+const getChatHistory = async (req, res) => {
+    const user_id = req.user?.id;
+
+    if (!user_id) {
+        return res.status(400).json({ error: "❌ User ID is required." });
+    }
+
+    try {
+        const objectId = new mongoose.Types.ObjectId(user_id);
+        // 🔹 חיפוש כל היסטוריית השיחות של המשתמש לפי user_id
+
+        const chatHistory = await ChatLog.find({ userId: objectId, }).sort({ createdAt: -1 });
+        if (!chatHistory || chatHistory.length === 0) {
+            return res.status(404).json({ message: "📭 No chat history found for this user." });
+        }
+
+        res.json({ chatHistory: chatHistory });
+    } catch (error) {
+        console.error("❌ Error fetching chat history:", error.message);
+        res.status(500).json({ error: "Internal Server Error." });
+    }
+};
+
 module.exports = {
     chat,
+    getChatHistory,
 }

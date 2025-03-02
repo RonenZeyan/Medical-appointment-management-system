@@ -147,60 +147,21 @@ li.active a{
 
 }
 
-/* Appointment Table Section */
-
-/* .daily-appointments{
-    margin-top: 40px;  
+@media (max-width: 520px) {
+    #dashboard{
+        flex-direction: column;
+    }
+    #dashboard-sidebar{
+        width: 100%;
+    }
+    #dashboard-content{
+        width: 100%;
+    }
+    #general-details{
+        flex-direction: column;
+        gap: 10px;
+    }
+    #section-of-table{
+        flex-direction: column;
+    }
 }
-
-table {
-    width: 100%;
-    background-color: var(--card-bg);
-    border-collapse: collapse;
-    border-radius: var(--border-radius);
-    box-shadow: 0 0 8px gray;
-}
-
-th {
-    border-bottom: 1px solid rgba(128, 128, 128, 0.432);
-    padding: 30px;
-    text-align: left;
-}
-
-td {
-    padding: 10px; 
-    text-align: center;
-
-}
-
-tr:nth-child(even) {
-    background-color: #ebebeb;
-}
-
-
-.more-btn,.delete-btn {
-    font-weight: bold;
-    font-size: 16px;
-    color: var(--button-text-color);
-    margin-right: 5px; 
-    border: none;
-    padding: 7px 15px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-}
-
-.more-btn{
-    background-color: var(--button-bg);
-}
-
-.more-btn:hover{
-    background-color: var(--button-hover-bg);
-}
-
-.delete-btn{
-    background-color: rgba(189, 0, 0, 0.774);
-}
-
-.delete-btn:hover{
-    background-color: red;
-} */

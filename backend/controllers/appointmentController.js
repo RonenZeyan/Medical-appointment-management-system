@@ -100,21 +100,21 @@ const DeleteSpecificAppointment = async (req, res) => {
  */
 const updateAppointmentStatus = async (req, res) => {
   try {
-    const { id } = req.params; // מזהה התור
-    const updatedAppointment = await Appointment.findByIdAndUpdate(
-      id,
-      { appointment_status: "cancelled" },
-      { new: true } // מחזיר את המסמך המעודכן
-    );
+      const { id } = req.params; // מזהה התור
+      const updatedAppointment = await Appointment.findByIdAndUpdate(
+          id, 
+          { appointment_status: "cancelled" }, 
+          { new: true } // מחזיר את המסמך המעודכן
+      );
 
-    if (!updatedAppointment) {
-      return res.status(404).json({ message: "Appointment not found" });
-    }
+      if (!updatedAppointment) {
+          return res.status(404).json({ message: "Appointment not found" });
+      }
 
-    return res.status(200).json(updatedAppointment);
+      return res.status(200).json(updatedAppointment);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Something went wrong" });
+      console.error(err);
+      res.status(500).json({ message: "Something went wrong" });
   }
 };
 
@@ -131,7 +131,7 @@ const GetallAppointments = async (req, res) => {
     //if there is query then get by query and not all appointments 
     const filter = status ? { appointment_status: status } : {};
     let allAppointments = await Appointment.find(filter);
-
+    
     if (status) {
       allAppointments = await Appointment.find(filter)
         .populate("patient_id")
@@ -316,7 +316,6 @@ const getTodaysAndFutureAppointments = async (req, res) => {
   }
 };
 
-
 const getDoctorAppointments = async (req, res) => {
   try {
     const db = req.app.locals.db;
@@ -390,7 +389,9 @@ const getDoctorAppointments = async (req, res) => {
     }
   };
 
-  module.exports = {
+
+
+module.exports = {
     addNewAppointment,
     GetSpecificAppointment,
     DeleteSpecificAppointment,

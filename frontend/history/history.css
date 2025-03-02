@@ -1,17 +1,17 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
     direction: rtl;
-    background-color: #f9f9f9;
+    text-align: center;
+    background-color: #f4f4f4;
 }
 
 .container {
-    max-width: 400px;
+    max-width: 600px;
     margin: 20px auto;
-    padding: 20px;
     background: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
     border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -23,58 +23,54 @@ ul {
     padding: 0;
 }
 
-li {
-    background: #fff;
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 6px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.chat-item {
+    margin-bottom: 10px;
 }
 
-.completed {
-    border-left: 5px solid green;
+details {
+    background: #e8e8e8;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.cancelled {
-    border-left: 5px solid red;
-}
-
-.date {
+summary {
     font-weight: bold;
-    color: #555;
+    cursor: pointer;
 }
 
-.status {
-    margin-top: 5px;
-    font-size: 14px;
-    padding: 3px 8px;
-    border-radius: 4px;
-    color: white;
-    display: inline-block;
+.user-message {
+    color: blue;
+    text-align: right;
+    padding: 5px;
 }
 
-.completed .status {
-    background-color: green;
-}
-
-.cancelled .status {
-    background-color: red;
+.bot-message {
+    color: green;
+    text-align: left;
+    padding: 5px;
 }
 
 button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: blue;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #007bff;
     color: white;
     border: none;
-    cursor: pointer;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 button:hover {
-    background-color: darkblue;
+    background-color: #0056b3;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.no-history {
+    color: gray;
+    font-style: italic;
 }

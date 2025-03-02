@@ -74,5 +74,5 @@ function logout() {
   window.location.href = "../login/login.html";
 }
 function navToHistory() {
-  // window.location.href = "../history/history.html";
+  window.location.href = "../history/history.html";
 }

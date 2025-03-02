@@ -111,13 +111,24 @@
             content: "הרופא ";
             text-decoration: underline;
         }
+        
+        /* responsive */
+        @media (max-width: 520px) {
+            #dashboard-content {
+                width: auto;
+            }
+        }
+
     </style>
 </head>
 
 <body>
     <nav>
         <img src="/frontend/logo.png">
-        <button id="logout-button" onclick="logout()" style="  background-color: #f44336;
+        <button
+            id="logout-button"
+            onclick="logout()"
+            style="  background-color: #f44336;
         position: absolute;
           top: 10px;
           right: 10px;
@@ -127,23 +138,25 @@
           padding: 5px 10px;
           font-size: 14px;
           cursor: pointer;
-          border-radius: 5px;">Logout</button>
+          border-radius: 5px;"
+        >Logout</button>
     </nav>
     <main>
-        <h1>Dashboard</h1>
         <section id="dashboard">
             <aside id="dashboard-sidebar">
                 <h3>אדמין דשבורד</h3>
                 <ul style="border-top: 3px solid var(--background-primary-color)">
-                    <li><a href="/frontend/dashboard/dashboard.html"><i class="bi bi-house-door"></i> לוח</a></li>
-                    <li class="active"><a href="../users/users.html"><i class="bi bi-people"></i> משתמשים</a></li>
+                    <li><a href="/frontend/dashboard/dashboard.html">לוח</a></li>
+                    <li><a href="../appointments/displayAppointmentsAdmin.html"><i class="bi bi-calendar-heart"></i>
+                            פגישות</a></li>
+                    <li><a href="../users/users.html"><i class="bi bi-people"></i> משתמשים</a></li>
                     <li><a href="../users/add-users.html"><i class="bi bi-person-add"></i>הוספת משתמש חדש</a></li>
                     <li><a href="../clinics/clinics.html"><i class="bi bi-building"></i> מרפאות</a></li>
-                    <li><a href="../clinics/add-new-clinic.html"><i class="bi bi-building-add"></i>הוספת מרפאה חדשה</a></li>
+                    <li><a href="../clinics/add-new-clinic.html"><i class="bi bi-building-add"></i>הוספת מרפאה חדשה</a>
+                    </li>
                     <li><a href="../medical-field/medical-fields.html"><i class="bi bi-file"></i> תחומי רפואה</a></li>
-                    <li><a href="../medical-field/add-new-medicalfield.html"><i class="bi bi-file-plus"></i>הוספת תחום רפואי</a></li>
+                    <li class="active"><a href="../medical-field/add-new-medicalfield.html"><i class="bi bi-file-plus"></i>הוספת תחום רפואי</a></li>
                     <li><a href="/frontend/dashboard/AdmnContacts.html"><i class="bi bi-chat"></i> פניות</a></li>
-
                 </ul>
             </aside>
             <div id="dashboard-content">
@@ -182,10 +195,7 @@
                                 multiple
                                 size="5"
                             >
-                                <option value="doctor1">doctor 1</option>
-                                <option value="doctor2">doctor 1</option>
-                                <option value="doctor3">doctor 1</option>
-                                <option value="doctor4">doctor 1</option>
+                                <option style="text-align: center;" value="doctor1" disabled>No Doctors Founded,Please Add Doctors</option>
                             </select>
                         </div>
                         <button id="add-mdfield-btn">הוספת תחום רפואי</button>
@@ -197,16 +207,16 @@
     <footer>
         <p>יצירת קשר: <a href="mailto:medAi@gmail.com">contact@example.com</a></p>
         <p>טלפון: 04-6784439</p>
-      </footer>
+    </footer>
     <script src="../../auth.js"></script>
     <script src="../success-modal/successModal.js"></script>
     <script>
- function logout() {
-        localStorage.clear();
-        sessionStorage.clear();
-    
-        window.location.href = "/frontend/login/login.html";
-      }
+        function logout() {
+            localStorage.clear();
+            sessionStorage.clear();
+
+            window.location.href = "/frontend/login/login.html";
+        }
         //get widgets & variables
 
         //wedgets
@@ -285,15 +295,17 @@
                 if (!res.ok) {
                     throw new Error("Failed to fetch doctors");
                 }
-                let doctors = await res.json();                
+                let doctors = await res.json();
                 doctorsSelect.innerHTML = "";
                 //add doctors to select
-                doctors.forEach(doctor => {
-                    let option = document.createElement("option");
-                    option.value = doctor._id;
-                    option.textContent = `${doctor.full_name} (${doctor.email})`;
-                    doctorsSelect.appendChild(option);
-                });
+                (doctors.length === 0 || !doctors) ? doctorsSelect.innerHTML = "<option disabled>No Doctors Founded</option>"
+                    :
+                    doctors.forEach(doctor => {
+                        let option = document.createElement("option");
+                        option.value = doctor._id;
+                        option.textContent = `${doctor.full_name} (${doctor.email})`;
+                        doctorsSelect.appendChild(option);
+                    });
             }
             catch (error) {
                 console.error("Error fetching doctors:", error);

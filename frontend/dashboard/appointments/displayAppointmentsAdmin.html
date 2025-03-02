@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Document</title>
+    <!-- Bootstrap icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- CSS LINKS -->
+    <link
+        rel="stylesheet"
+        href="../../styles.css"
+    >
+    <link
+        rel="stylesheet"
+        href="../dashboard.css"
+    >
+    <link
+        rel="stylesheet"
+        href="../table.css"
+    >
+    <link
+        rel="stylesheet"
+        href="appointments.css"
+    >
+</head>
+
+<body>
+    <nav>
+        <img src="/frontend/logo.png">
+        <button
+            id="logout-button"
+            onclick="logout()"
+            style="  background-color: #f44336;
+        position: absolute;
+          top: 10px;
+          right: 10px;
+          background-color: #f44336;
+          color: white;
+          border: none;
+          padding: 5px 10px;
+          font-size: 14px;
+          cursor: pointer;
+          border-radius: 5px;"
+        >Logout</button>
+    </nav>
+    <main>
+        <section id="dashboard">
+            <aside id="dashboard-sidebar">
+                <h3>אדמין דשבורד</h3>
+                <ul style="border-top: 3px solid var(--background-primary-color)">
+                    <li><a href="../dashboard.html">לוח</a></li>
+                    <li class="active"><a href="displayAppointmentsAdmin.html"><i class="bi bi-calendar-heart"></i>
+                            פגישות</a>
+                    </li>
+                    <li><a href="../users/users.html"><i class="bi bi-people"></i> משתמשים</a></li>
+                    <li><a href="../users/add-users.html"><i class="bi bi-person-add"></i> הוספת משתמש חדש</a></li>
+                    <li><a href="../clinics/clinics.html"><i class="bi bi-building"></i> מרפאות</a></li>
+                    <li><a href="../clinics/add-new-clinic.html"><i class="bi bi-building-add"></i> הוספת מרפאה חדשה</a>
+                    </li>
+                    <li><a href="../medical-field/medical-fields.html"><i class="bi bi-file"></i> תחום רפואי</a></li>
+                    <li><a href="../medical-field/add-new-medicalfield.html"><i class="bi bi-file-plus"></i> הוספת תחום
+                            רפואי חדש</a></li>
+                </ul>
+            </aside>
+            <div id="dashboard-content">
+                <div class="search-user">
+                    <input
+                        type="search"
+                        id="search-user-input"
+                        placeholder="חיפוש תור לפי עיר המרפאה..."
+                        oninput="searchClinic()"
+                    >
+                    <i class="bi bi-search"></i>
+                </div>
+                <div id="filter-add-btn-container">
+                    <div id="filter-appointments-container">
+                        <button
+                            onclick="displayTodayAppointments()"
+                            id="today-btn"
+                            class="btn-active"
+                        >היום</button>
+                        <button
+                            onclick="displayUpcommingAppointments()"
+                            id="upcomming-btn"
+                        >עתידי</button>
+                        <button
+                            onclick="displayCancelledAppointments()"
+                            id="cancelled-btn"
+                        >בוטל</button>
+                        <button
+                            onclick="displayCompletedAppointments()"
+                            id="completed-btn"
+                        >הסתיים</button>
+                    </div>
+                    <a
+                        id="add-appointment"
+                        href="./findUser.html"
+                    ><i class="bi bi-plus-circle"></i> הוספת תור חדש</a>
+                </div>
+                <div
+                    id="appointments-container"
+                    class="appointments-container"
+                >
+                    <div class="appointment-container">
+                        <div class="appointment-data">
+                            <div class="appointment-data-date">
+                                <p style="text-align: center;">wed<br><span style="font-size: 40px;">28</span></p>
+
+                            </div>
+                            <div class="appointment-data-timeaddress">
+                                <p class="appointment-data-time">
+                                    <i class="bi bi-alarm-fill"></i> 9:00 - 9:30
+                                </p>
+                                <p class="appointment-data-location">
+                                    <i class="bi bi-geo-alt-fill"></i> ירכא,צפון ישראל
+                                </p>
+                            </div>
+                            <div class="appointment-data-patient">
+                                <p>המטופל רונן זיאן</p>
+                                <p>הרופא רונן זיאן</p>
+                            </div>
+                        </div>
+                        <div class="cancel-appointment-container">
+                            <button class="cancel-appointment-btn">ביטול תור</button>
+                        </div>
+                    </div>
+                    <div class="appointment-container">
+                        <div class="appointment-data">
+                            <div class="appointment-data-date">
+                                <p>wed</p>
+                                <h1>28</h1>
+                            </div>
+                            <div class="appointment-data-timeaddress">
+                                <p class="appointment-data-time">
+                                    <i class="bi bi-alarm-fill"></i> 9:00 - 9:30
+                                </p>
+                                <p class="appointment-data-location">
+                                    <i class="bi bi-geo-alt-fill"></i> Yarka,North Israel
+                                </p>
+                            </div>
+                            <div class="appointment-data-patient">
+                                המטופל רונן זיאן
+                            </div>
+                        </div>
+                        <div class="cancel-appointment-container">
+                            <button class="cancel-appointment-btn">ביטול תור</button>
+                        </div>
+                    </div>
+                    <div class="appointment-container">
+                        <div class="appointment-data">
+                            <div class="appointment-data-date">
+                                <p>wed</p>
+                                <h1>28</h1>
+                            </div>
+                            <div class="appointment-data-timeaddress">
+                                <p class="appointment-data-time">
+                                    <i class="bi bi-alarm-fill"></i> 9:00 - 9:30
+                                </p>
+                                <p class="appointment-data-location">
+                                    <i class="bi bi-geo-alt-fill"></i> Yarka,North Israel
+                                </p>
+                            </div>
+                            <div class="appointment-data-patient">
+                                המטופל רונן זיאן
+                            </div>
+                        </div>
+                        <div class="cancel-appointment-container">
+                            <button class="cancel-appointment-btn">ביטול תור</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="../../auth.js"></script>
+        <script>
+
+            //get widgets and set vars
+            const appointments_container = document.getElementById("appointments-container");
+            const search_user_input = document.getElementById("search-user-input");
+            let save_appointments;
+            //event listeners
+            window.addEventListener("load", () => {
+                displayTodayAppointments();
+            })
+
+            //functions
+
+            async function fetchAppointmentsByStatus(id, status = "existing") {
+                document.getElementById("today-btn").classList.remove("btn-active");
+                document.getElementById("upcomming-btn").classList.remove("btn-active");
+                document.getElementById("cancelled-btn").classList.remove("btn-active");
+                document.getElementById("completed-btn").classList.remove("btn-active");
+                document.getElementById(id).classList.add("btn-active");
+                try {
+                    const response = await fetch(`http://localhost:3000/api/appointment?status=${status}`, {
+                        method: "GET",
+                        headers: {
+                            "Authorization": "Bearer " + localStorage.getItem("token") // אם משתמש מאומת
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch appointments");
+                    }
+
+                    const appointments = await response.json();
+                    save_appointments = appointments;
+                    console.log(appointments);
+                    appointments_container.innerHTML = ``;
+                    return appointments;
+                } catch (error) {
+                    console.error("Error fetching appointments:", error);
+                }
+            }
+
+            //get today appointments
+            async function displayTodayAppointments() {
+                let data = await fetchAppointmentsByStatus("today-btn");
+                let today = new Date();
+                today.setHours(0, 0, 0, 0);
+                let weekday = today.toLocaleString('default', { weekday: 'short' });
+                let dayOfMonth = today.getDate();
+
+                let todayAppointments = data.filter(appoin => {
+                    let appointmentDate = new Date(appoin.appointment_date);
+                    appointmentDate.setHours(0, 0, 0, 0);
+
+                    return appointmentDate.getTime() === today.getTime();
+                });
+                todayAppointments.length === 0 ? appointments_container.innerHTML = "<h2 style='text-align:center'>אין תורים להיום</h2>"
+                    :
+                    todayAppointments.forEach(appoin => {
+                        appointments_container.innerHTML += `
+                         <div class="appointment-container">
+                        <div class="appointment-data">
+                            <div class="appointment-data-date">
+                                <p style="text-align: center; color:red;">${weekday}<br><span style="font-size: 40px;">${dayOfMonth}</span><br><span>${today.toLocaleString('default', { month: 'long' })} ${today.getFullYear()}</span></p>
+
+                            </div>
+                            <div class="appointment-data-timeaddress">
+                                <p class="appointment-data-time">
+                                    <i class="bi bi-alarm-fill"></i> ${new Date(appoin.appointment_date).toLocaleTimeString("he-IL", { hour: "2-digit", minute: "2-digit" })}
+                                </p>
+                                <p>
+                                    <i class="bi bi-hospital-fill"></i> ${appoin.clinic_address.name}
+                                </p>
+                                <p class="appointment-data-location">
+                                    <i class="bi bi-geo-alt-fill"></i> ${appoin.clinic_address.location.region},${appoin.clinic_address.location.city} <br> ${appoin.clinic_address.location.address}
+                                </p>
+                            </div>
+                            <div class="appointment-data-patient">
+                                <p>המטופל ${appoin.patient_id.full_name}</p>
+                                <p>הרופא ${appoin.doctor.full_name}</p>
+                            </div>
+                        </div>
+                        <div class="cancel-appointment-container">
+                            <button onclick="removeAppointment('${appoin._id}')" class="cancel-appointment-btn">ביטול תור</button>
+                        </div>
+                    </div>
+                        `})
+            }
+
+            //get future appointments
+            async function displayUpcommingAppointments() {
+                let data = await fetchAppointmentsByStatus("upcomming-btn");
+
+                data.length === 0 ? appointments_container.innerHTML = "<h2 style='text-align:center'>אין תורים עתידים</h2>"
+                    :
+                    data.forEach(appoin => {
+                        let appointmentDate = new Date(appoin.appointment_date);
+                        let weekday = appointmentDate.toLocaleString('default', { weekday: 'short' });
+                        let dayOfMonth = appointmentDate.getDate();
+                        appointments_container.innerHTML += `
+                         <div class="appointment-container">
+                        <div class="appointment-data">
+                            <div class="appointment-data-date">
+                                <p style="text-align: center;">${weekday}<br><span style="font-size: 40px;">${dayOfMonth}</span><br><span>${appointmentDate.toLocaleString('default', { month: 'long' })} ${appointmentDate.getFullYear()}</span></p>
+
+                            </div>
+                            <div class="appointment-data-timeaddress">
+                                <p class="appointment-data-time">
+                                    <i class="bi bi-alarm-fill"></i> ${new Date(appoin.appointment_date).toLocaleTimeString("he-IL", { hour: "2-digit", minute: "2-digit" })}
+                                </p>
+                                <p>
+                                    <i class="bi bi-hospital-fill"></i> ${appoin.clinic_address.name}
+                                </p>
+                                <p class="appointment-data-location">
+                                    <i class="bi bi-geo-alt-fill"></i> ${appoin.clinic_address.location.region},${appoin.clinic_address.location.city} <br> ${appoin.clinic_address.location.address}
+                                </p>
+                            </div>
+                            <div class="appointment-data-patient">
+                                <p>המטופל ${appoin.patient_id.full_name}</p>
+                                <p>הרופא ${appoin.doctor.full_name}</p>
+                            </div>
+                        </div>
+                        <div class="cancel-appointment-container">
+                            <button onclick="removeAppointment('${appoin._id}')" class="cancel-appointment-btn">ביטול תור</button>
+                        </div>
+                    </div>
+                        `})
+            }
+
+            //get cancelled appointments
+            async function displayCancelledAppointments() {
+                let data = await fetchAppointmentsByStatus("cancelled-btn", "cancelled");
+                console.log("Data received:", data);
+                data.length === 0 ? appointments_container.innerHTML = "<h2 style='text-align:center'>אין תורים שבוטלו</h2>"
+                    :
+                    data.forEach(appoin => {
+                        let appointmentDate = new Date(appoin.appointment_date);
+                        let weekday = appointmentDate.toLocaleString('default', { weekday: 'short' });
+                        let dayOfMonth = appointmentDate.getDate();
+                        appointments_container.innerHTML += `
+                         <div class="appointment-container">
+                        <div class="appointment-data">
+                            <div class="appointment-data-date">
+                                <p style="text-align: center;">${weekday}<br><span style="font-size: 40px;">${dayOfMonth}</span><br><span>${appointmentDate.toLocaleString('default', { month: 'long' })} ${appointmentDate.getFullYear()}</span></p>
+                            </div>
+                            <div class="appointment-data-timeaddress">
+                                <p class="appointment-data-time">
+                                    <i class="bi bi-alarm-fill"></i> ${new Date(appoin.appointment_date).toLocaleTimeString("he-IL", { hour: "2-digit", minute: "2-digit" })}
+                                </p>
+                                <p>
+                                    <i class="bi bi-hospital-fill"></i> ${appoin.clinic_address.name}
+                                </p>
+                                <p class="appointment-data-location">
+                                    <i class="bi bi-geo-alt-fill"></i> ${appoin.clinic_address.location.region},${appoin.clinic_address.location.city} <br> ${appoin.clinic_address.location.address}
+                                </p>
+                            </div>
+                            <div class="appointment-data-patient">
+                                <p>המטופל ${appoin.patient_id.full_name}</p>
+                                <p>הרופא ${appoin.doctor.full_name}</p>
+                            </div>
+                        </div>
+                        <div class="cancel-appointment-container">
+                            <button class="cancel-appointment-btn" disabled>בוטל</button>
+                        </div>
+                    </div>
+                        `})
+            }
+
+            //get completed appointments
+            async function displayCompletedAppointments() {
+                let data = await fetchAppointmentsByStatus("completed-btn", "completed");
+                data.length === 0 ? appointments_container.innerHTML = "<h2 style='text-align:center'>אין תורים שהסתיימו</h2>"
+                    :
+                    data.forEach(appoin => {
+                        let appointmentDate = new Date(appoin.appointment_date);
+                        let weekday = appointmentDate.toLocaleString('default', { weekday: 'short' });
+                        let dayOfMonth = appointmentDate.getDate();
+                        appointments_container.innerHTML += `
+                                        <div class="appointment-container">
+                        <div class="appointment-data">
+                            <div class="appointment-data-date">
+                                <p style="text-align: center;">${weekday}<br><span style="font-size: 40px;">${dayOfMonth}</span><br><span>${appointmentDate.toLocaleString('default', { month: 'long' })} ${appointmentDate.getFullYear()}</span></p>
+                            </div>
+                            <div class="appointment-data-timeaddress">
+                                <p class="appointment-data-time">
+                                    <i class="bi bi-alarm-fill"></i> ${new Date(appoin.appointment_date).toLocaleTimeString("he-IL", { hour: "2-digit", minute: "2-digit" })}
+                                </p>
+                                <p>
+                                    <i class="bi bi-hospital-fill"></i> ${appoin.clinic_address.name}
+                                </p>
+                                <p class="appointment-data-location">
+                                    <i class="bi bi-geo-alt-fill"></i> ${appoin.clinic_address.location.region},${appoin.clinic_address.location.city} <br> ${appoin.clinic_address.location.address}
+                                </p>
+                            </div>
+                            <div class="appointment-data-patient">
+                                <p>המטופל ${appoin.patient_id.full_name}</p>
+                                <p>הרופא ${appoin.doctor.full_name}</p>
+                            </div>
+                        </div>
+                        <div class="cancel-appointment-container">
+                            <button class="cancel-appointment-btn" style="background-color:green">הסתיים</button>
+                        </div>
+                    </div>
+                    `
+                    });
+            }
+
+            //change appointments status to canced by id
+            async function removeAppointment(appointment_id) {
+                const confirmCancel = confirm("האם אתה בטוח שברצונך לבטל את התור?");
+
+                if (!confirmCancel) {
+                    return;
+                }
+                try {
+                    const response = await fetch(`http://localhost:3000/api/appointment/${appointment_id}`, {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Failed to cancel appointment");
+                    }
+
+                    const updatedAppointment = await response.json();
+                    console.log("Appointment cancelled:", updatedAppointment);
+                    window.location.reload();
+                } catch (error) {
+                    console.error("Error cancelling appointment:", error);
+                }
+            }
+
+            function searchClinic() {
+                let filtered_appointments = save_appointments.filter(appoi => appoi.clinic_address.location.city.toLowerCase().includes(search_user_input.value.toLowerCase()));
+                appointments_container.innerHTML = ``;
+                filtered_appointments.length === 0 ? appointments_container.innerHTML = "<h2 style='text-align:center'>לא נמצאו תוצאות</h2>"
+                    :
+                    filtered_appointments.forEach(appoin => {
+                        let appointmentDate = new Date(appoin.appointment_date);
+                        let weekday = appointmentDate.toLocaleString('default', { weekday: 'short' });
+                        let dayOfMonth = appointmentDate.getDate();
+                        appointments_container.innerHTML += `
+                                        <div class="appointment-container">
+                        <div class="appointment-data">
+                            <div class="appointment-data-date">
+                                <p style="text-align: center;">${weekday}<br><span style="font-size: 40px;">${dayOfMonth}</span><br><span>${appointmentDate.toLocaleString('default', { month: 'long' })} ${appointmentDate.getFullYear()}</span></p>
+                            </div>
+                            <div class="appointment-data-timeaddress">
+                                <p class="appointment-data-time">
+                                    <i class="bi bi-alarm-fill"></i> ${new Date(appoin.appointment_date).toLocaleTimeString("he-IL", { hour: "2-digit", minute: "2-digit" })}
+                                </p>
+                                <p class="appointment-data-location">
+                                    <i class="bi bi-geo-alt-fill"></i> ${appoin.clinic_address.location.region},${appoin.clinic_address.location.city} <br> ${appoin.clinic_address.location.address}
+                                </p>
+                            </div>
+                            <div class="appointment-data-patient">
+                                <p>המטופל ${appoin.patient_id.full_name}</p>
+                                <p>הרופא ${appoin.doctor.full_name}</p>
+                            </div>
+                        </div>
+                        <div class="cancel-appointment-container">
+                            <button class="cancel-appointment-btn" style="background-color:green">הסתיים</button>
+                        </div>
+                    </div>
+                    `
+                    })
+            }
+
+        function logout() {
+            localStorage.clear();
+            sessionStorage.clear();
+
+            window.location.href = "/frontend/login/login.html";
+        }
+
+        </script>
+</body>

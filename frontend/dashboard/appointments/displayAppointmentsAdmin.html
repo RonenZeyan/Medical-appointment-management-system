@@ -448,5 +448,12 @@
                     })
             }
 
+        function logout() {
+            localStorage.clear();
+            sessionStorage.clear();
+
+            window.location.href = "/frontend/login/login.html";
+        }
+
         </script>
 </body>

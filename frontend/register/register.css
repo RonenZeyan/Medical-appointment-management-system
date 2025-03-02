@@ -99,15 +99,21 @@ body {
   background-color: var(--button-click-bg);
 }
 
-#register-error {
-  display: none;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
 
 footer{
   padding: 0px;
 }
+
+#register-error-message {
+  display: inline-block; 
+  width: 270px; 
+  height: 40px;
+}
+
+
+
+
+
 
 
 @media (max-width: 400px) {

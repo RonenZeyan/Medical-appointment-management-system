@@ -12,6 +12,7 @@ const {
   getUserInfo,
   getDoctorByName,
   AddUser,
+  getDoctorsByParameters,
 } = require("../controllers/userController");
 const {
   verifyTokenIsSameUserOrAdmin,
@@ -24,7 +25,7 @@ const {
 router.get("/doctors", verifyToken, getAllDoctors);
 
 // Get user by name route
-router.post("/findUser", verifyTokenIsAdmin, getUserByName);
+router.post("/findUser", verifyTokenIsSameUserOrAdmin, getUserByName);
 
 // Get user by id
 router.post("/userInfo/:id", verifyTokenIsSameUserOrAdmin, getUserInfo);
@@ -42,7 +43,7 @@ router.delete("/:id", verifyTokenIsAdmin, deleteUserById);
 router.put("/:id", verifyTokenIsSameUserOrAdmin, updateUserInfo);
 
 // Get doctor by name
-router.post("/findDoctor", verifyToken, getDoctorByName);
+router.post("/findDoctor", verifyToken, getDoctorsByParameters);
 
 // Add User
 router.post("/AdminAddUser", AddUser);

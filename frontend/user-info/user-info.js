@@ -10,14 +10,17 @@ async function loadDetails() {
 
   try {
     // Sending POST request to get user details
-    const response = await fetch(`http://localhost:3000/api/user/userInfo/${id}`, {
-      method: "POST", 
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // If authentication is needed
-      },
-      body: JSON.stringify({ id: id }),
-    });
+    const response = await fetch(
+      `http://localhost:3000/api/user/userInfo/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // If authentication is needed
+        },
+        body: JSON.stringify({ id: id }),
+      }
+    );
 
     // Check if the response is OK
     if (!response.ok) {
@@ -44,24 +47,24 @@ async function saveUserInfo() {
   let phone = document.getElementById("phone").value;
 
   // Getting form
-  let form = document.getElementById("user-info-form") 
+  let form = document.getElementById("user-info-form");
 
-  // Ensures at least 5 characters of any type
-  const minFullNameLengthRegex = /^.{5,}$/;
+  // Ensures first and last name using only Hebrew or English letters, with at least two characters per name.
+  const nameRegex = /^[a-zA-Zא-ת]{2,}[\s'-][a-zA-Zא-ת]{2,}([\s'-][a-zA-Zא-ת]{2,})*$/;
 
   // Matches a valid email format
   const emailRegex =
     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
 
-  // Ensures at least 7 characters of any type
-  const minPhoneLengthRegex = /^.{7,}$/;
+  // Ensures valid Israeli number with the correct prefix and at least 7 digits.
+  const phoneRegex = /^(\+972[-\s]?|0)([23489]|5[0-9])[-\s]?\d{7}$/;
 
   // Error message is hidden first
   let message = document.getElementById("response-message-contant");
   message.style.display = "none";
 
   // Notify user he need at least one value for to update
-  if (email === "" || full_name === "" || phone === "") {
+  if (email === "" && full_name === "" && phone === "") {
     message.style.display = "block";
 
     message.textContent = "לפחות אחד הפרטים חייב לעדכן";
@@ -69,32 +72,32 @@ async function saveUserInfo() {
   }
 
   // FullName Regex Validation
-  if (!minFullNameLengthRegex.test(full_name)) {
+  if (!nameRegex.test(full_name) && full_name !== "") {
     message.style.display = "block";
-    message.textContent = "שם המלא חייב להכיל לפחות 5 תווים.";
+    message.textContent = "יש להזין שם פרטי ושם משפחה באותיות עברית או אנגלית בלבד, עם לפחות שני תווים בכל שם";
     return;
   }
 
   // Email Regex Validation
-  if (!emailRegex.test(email)) {
+  if (!emailRegex.test(email) && email !== "") {
     message.style.display = "block";
     message.textContent = "אימייל לא תקין. אנא הזן אימייל בפורמט תקין.";
     return;
   }
 
   // Phone Regex Validation
-  if (!minPhoneLengthRegex.test(phone)) {
+  if (!phoneRegex.test(phone) && phone !== "") {
     message.style.display = "block";
-    message.textContent = "מספר הטלפון חייב להכיל לפחות 7 תווים.";
+    message.textContent =
+      "מספר הטלפון אינו תקין. יש להזין מספר ישראלי חוקי עם קידומת מתאימה ולפחות 7 ספרות.";
     return;
   }
 
-  // Data to send
-  let userData = {
-    email,
-    full_name,
-    phone,
-  };
+  // Create userData object and remove empty values
+  let userData = {};
+  if (email) userData.email = email;
+  if (full_name) userData.full_name = full_name;
+  if (phone) userData.phone = phone;
 
   // Getting id to send from local storage
   let id = localStorage.getItem("id");
@@ -116,19 +119,83 @@ async function saveUserInfo() {
       throw new Error(errorData.message || "Failed to update user"); // Throw an error
     }
 
-    // Show seccuss message 
+    // Show seccuss message
     message.style.display = "block";
     message.textContent = "התעדכן בהצלחה";
-    form.reset()
+    form.reset();
 
     // After seccussfuly update, update also in UI to show
     loadDetails();
   } catch (error) {
     message.style.display = "block";
-    // Show error message 
+    // Show error message
     message.textContent = "שגיאה בעדכון המשתמש, אנא נסה שנית";
 
     console.error("Error updating user:", error);
+  }
+}
+
+// Password Update Function
+async function saveUserPassword() {
+  let oldPassword = document.getElementById("oldPassword").value;
+  let newPassword = document.getElementById("password").value;
+
+  // Error message container
+  let message = document.getElementById("response-message-contant-password");
+  message.style.display = "none";
+
+  // Password Regex Validation: At least 8 chars, 1 uppercase, 1 number
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+  if (oldPassword == "") {
+    message.style.display = "block";
+    message.textContent = "אנא מלא את סיסמה הישנה";
+    return;
+  }
+
+  if (newPassword == "") {
+    message.style.display = "block";
+    message.textContent = "אנא מלא את סיסמה החדשה";
+    return;
+  }
+
+  if (!passwordRegex.test(newPassword)) {
+    message.style.display = "block";
+    message.textContent =
+      "הסיסמה חייבת להכיל לפחות 8 תווים, כולל מספר ואות גדולה.";
+    return;
+  }
+
+  // Get user ID from local storage
+  let id = localStorage.getItem("id");
+
+  try {
+    // Sending PATCH request to validate old password & update new password
+    const response = await fetch(
+      `http://localhost:3000/api/auth/change-password/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ oldPassword, newPassword }),
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to update password");
+    }
+
+    // Success Message
+    message.style.display = "block";
+    message.textContent = "הסיסמה עודכנה בהצלחה!";
+    document.getElementById("user-info-form-password").reset();
+  } catch (error) {
+    message.style.display = "block";
+    message.textContent = "שגיאה בעדכון הסיסמה, אנא נסה שנית";
+    console.error("Error updating password:", error);
   }
 }
 

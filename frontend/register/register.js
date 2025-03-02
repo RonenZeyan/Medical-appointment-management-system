@@ -8,17 +8,14 @@ document
     const email = document.getElementById("emailInput").value;
     const phone = document.getElementById("phoneInput").value;
     const password = document.getElementById("passwordInput").value;
+    const passwordAgain = document.getElementById("passwordAgainInput").value; // Get confirmation password
 
     // Error div
     const errorMessage = document.getElementById("register-error-message");
     const errorDiv = document.getElementById("register-error");
 
-
-
-    
-
-    // Ensures at least 5 characters of any type
-    const minFullNameLengthRegex = /^.{5,}$/;
+    // Ensures first and last name using only Hebrew or English letters, with at least two characters per name.
+    const nameRegex = /^[a-zA-Zא-ת]{2,}[\s'-][a-zA-Zא-ת]{2,}([\s'-][a-zA-Zא-ת]{2,})*$/;
 
     // Matches a valid email format
     const emailRegex =
@@ -28,15 +25,14 @@ document
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    // Ensures at least 7 characters of any type
-    const minPhoneLengthRegex = /^.{7,}$/;
+    // Ensures valid Israeli number with the correct prefix and at least 7 digits.
+    const phoneRegex = /^(\+972[-\s]?|0)([23489]|5[0-9])[-\s]?\d{7}$/;
 
     // Full Name Regex Validation
 
-    if (!minFullNameLengthRegex.test(full_name)) {
+    if (!nameRegex.test(full_name)) {
       document.getElementById("register-error").style.display = "block";
-      document.getElementById("register-error-message").textContent =
-        "שם המלא חייב להכיל לפחות 5 תווים.";
+      document.getElementById("register-error-message").textContent = "יש להזין שם פרטי ושם משפחה באותיות עברית או אנגלית בלבד, עם לפחות שני תווים בכל שם.";
       return;
     }
 
@@ -48,9 +44,9 @@ document
     }
 
     // Phone Regex Validation
-    if (!minPhoneLengthRegex.test(phone)) {
+    if (!phoneRegex.test(phone)) {
       errorDiv.style.display = "block";
-      errorMessage.textContent = "מספר הטלפון חייב להכיל לפחות 7 תווים.";
+      errorMessage.textContent = "מספר הטלפון אינו תקין. יש להזין מספר ישראלי חוקי עם קידומת מתאימה ולפחות 7 ספרות.";
       return;
     }
     // Password Regex Validation
@@ -61,6 +57,14 @@ document
       return;
     }
 
+    // **Password Match Validation**
+    if (password !== passwordAgain) {
+      errorDiv.style.display = "block";
+      errorMessage.textContent =
+        "הסיסמאות אינן תואמות. אנא ודא שהסיסמאות זהות.";
+      return;
+    }
+
     // Data to send in the request body
     const registerData = {
       full_name,
@@ -68,7 +72,6 @@ document
       password,
       phone,
     };
-
 
     try {
       // Sending POST request for registration using fetch

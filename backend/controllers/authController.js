@@ -1,8 +1,14 @@
-
-
 const bcrypt = require("bcryptjs");
-const { User } = require("../models/User");
+const { User} = require("../models/User");
+const { registerValidation } = require("../validations/userValidation");
 
+
+/**
+ * @description Login User
+ * @router /api/auth/login
+ * @method POST
+ * @access public
+ */
 
 const loginUser = async (req, res) => {
   try {
@@ -24,7 +30,12 @@ const loginUser = async (req, res) => {
     // Generate JWT token using the method defined in the User model
     const token = user.generateAuthToken();
 
-    let connectedUser = { full_name: user.full_name, email: user.email, id:user._id, role:user.role };
+    let connectedUser = {
+      full_name: user.full_name,
+      email: user.email,
+      id: user._id,
+      role: user.role,
+    };
 
     return res.status(200).json({
       token,
@@ -54,6 +65,13 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ message: "User already exist" });
     }
 
+    // Run validation before proceeding
+    const validationResponse = registerValidation({ full_name, email, password, phone });
+    if (validationResponse.error) {
+      return res.status(400).json({ message: validationResponse.error });
+    }
+
+
     // Hash and Salt the password using bcrypt
     const salt = await bcrypt.genSalt(10); // 10 is the default number of rounds for bcrypt salt
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -79,9 +97,50 @@ const registerUser = async (req, res) => {
 
 
 
+/**
+ * @description Change Password
+ * @router PATCH /api/auth/change-password/:id
+ * @access Private (Authenticated User)
+ */
+const changePassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword } = req.body;
+    const id = req.params.id;
+
+    // Find user by ID
+    let user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Compare old password with stored hashed password
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Old password is incorrect" });
+    }
+   // Run validation before proceeding
+   const validationResponse = registerValidation({newPassword });
+   if (validationResponse.error) {
+     return res.status(400).json({ message: validationResponse.error });
+   }
+
+    // Hash new password
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(newPassword, salt);
+
+    // Save updated password
+    await user.save();
+
+    res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Something went wrong!");
+  }
+};
+
 
 module.exports = {
   loginUser,
-  registerUser,  
+  registerUser,
+  changePassword
 };
-

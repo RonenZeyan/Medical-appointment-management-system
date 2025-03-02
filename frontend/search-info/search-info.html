@@ -29,19 +29,57 @@
           <option value="מרפאות">מרפאות</option>
           <option value="רופאים">רופאים</option>
         </select>
-        <label>שם:</label>
-        <input type="text" id="name" placeholder="שם" />
+        <div id="clinic-form-part">
+          <div id="region-input-container">
+            <label>בחר מחוז:</label>
+            <select id="region-input-options">
+              <option value="" selected>כל המחוזות</option>
+              <option value="צפון">צפון</option>
+              <option value="מרכז">מרכז</option>
+              <option value="דרום">דרום</option>
+            </select>
+            <div id="name-input-container">
+              <label>שם:</label>
+              <input type="text" id="clinicName" placeholder="שם" />
+            </div>
+          </div>
+        </div>
+        <div id="doctor-form-part">
+          <div id="medical-field-input-container">
+            <label>תחום רפואי:</label>
+            <input type="text" id="medical-field" placeholder="תחום רפואי" />
+          </div>
+          <div id="name-input-container">
+            <label>שם:</label>
+            <input type="text" id="doctorName" placeholder="שם" />
+          </div>
+        </div>
         <button type="submit" onclick="searchInfo(event)">חפש</button>
       </form>
 
       <div id="response-message">
         <span id="response-message-contant"></span>
       </div>
-      
+
       <div id="search-info-details">
+        <div id="sort-buttons-container">
+          <button id="clinic-sort-button" onclick="toggleSort('clinic')">
+            מיין מ-א עד ת
+          </button>
+          <button id="doctor-sort-button" onclick="toggleSort('doctor')">
+            מיין מ-א עד ת
+          </button>
+        </div>
+
         <h2>תוצאות חיפוש</h2>
-        <ul id="clinic-list" class="clinic-list">
-        </ul>
+        <ul id="clinic-list" class="clinic-list"></ul>
+        <div id="clinic-list-buttons-container">
+          <div>
+            <span id="clinic-page-info"></span>
+          </div>
+          <button id="clinic-list-previous-items">הקודם</button>
+          <button id="clinic-list-next-items">הבא</button>
+        </div>
 
         <!--  Modal for Displaying Clinic Details -->
         <div id="clinic-modal" class="modal">
@@ -75,43 +113,42 @@
           </div>
         </div>
 
+        <ul id="doctor-list" class="doctor-list"></ul>
+        <div id="doctor-list-buttons-container">
+          <div>
+            <span id="doctor-page-info"></span>
+          </div>
+          <button id="doctor-list-previous-items">הקודם</button>
+          <button id="doctor-list-next-items">הבאה</button>
+        </div>
 
-
-        <ul id="doctor-list" class="doctor-list">
-        </ul>
-      
-              <!--  Modal for Displaying Clinic Details -->
-              <div id="doctor-modal" class="doctor-modal">
-                <div class="doctor-modal-content">
-                  <span class="doctor-close">&times;</span>
-                  <h3 id="modal-doctor-name"></h3>
-                  <table id="doctor-details-table">
-                    <tbody>
-                      <tr>
-                        <th><i class="bi bi-building"></i> שם מלא:</th>
-                        <td id="modal-doctor-full_name"></td>
-                      </tr>
-                      <tr>
-                        <th><i class="bi bi-person-workspace"></i></i> תחום:</th>
-                        <td id="modal-doctor-medicalField"></td>
-                      </tr>
-                      <tr>
-                        <th><i class="bi bi-pin-map-fill"></i> מס' טלפון:</th>
-                        <td id="modal-doctor-phone"></td>
-                      </tr>
-                      <tr>
-                        <th><i class="bi bi-geo-alt"></i> אימייל:</th>
-                        <td id="modal-doctor-email"></td>
-                      </tr>
-               
-              
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-      
-
-
+        <!--  Modal for Displaying Clinic Details -->
+        <div id="doctor-modal" class="doctor-modal">
+          <div class="doctor-modal-content">
+            <span class="doctor-close">&times;</span>
+            <h3 id="modal-doctor-name"></h3>
+            <table id="doctor-details-table">
+              <tbody>
+                <tr>
+                  <th><i class="bi bi-building"></i> שם מלא:</th>
+                  <td id="modal-doctor-full_name"></td>
+                </tr>
+                <tr>
+                  <th><i class="bi bi-person-workspace"></i> תחום:</th>
+                  <td id="modal-doctor-medicalField"></td>
+                </tr>
+                <tr>
+                  <th><i class="bi bi-pin-map-fill"></i> מס' טלפון:</th>
+                  <td id="modal-doctor-phone"></td>
+                </tr>
+                <tr>
+                  <th><i class="bi bi-geo-alt"></i> אימייל:</th>
+                  <td id="modal-doctor-email"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <div id="search-result-display"></div>
       </div>
     </main>

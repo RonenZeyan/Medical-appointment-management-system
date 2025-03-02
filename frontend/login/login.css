@@ -18,6 +18,8 @@ footer{
   align-items: center;
   justify-content: center;
   min-width: 300px;
+  max-width: 350px;
+  height: 330px;
   padding: 20px;
   border-radius: var(--border-radius);
   border: var(--container-color-glassy); /* Glassy border */
@@ -102,10 +104,12 @@ footer{
 }
 
 #login-error {
-  display: none;
   margin-top: 5px;
   margin-bottom: 5px;
+  min-width: 230px;
+  min-height: 20px;
 }
+
 
 /* Notification success*/
 .notification {

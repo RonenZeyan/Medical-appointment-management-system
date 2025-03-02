@@ -1,55 +1,57 @@
-document.addEventListener("DOMContentLoaded", function () {
-    fetch("http://localhost:3000/api/appointment", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        const historyList = document.getElementById("historyList");
-        historyList.innerHTML = "";
+document.addEventListener("DOMContentLoaded", async () => {
+    const historyList = document.getElementById("historyList");
 
-        if (data.length === 0) {
-            historyList.innerHTML = "<li>אין תורים קודמים</li>";
+    try {
+        const response = await fetch("http://localhost:3000/api/chat/history", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}` 
+            }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            historyList.innerHTML = `<p class="error">${data.message || "שגיאה בטעינת ההיסטוריה."}</p>`;
             return;
         }
 
-        data.forEach(appointment => {
+        if (!data.chatHistory || data.chatHistory.length === 0) {
+            historyList.innerHTML = `<p class="no-history">📭 אין היסטוריית שיחות זמינה.</p>`;
+            return;
+        }
+
+        data.chatHistory.forEach(chat => {
             const listItem = document.createElement("li");
-            listItem.innerHTML = `
-                <div>📅 ${new Date(appointment.appointment_date).toLocaleDateString()}</div>
-                <div>👨‍⚕️ רופא: ${appointment.doctor?.name || "לא ידוע"}</div>
-                <div>🏥 תחום: ${appointment.medical_field?.name || "לא ידוע"}</div>
-                <div>📍 מרפאה: ${appointment.clinic_address?.name || "לא ידוע"}</div>
-                <div>${appointment.appointment_status === "completed" ? "✅ הושלם" : "❌ בוטל"}</div>
-            `;
+            listItem.classList.add("chat-item");
+
+            // יצירת סיכום עם התאריך של השיחה
+            const summary = document.createElement("summary");
+            summary.textContent = `📅 ${new Date(chat.createdAt).toLocaleString("he-IL")}`;
+
+            // יצירת פרטי השיחה
+            const details = document.createElement("details");
+            details.appendChild(summary);
+
+            chat.chatHistory.forEach(entry => {
+                const messageDiv = document.createElement("div");
+                messageDiv.classList.add(entry.senderName === "user" ? "user-message" : "bot-message");
+                messageDiv.textContent = `${entry.senderName === "user" ? "👤" : "🤖"} ${entry.messageContent}`;
+                details.appendChild(messageDiv);
+            });
+
+            listItem.appendChild(details);
             historyList.appendChild(listItem);
         });
 
-        // כפתור ייצוא ל-PDF
-        document.getElementById("exportPdf").addEventListener("click", function () {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            // הגדרת הגופן לעברית (השתמש בגופן עברי שנמצא ברוב הדפדפנים)
-            doc.setFont("helvetica", "normal"); // גופן רגיל
-            doc.setFontSize(12);
-
-            doc.text("היסטוריית תורים", 10, 10);
-
-            let y = 20;
-            data.forEach((appointment, index) => {
-                doc.setFont("helvetica", "normal");
-                doc.text(`${index + 1}. ${new Date(appointment.appointment_date).toLocaleDateString()} | רופא: ${appointment.doctor?.name || "לא ידוע"}`, 10, y);
-                doc.text(`   תחום: ${appointment.medical_field?.name || "לא ידוע"} | מרפאה: ${appointment.clinic_address?.name || "לא ידוע"}`, 10, y + 5);
-                doc.text(`   סטטוס: ${appointment.appointment_status === "completed" ? "✅ הושלם" : "❌ בוטל"}`, 10, y + 10);
-                y += 20;
-            });
-
-            doc.save("history.pdf"); // שמירת הקובץ
-        });
-    })
-    .catch(error => console.error("שגיאה בטעינת ההיסטוריה:", error));
+    } catch (error) {
+        console.error("❌ Error loading chat history:", error);
+        historyList.innerHTML = `<p class="error">שגיאה בטעינת ההיסטוריה.</p>`;
+    }
 });
+
+// פונקציה לחזרה לדף הקודם
+function goBack() {
+    window.history.back();
+}

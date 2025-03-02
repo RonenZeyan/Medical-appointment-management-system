@@ -1,0 +1,59 @@
+#navbar-container {
+    width: 100%;
+  }
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:white;
+  }
+  .navbar-logo {
+    height: 120px;
+    width: 30%;
+  }
+  .navbar-links {
+    display: flex;
+    gap: 20px;
+  }
+  .navbar-links a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+  }
+  
+ 
+#logout-button {
+    position: absolute;
+    right:20px; /* זה יקבע את המיקום של הכפתור בצד שמאל */
+    top: 20px; /* זו תהיה המרחק מהחלק העליון של הדף */
+    background-color: red; /* צבע רקע לאיזו הדגשה */
+    color: white;
+    border: none;
+    font-size: 15px;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  #logout-button:hover {
+    background-color: darkred;
+  }
+  /* Footer */
+  footer {
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative; margin-top: 20px;
+  }
+  footer a {
+    color: #f44336;
+    text-decoration: none;
+  }
+
+  @media (max-width: 520px) {
+    .navbar-container{
+        flex-direction: column;
+    }
+    .navbar-links{
+        flex-direction: column;
+    }
+  }

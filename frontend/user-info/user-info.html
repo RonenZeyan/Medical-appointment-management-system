@@ -1,49 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MAMS</title>
-    <link rel="stylesheet" href="./user-info.css" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>MAMS</title>
+  <link
+    rel="stylesheet"
+    href="./user-info.css"
+  />
 
-  <body>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  />
+  <link rel="stylesheet" href="../navbar.css">
+</head>
+
+<body>
     <!-- Header -->
-    <header></header>
+    <header>
+      <div id="navbar-container">
+        <nav>
+          <div class="navbar-container">
+            <img src="/frontend/logo.png" alt="Logo" class="navbar-logo" />
+            <div class="navbar-links">
+              <a href="/frontend/user-info/user-info.html">חשבון </a>
+              <a href="/frontend/dashboard-user/dashboard-user.html">לוח</a>
+              <a href="/frontend/appointment-details/appointment-details.html">תורים</a>
+              <a href="/frontend/search-info/search-info.html">חיפוש</a>
+              <a href="/frontend/history/history.html">היסטוריה</a>
+              <a href="/frontend/">המלצות</a>
+              <a href="/frontend/dashboard-user/myContact.html">פניות</a>
+              <a href="/frontend/ai-bot/bot.html">צאט בוט</a>
 
-    <!-- Main -->
-    <main class="user-info" id="user-info">
-      <div class="user-info-details">
-        <h2>פרטי משתמש</h2>
-        <div id="user-details-display">
-          <p><strong>אימייל:</strong> <span id="displayEmail"></span></p>
-          <p><strong>שם מלא:</strong> <span id="displayFullName"></span></p>
-          <p><strong>מס' טלפון:</strong> <span id="displayPhone"></span></p>
-        </div>
+              <button id="logout-button" onclick="logout()">Logout</button>
+            </div>
+          </div>
+        </nav>
       </div>
+    </header>
 
-      <hr />
+  <!-- Main -->
+  <main
+    class="user-info"
+    id="user-info"
+  >
+    <div class="user-info-details">
+      <h2>פרטי משתמש</h2>
+      <div id="user-details-display">
+        <p><strong>אימייל:</strong> <span id="displayEmail"></span></p>
+        <p><strong>שם מלא:</strong> <span id="displayFullName"></span></p>
+        <p><strong>מס' טלפון:</strong> <span id="displayPhone"></span></p>
+      </div>
+    </div>
 
-      <!--  User Info Form -->
-      <form id="user-info-form">
-        <h2>עידכון פרטים</h2>
-        <div id="user-info-form-inputs">
+    <hr />
+
+    <!--  User Info Form -->
+    <form id="user-info-form">
+      <h2>עידכון פרטים</h2>
+      <div id="user-info-form-inputs">
         <label>אימייל:</label>
-        <input type="email" id="email" placeholder="אימייל" />
+        <input
+          type="email"
+          id="email"
+          placeholder="אימייל"
+        />
         <label>שם מלא:</label>
-        <input type="text" id="full_name" placeholder="שם מלא" />
+        <input
+          type="text"
+          id="full_name"
+          placeholder="שם מלא"
+        />
         <label>מס' טלפון:</label>
-        <input type="text" id="phone" placeholder="מס' טלפון" />
-        </div>
-        <div>
-          <button type="button" onclick="saveUserInfo()">שמור</button>
-        </div>
-      </form>
+        <input
+          type="text"
+          id="phone"
+          placeholder="מס' טלפון"
+        />
+      </div>
+      <div>
+        <button
+          type="button"
+          onclick="saveUserInfo()"
+        >שמור</button>
+      </div>
+    </form>
     </div>
 
 
@@ -52,22 +98,35 @@
     </div>
 
 
-          <!--  User Password Form -->
-          <div id="user-info-form-password-container">
-            <hr id="user-info-form-password-hr">
-          <form id="user-info-form-password">
-            <h2>שינוי סיסמה</h2>
-            <div id="user-info-form-inputs">
-            <label>סיסמה ישנה:</label>
-            <input type="password" id="oldPassword" placeholder="סיסמה ישנה" required />
-            <label>סיסמה חדשה:</label>
-            <input type="password" id="password" placeholder="סיסמה חדשה" required />
-            </div>
-            <div>
-              <button type="button" onclick="saveUserPassword()">עדכן</button>
-            </div>
-          </form>
+    <!--  User Password Form -->
+    <div id="user-info-form-password-container">
+      <hr id="user-info-form-password-hr">
+      <form id="user-info-form-password">
+        <h2>שינוי סיסמה</h2>
+        <div id="user-info-form-inputs">
+          <label>סיסמה ישנה:</label>
+          <input
+            type="password"
+            id="oldPassword"
+            placeholder="סיסמה ישנה"
+            required
+          />
+          <label>סיסמה חדשה:</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="סיסמה חדשה"
+            required
+          />
         </div>
+        <div>
+          <button
+            type="button"
+            onclick="saveUserPassword()"
+          >עדכן</button>
+        </div>
+      </form>
+    </div>
 
 
 
@@ -76,10 +135,18 @@
       <span id="response-message-contant-password"></span>
     </div>
 
-    </main>
+  </main>
 
-    <!-- Footer -->
-    <footer></footer>
-    <script src="user-info.js" defer></script>
-  </body>
+  <!-- Footer -->
+  <footer>
+    <p>
+      <a href="/frontend/dashboard-user/contact.html">צור קשר</a>
+    </p>
+  </footer>
+  <script
+    src="user-info.js"
+    defer
+  ></script>
+</body>
+
 </html>

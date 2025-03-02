@@ -12,17 +12,57 @@
         rel="stylesheet"
         href="history.css"
     >
+    <link rel="stylesheet" href="../navbar.css">
+    <style>
+        body{
+            margin: 0;
+        }
+        .navbar-container {
+            justify-content: center;
+        }
+        .navbar-logo{
+            width: 150px;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container">
+    <!-- Header -->
+    <header>
+        <div id="navbar-container">
+          <nav>
+            <div class="navbar-container">
+              <img src="/frontend/logo.png" alt="Logo" class="navbar-logo" />
+              <div class="navbar-links">
+                <a href="/frontend/user-info/user-info.html">חשבון </a>
+                <a href="/frontend/dashboard-user/dashboard-user.html">לוח</a>
+                <a href="/frontend/appointment-details/appointment-details.html">תורים</a>
+                <a href="/frontend/search-info/search-info.html">חיפוש</a>
+                <a href="/frontend/history/history.html">היסטוריה</a>
+                <a href="/frontend/">המלצות</a>
+                <a href="/frontend/dashboard-user/myContact.html">פניות</a>
+                <a href="/frontend/ai-bot/bot.html">צאט בוט</a>
+  
+                <button id="logout-button" onclick="logout()">Logout</button>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+     
+    <div style="height: 100vh;" class="container">
         <h2>📜 היסטוריית שיחות עם בוט</h2>
         <ul id="historyList">
             <!-- הנתונים ייטענו כאן ב-JavaScript -->
         </ul>
         <button onclick="goBack()">🔙 חזור</button>
     </div>
-
+    <!-- Footer -->
+    <footer>
+        <p>
+          <a href="/frontend/dashboard-user/contact.html">צור קשר</a>
+        </p>
+      </footer>
     <script src="history.js"></script>
 </body>
 

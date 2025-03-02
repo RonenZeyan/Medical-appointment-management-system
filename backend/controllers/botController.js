@@ -1,6 +1,5 @@
 const Clinic = require('../models/Clinics');
 const { run } = require('../services/botService');
-const Clinic = require("../models/Clinics");
 const ChatLog = require("../models/chatLogs");
 const mongoose = require("mongoose");
 

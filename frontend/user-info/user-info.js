@@ -61,7 +61,7 @@ async function saveUserInfo() {
   message.style.display = "none";
 
   // Notify user he need at least one value for to update
-  if (email === "" || full_name === "" || phone === "") {
+  if (email === "" && full_name === "" && phone === "") {
     message.style.display = "block";
 
     message.textContent = "לפחות אחד הפרטים חייב לעדכן";
@@ -69,32 +69,31 @@ async function saveUserInfo() {
   }
 
   // FullName Regex Validation
-  if (!minFullNameLengthRegex.test(full_name)) {
+  if (!minFullNameLengthRegex.test(full_name) && full_name ==! "") {
     message.style.display = "block";
     message.textContent = "שם המלא חייב להכיל לפחות 5 תווים.";
     return;
   }
 
   // Email Regex Validation
-  if (!emailRegex.test(email)) {
+  if (!emailRegex.test(email) && email ==! "" ) {
     message.style.display = "block";
     message.textContent = "אימייל לא תקין. אנא הזן אימייל בפורמט תקין.";
     return;
   }
 
   // Phone Regex Validation
-  if (!minPhoneLengthRegex.test(phone)) {
+  if (!minPhoneLengthRegex.test(phone) && phone ==! "" ) {
     message.style.display = "block";
     message.textContent = "מספר הטלפון חייב להכיל לפחות 7 תווים.";
     return;
   }
 
-  // Data to send
-  let userData = {
-    email,
-    full_name,
-    phone,
-  };
+  // Create userData object and remove empty values
+  let userData = {};
+  if (email) userData.email = email;
+  if (full_name) userData.full_name = full_name;
+  if (phone) userData.phone = phone;
 
   // Getting id to send from local storage
   let id = localStorage.getItem("id");
@@ -129,6 +128,70 @@ async function saveUserInfo() {
     message.textContent = "שגיאה בעדכון המשתמש, אנא נסה שנית";
 
     console.error("Error updating user:", error);
+  }
+}
+
+
+
+// Password Update Function
+async function saveUserPassword() {
+  let oldPassword = document.getElementById("oldPassword").value;
+  let newPassword = document.getElementById("password").value;
+
+  // Error message container
+  let message = document.getElementById("response-message-contant-password");
+  message.style.display = "none";
+
+  // Password Regex Validation: At least 8 chars, 1 uppercase, 1 number
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+  if(oldPassword == ""){
+    message.style.display = "block";
+    message.textContent = "אנא מלא את סיסמה הישנה";
+    return;
+  }
+
+  if(newPassword == ""){
+    message.style.display = "block";
+    message.textContent = "אנא מלא את סיסמה החדשה";
+    return;
+  }
+
+  if (!passwordRegex.test(oldPassword)) {
+    message.style.display = "block";
+    message.textContent = "הסיסמה חייבת להכיל לפחות 8 תווים, כולל מספר ואות גדולה.";
+    return;
+  }
+
+
+  // Get user ID from local storage
+  let id = localStorage.getItem("id");
+
+  try {
+    // Sending PATCH request to validate old password & update new password
+    const response = await fetch(`http://localhost:3000/api/auth/change-password/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ oldPassword, newPassword }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to update password");
+    }
+
+    // Success Message
+    message.style.display = "block";
+    message.textContent = "הסיסמה עודכנה בהצלחה!";
+    document.getElementById("user-info-form-password").reset();
+
+  } catch (error) {
+    message.style.display = "block";
+    message.textContent = "שגיאה בעדכון הסיסמה, אנא נסה שנית";
+    console.error("Error updating password:", error);
   }
 }
 

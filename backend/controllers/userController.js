@@ -5,12 +5,11 @@ const bcrypt = require("bcryptjs");
 
 /**
  * @description Get user by id
- * @router /api/users/userInfo
+ * @router /api/user/userInfo
  * @method POST
- * @access Private (admin and user)
+ * @access private (admin and user)
  */
 const getUserInfo = async (req, res) => {
-
   try {
     // Getting id from request body
     const _id = new mongoose.Types.ObjectId(`${req.body.id}`);
@@ -40,8 +39,8 @@ const getUserInfo = async (req, res) => {
 /**
  * @description Get user by name
  * @router /api/user/findUser
- * @method POST
- * @access Private (admin and user)
+ * @method POST 
+ * @access private (admin and user)
  */
 const getUserByName = async (req, res) => {
   try {
@@ -72,14 +71,14 @@ const getUserByName = async (req, res) => {
 
 /**
  * @description Get user by ID
- * @router /api/users/:id
+ * @router /api/user/:id
  * @method GET
  * @access Private (only admin)
  */
 const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
-    
+
     // חיפוש משתמש לפי ID
     const user = await User.findById(id).select("-password"); // Exclude password
 
@@ -94,16 +93,14 @@ const getUserById = async (req, res) => {
   }
 };
 
-
 /**
  * @description Get all users
- * @router /api/users
+ * @router /api/user
  * @method GET
  * @access Private (only admin)
  */
 const getAllUsers = async (req, res) => {
   try {
-
     // Getting all users
     const users = await User.find().select("-password"); // Exclude passwords
     return res.status(200).json(users);
@@ -115,13 +112,12 @@ const getAllUsers = async (req, res) => {
 
 /**
  * @description Delete user by ID
- * @router /api/users/:id
+ * @router /api/user/:id
  * @method DELETE
  * @access Private (only admin)
  */
 const deleteUserById = async (req, res) => {
   try {
-
     // Getting full name from params
     const { id } = req.params;
 
@@ -142,13 +138,12 @@ const deleteUserById = async (req, res) => {
 
 /**
  * @description Update user information
- * @router /api/users/:id
+ * @router /api/user/:id
  * @method PUT
- * @access Private (only admin and user)
+ * @access private (only admin and user)
  */
 const updateUserInfo = async (req, res) => {
   try {
-
     // Getting full name from params
     const { id } = req.params;
     const updateData = req.body;
@@ -167,7 +162,9 @@ const updateUserInfo = async (req, res) => {
 
     // If Couldn't be found user and update
     if (!user) {
-      return res.status(404).json({ message: "Couldn't be found user and update" });
+      return res
+        .status(404)
+        .json({ message: "Couldn't be found user and update" });
     }
 
     return res.status(200).json(user);
@@ -179,12 +176,11 @@ const updateUserInfo = async (req, res) => {
 
 /**
  * @description Get All doctors with their medical fields
- * @router /api/users/doctors
+ * @router /api/user/doctors
  * @method GET
- * @access Private (only admin)
+ * @access private user and admin 
  */
 const getAllDoctors = async (req, res) => {
-
   try {
     //  Fetch all doctors (excluding password)
     const doctors = await User.find({ role: "doctor" }).select("-password");
@@ -218,67 +214,81 @@ const getAllDoctors = async (req, res) => {
 };
 
 /**
- * @description Get user by name
- * @router /api/user/findUser
+ * @description Get doctors by parameters
+ * @router /api/user/findDoctor
  * @method POST
- * @access Private (only admin)
+ * @access private user and admin 
  */
-const getDoctorByName = async (req, res) => {
+const getDoctorsByParameters = async (req, res) => {
   try {
-
     // Getting full name from request body
-    const { full_name } = req.body;
+    const { full_name, medicalField } = req.body;
 
-    // If there any full name from request body
-    if (!full_name) {
-      return res.status(400).json({ message: "User name is required" });
-    }
+    // Search for doctors by full name (case-insensitive) or return all doctors if no full_name is provided
+    const query = full_name
+      ? { full_name: { $regex: new RegExp(full_name, "i") }, role: "doctor" }
+      : { role: "doctor" }; // If no full_name is provided, find all doctors
 
-    // Search for a doctor by full name (case-insensitive)
-    const doctor = await User.findOne({
-      full_name: { $regex: new RegExp(full_name, "i") }, // Case-insensitive search
-      role: "doctor", // Ensure the user is a doctor
-    }).select("-password"); // Exclude password
+    const doctors = await User.find(query).select("-password"); // Exclude password
 
+    console.log(doctors)
 
     // Doctor could not be found
-    if (!doctor) {
-      return res.status(404).json({ message: "Doctor could not be found" });
+    if (!doctors) {
+      return res.status(404).json({ message: "Doctors could not be found" });
     }
 
     // Find all medical fields
-    const medicalFields = await MedicalField.find();
-
-    // Find  and return doctors with there medical fields
-    const findMedicalField = medicalFields.find((field) =>
-      field.doctors.find((doc) => doc.equals(doctor._id))
-    );
-
-    return res.status(200).json({
-      id: doctor._id,
-      full_name: doctor.full_name,
-      email: doctor.email,
-      phone: doctor.phone,
-      medicalField: findMedicalField?.name,
+    const medicalFields = await MedicalField.find({
+      name: { $regex: new RegExp(medicalField, "i") },
     });
+
+    // Doctor could not be found
+    if (!medicalFields) {
+      return res
+        .status(404)
+        .json({ message: "Medical Fields could not be found" });
+    }
+
+    const doctorsWithMedicalFields = [];
+
+
+    doctors.map((doctor) => {
+      
+      const findMedicalField = medicalFields.find((field) =>
+        field.doctors.find((doc) => doc.equals(doctor._id))
+      );
+
+      if (findMedicalField || (medicalField == "" && !findMedicalField)) { // find also doctors with no medical fields
+        doctorsWithMedicalFields.push({
+          id: doctor._id,
+          full_name: doctor.full_name,
+          email: doctor.email,
+          phone: doctor.phone,
+          medicalField: findMedicalField?.name,
+        });
+      }
+    });
+
+    console.log(doctorsWithMedicalFields)
+
+    return res.status(200).json(doctorsWithMedicalFields);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Something went wrong!" });
   }
 };
 
-
-
 /**
  * @description Add User
  * @router /api/user/AdminAddUser
  * @method POST
- * @access Private (only admin)
+ * @access private (only admin)
  */
 const AddUser = async (req, res) => {
   try {
     //get email,password and name from request body
-    const { full_name, email, password, phone,role } = req.body;
+    const { full_name, email, password, phone, role } = req.body;
 
     // Find the user by email
     let user = await User.findOne({ email });
@@ -297,8 +307,10 @@ const AddUser = async (req, res) => {
       password: hashedPassword, // Store the hashed password,
       phone,
     });
-    if(role){ user['role'] = role}
-     // Save the user to the database
+    if (role) {
+      user["role"] = role;
+    }
+    // Save the user to the database
     await user.save();
 
     res.status(201).json({ message: "User have been registered successfuly" });
@@ -308,7 +320,6 @@ const AddUser = async (req, res) => {
   }
 };
 
-
 module.exports = {
   getUserByName,
   getAllUsers,
@@ -317,6 +328,6 @@ module.exports = {
   getAllDoctors,
   getUserById,
   getUserInfo,
-  getDoctorByName,
-  AddUser
+  getDoctorsByParameters,
+  AddUser,
 };

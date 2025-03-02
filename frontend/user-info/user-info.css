@@ -66,6 +66,24 @@ button:active {
   background-color: var(--button-click-bg);
 }
 
+#user-info-form-password {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#user-info-form-inputs-password {
+  display: flex;
+}
+
+#user-info-form-password-hr{
+  margin-top: 20px;
+}
+
 @media (max-width: 1100px) {
   label {
     margin-top: 5px;

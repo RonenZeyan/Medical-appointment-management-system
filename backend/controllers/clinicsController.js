@@ -153,34 +153,52 @@ const getSpecificClinic = async (req, res) => {
 
 
 /**
- * @description Get specific clinic by name
- * @router /api/clinic/search
+ * @description find clinics by parameters
+ * @router /api/clinic/find
  * @method POST
  * @access public
  */
 
-const getSpecificClinicByName = async (req, res) => {
+const findClinics = async (req, res) => {
 
 
     try {
-      // Get the clinic name from the request body
-      const { name } = req.body;
-  
-      if (!name) {
-        return res.status(400).json({ message: "Clinic name is required" });
+      // Get the clinic name and region from the request body
+      const { name, region } = req.body;
+
+
+      console.log(name)
+      console.log(region)
+
+      if (!name && !region) {
+        return res.status(400).json({ message: "Clinic name or region is required" });
       }
   
-      // Search for the clinic by name using a case-insensitive match
-      const clinic = await Clinic.findOne({
-        name: { $regex: new RegExp(name, "i") }, // 'i' for case-insensitive search
-      });
+      // Build dynamic query object
+      let query = {};
   
-      if (!clinic) {
+      if (name) {
+        query.name = { $regex: new RegExp(name, "i") }; // Case-insensitive name search
+      }
+      if (region) {
+        query["location.region"] = region; // Exact match for region
+      }
+  
+      console.log(query)
+
+      // Find multiple clinics that match the criteria
+      const clinics = await Clinic.find(query);
+  
+  
+      if (!clinics) {
+        console.log("ddddddd")
         return res.status(404).json({ message: "Clinic not found" });
       }
   
+      console.log(clinics)
+
       // Return the clinic data
-      res.status(200).json(clinic);
+      res.status(200).json(clinics);
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Something went wrong!" });
@@ -196,6 +214,6 @@ module.exports = {
   deleteClinic,
   updateClinic,
   getSpecificClinic,
-  getSpecificClinicByName
+  findClinics
 };
 

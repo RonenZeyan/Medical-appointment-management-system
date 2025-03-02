@@ -15,6 +15,8 @@
   --button-hover-bg: #008c8c; /* רקע של כפתור במעבר עכבר */
   --button-click-bg: #006d6d; /* רקע של כפתור בלחיצת עכבר */
   --button-text-color: #ffffff; /* צבע טקסט בתוך כפתור */
+  --buttonDisabled-bg:#ccc; /* Light gray background */
+  --buttonDisabled-color:#666; /* Darker gray text */
 
   /* 🎨 צבעי צללים */
   --button-box-shadow: 0 0 15px rgba(52, 152, 219, 1); /* צל של כפתור */
@@ -43,7 +45,6 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  height: 100vh;
   direction: rtl;
   color: #333333;
   font-family: Arial, sans-serif;
@@ -156,6 +157,8 @@ nav img {
 nav img:hover {
   transform: scale(1.1);
 }
+
+
 
 /* Responsive styles */
 @media (max-width: 768px) {

@@ -8,6 +8,7 @@ document
     const email = document.getElementById("emailInput").value;
     const phone = document.getElementById("phoneInput").value;
     const password = document.getElementById("passwordInput").value;
+    const passwordAgain = document.getElementById("passwordAgainInput").value; // Get confirmation password
 
     // Error div
     const errorMessage = document.getElementById("register-error-message");
@@ -60,6 +61,14 @@ document
         "סיסמה חייבת להיות לפחות 8 תווים ולכלול אות גדולה, אות קטנה, מספר ותו מיוחד.";
       return;
     }
+
+
+        // **Password Match Validation**
+        if (password !== passwordAgain) {
+          errorDiv.style.display = "block";
+          errorMessage.textContent = "הסיסמאות אינן תואמות. אנא ודא שהסיסמאות זהות.";
+          return;
+        }
 
     // Data to send in the request body
     const registerData = {

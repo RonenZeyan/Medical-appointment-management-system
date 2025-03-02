@@ -1,35 +1,40 @@
-
 const registerValidation = (user_data) => {
-    let errors = [];
+  let errors = [];
 
-    // Regex Patterns (Same as Frontend)
-    const minFullNameLengthRegex = /^.{5,}$/;
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
-    const minPhoneLengthRegex = /^.{7,}$/;
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/; // At least 8 characters, 1 uppercase, 1 number
+  // Ensures first and last name using only Hebrew or English letters, with at least two characters per name.
+  const nameRegex = /^[a-zA-Zא-ת]{2,}[\s'-][a-zA-Zא-ת]{2,}([\s'-][a-zA-Zא-ת]{2,})*$/;
 
-    // Validate Email (only if provided)
-    if (user_data.email && !emailRegex.test(user_data.email)) {
-        errors.push("אימייל לא תקין. אנא הזן אימייל בפורמט תקין.");
-    }
+  const emailRegex =
+    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
+  // Ensures valid Israeli number with the correct prefix and at least 7 digits.
+  const phoneRegex = /^(\+972[-\s]?|0)([23489]|5[0-9])[-\s]?\d{7}$/;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/; // At least 8 characters, 1 uppercase, 1 number
 
-    // Validate Full Name (only if provided)
-    if (user_data.full_name && !minFullNameLengthRegex.test(user_data.full_name)) {
-        errors.push("שם המלא חייב להכיל לפחות 5 תווים.");
-    }
+  // Validate Email (only if provided)
+  if (user_data.email && !emailRegex.test(user_data.email)) {
+    errors.push("אימייל לא תקין. אנא הזן אימייל בפורמט תקין.");
+  }
 
-    // Validate Phone (only if provided)
-    if (user_data.phone && !minPhoneLengthRegex.test(user_data.phone)) {
-        errors.push("מספר הטלפון חייב להכיל לפחות 7 תווים.");
-    }
+  // Validate Full Name (only if provided)
+  if (user_data.full_name && !nameRegex.test(user_data.full_name)) {
+    errors.push(
+      "יש להזין שם פרטי ושם משפחה באותיות עברית או אנגלית בלבד, עם לפחות שני תווים בכל שם"
+    );
+  }
 
-    // Validate Password (only if provided)
-    if (user_data.password && !passwordRegex.test(user_data.password)) {
-        errors.push("הסיסמה חייבת להכיל לפחות 8 תווים, כולל מספר ואות גדולה.");
-    }
+  // Validate Phone (only if provided)
+  if (user_data.phone && !phoneRegex.test(user_data.phone)) {
+    errors.push(
+      "מספר הטלפון אינו תקין. יש להזין מספר ישראלי חוקי עם קידומת מתאימה ולפחות 7 ספרות."
+    );
+  }
 
-    return errors.length > 0 ? { error: errors } : { success: true };
+  // Validate Password (only if provided)
+  if (user_data.password && !passwordRegex.test(user_data.password)) {
+    errors.push("הסיסמה חייבת להכיל לפחות 8 תווים, כולל מספר ואות גדולה.");
+  }
+
+  return errors.length > 0 ? { error: errors } : { success: true };
 };
-
 
 module.exports = { registerValidation };

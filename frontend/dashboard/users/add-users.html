@@ -1,93 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <!-- Bootstrap icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
     <!-- CSS LINKS -->
-    <link rel="stylesheet" href="../../styles.css">
-    <link rel="stylesheet" href="../dashboard.css">
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="../dashboard.css" />
 
     <style>
-        .add-new-mdfield {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+      .add-new-mdfield {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-        #add-mdfield-form {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 20px;
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 0 8px gray;
-            width: 100%;
-            max-width: 600px;
-        }
+      #add-mdfield-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 20px;
+        background-color: var(--card-bg);
+        padding: 20px;
+        border-radius: var(--border-radius);
+        box-shadow: 0 0 8px gray;
+        width: 100%;
+        max-width: 600px;
+      }
 
-        .form-raw {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            width: 100%;
-            gap: 10px;
-        }
+      .form-raw {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        gap: 10px;
+      }
 
-        .form-raw input,
-        select,
-        textarea {
-            width: 100%;
-            border: none;
-            background-color: var(--background-primary-color);
-            padding: 8px 5px;
-            border-radius: var(--border-radius);
-            direction: rtl;
-        }
+      .form-raw input,
+      select,
+      textarea {
+        width: 100%;
+        border: none;
+        background-color: var(--background-primary-color);
+        padding: 8px 5px;
+        border-radius: var(--border-radius);
+        direction: rtl;
+      }
 
-        #add-mdfield-btn {
-            background-color: var(--button-bg);
-            border: none;
-            width: 100%;
-            padding: 10px 20px;
-            border-radius: var(--border-radius);
-            color: var(--button-text-color);
-            font-weight: bolder;
-            transition: .6s ease-in-out;
-        }
+      #add-mdfield-btn {
+        background-color: var(--button-bg);
+        border: none;
+        width: 100%;
+        padding: 10px 20px;
+        border-radius: var(--border-radius);
+        color: var(--button-text-color);
+        font-weight: bolder;
+        transition: 0.6s ease-in-out;
+      }
 
-        #add-mdfield-btn:hover {
-            background-color: var(--button-hover-bg);
-            cursor: pointer;
-            transform: scale(1.05);
-        }
+      #add-mdfield-btn:hover {
+        background-color: var(--button-hover-bg);
+        cursor: pointer;
+        transform: scale(1.05);
+      }
 
-        /* עיצוב אחיד עבור שדות */
-        .form-input {
-            width: 100%;
-            border: none;
-            background-color: var(--background-primary-color);
-            padding: 8px 5px;
-            border-radius: var(--border-radius);
-            direction: rtl;
-        }
+      /* עיצוב אחיד עבור שדות */
+      .form-input {
+        width: 100%;
+        border: none;
+        background-color: var(--background-primary-color);
+        padding: 8px 5px;
+        border-radius: var(--border-radius);
+        direction: rtl;
+      }
     </style>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <nav>
-        <img src="/frontend/logo.png">
-        <button id="logout-button" onclick="logout()" style="  background-color: #f44336;
-        position: absolute;
+      <img src="/frontend/logo.png" />
+      <button
+        id="logout-button"
+        onclick="logout()"
+        style="
+          background-color: #f44336;
+          position: absolute;
           top: 10px;
           right: 10px;
           background-color: #f44336;
@@ -96,151 +101,212 @@
           padding: 5px 10px;
           font-size: 14px;
           cursor: pointer;
-          border-radius: 5px;">Logout</button>
+          border-radius: 5px;
+        "
+      >
+        Logout
+      </button>
     </nav>
     <main>
-        <h1>Dashboard</h1>
-        <section id="dashboard">
-            <aside id="dashboard-sidebar">
-                <h3>Admin Dashboard</h3>
-                <ul style="border-top: 3px solid var(--background-primary-color)">
-                    <li><a href="/frontend/dashboard/dashboard.html">לוח</a></li>
-                    <li><a href="/frontend/appointment-details/appointment-details.html"><i class="bi bi-calendar-heart"></i> פגישות</a></li>
-                    <li class="active"><a href="../users/users.html"><i class="bi bi-people"></i> משתמשים</a></li>
-                    <li><a href="../users/add-users.html"><i class="bi bi-person-add"></i>הוספת משתמש חדש</a></li>
-                    <li><a href="../clinics/clinics.html"><i class="bi bi-building"></i> מרפאות</a></li>
-                    <li><a href="../clinics/add-new-clinic.html"><i class="bi bi-building-add"></i>הוספת מרפאה חדשה</a></li>
-                    <li><a href="../medical-field/medical-fields.html"><i class="bi bi-file"></i> תחומי רפואה</a></li>
-                    <li><a href="../medical-field/add-new-medicalfield.html"><i class="bi bi-file-plus"></i>הוספת תחום רפואי</a></li>
-                </ul>
-            </aside>
-            <div id="dashboard-content">
-                <h1 style="text-align: center;">הוספת משתמש חדש</h1>
-                <section class="add-new-mdfield">
-                    <form id="add-mdfield-form">
-                        <div class="form-raw">
-                            <label id="fullNameLabel"><b>שם מלא:</b></label>
-                            <input type="text" id="fullNameInput" placeholder="שם מלא" required />
-                        </div>
-                        <div class="form-raw">
-                            <label id="emailLabel"><b>אימייל:</b></label>
-                            <input type="email" id="emailInput" placeholder="אימייל" required />
-                        </div>
-                        <div class="form-raw">
-                            <label id="phoneLabel"><b>מס' טלפון:</b></label>
-                            <input type="text" id="phoneInput" placeholder="מס' טלפון:" required />
-                        </div>
-                        <div class="form-raw">
-                            <label for="user-role"><b>תפקיד:</b></label>
-                            <select id="user-role" required>
-                                <option selected disabled>בחר תפקיד</option>
-                                <option value="patient">מטופל</option>
-                                <option value="doctor">רופא</option>
-                                <option value="admin">אדמין</option>
-                            </select>
-                        </div>
+      <h1>Dashboard</h1>
+      <section id="dashboard">
+        <aside id="dashboard-sidebar">
+          <h3>Admin Dashboard</h3>
+          <ul style="border-top: 3px solid var(--background-primary-color)">
+            <li><a href="/frontend/dashboard/dashboard.html">לוח</a></li>
+            <li>
+              <a href="/frontend/appointment-details/appointment-details.html"
+                ><i class="bi bi-calendar-heart"></i> פגישות</a
+              >
+            </li>
+            <li class="active">
+              <a href="../users/users.html"
+                ><i class="bi bi-people"></i> משתמשים</a
+              >
+            </li>
+            <li>
+              <a href="../users/add-users.html"
+                ><i class="bi bi-person-add"></i>הוספת משתמש חדש</a
+              >
+            </li>
+            <li>
+              <a href="../clinics/clinics.html"
+                ><i class="bi bi-building"></i> מרפאות</a
+              >
+            </li>
+            <li>
+              <a href="../clinics/add-new-clinic.html"
+                ><i class="bi bi-building-add"></i>הוספת מרפאה חדשה</a
+              >
+            </li>
+            <li>
+              <a href="../medical-field/medical-fields.html"
+                ><i class="bi bi-file"></i> תחומי רפואה</a
+              >
+            </li>
+            <li>
+              <a href="../medical-field/add-new-medicalfield.html"
+                ><i class="bi bi-file-plus"></i>הוספת תחום רפואי</a
+              >
+            </li>
+          </ul>
+        </aside>
+        <div id="dashboard-content">
+          <h1 style="text-align: center">הוספת משתמש חדש</h1>
+          <section class="add-new-mdfield">
+            <form id="add-mdfield-form">
+              <div class="form-raw">
+                <label id="fullNameLabel"><b>שם מלא:</b></label>
+                <input
+                  type="text"
+                  id="fullNameInput"
+                  placeholder="שם מלא"
+                  required
+                />
+              </div>
+              <div class="form-raw">
+                <label id="emailLabel"><b>אימייל:</b></label>
+                <input
+                  type="email"
+                  id="emailInput"
+                  placeholder="אימייל"
+                  required
+                />
+              </div>
+              <div class="form-raw">
+                <label id="phoneLabel"><b>מס' טלפון:</b></label>
+                <input
+                  type="text"
+                  id="phoneInput"
+                  placeholder="מס' טלפון:"
+                  required
+                />
+              </div>
+              <div class="form-raw">
+                <label for="user-role"><b>תפקיד:</b></label>
+                <select id="user-role" required>
+                  <option selected disabled>בחר תפקיד</option>
+                  <option value="patient">מטופל</option>
+                  <option value="doctor">רופא</option>
+                  <option value="admin">אדמין</option>
+                </select>
+              </div>
 
-                        <div id="register-error">
-                            <span id="register-error-message"></span>
-                        </div>
+              <div id="register-error">
+                <span id="register-error-message"></span>
+              </div>
 
-                        <div id="register-form-button-container">
-                            <button id="add-mdfield-btn">הוספת משתמש חדש</button>
-                        </div>
-                    </form>
-                </section>
-            </div>
-        </section>
+              <div id="register-form-button-container">
+                <button id="add-mdfield-btn">הוספת משתמש חדש</button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </section>
     </main>
     <footer>
-        <p>יצירת קשר: <a href="mailto:medAi@gmail.com">contact@example.com</a></p>
-        <p>טלפון: 04-6784439</p>
-      </footer>
+      <p>יצירת קשר: <a href="mailto:medAi@gmail.com">contact@example.com</a></p>
+      <p>טלפון: 04-6784439</p>
+    </footer>
     <script>
-       function logout() {
+      function logout() {
         localStorage.clear();
         sessionStorage.clear();
-    
+
         window.location.href = "/frontend/login/login.html";
       }
-        function generateRandomPassword() {
-            const length = 12;
-            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
-            let password = "";
-            for (let i = 0; i < length; i++) {
-                const randomIndex = Math.floor(Math.random() * charset.length);
-                password += charset[randomIndex];
-            }
-            return password;
+      function generateRandomPassword() {
+        const length = 12;
+        const charset =
+          "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+        let password = "";
+        for (let i = 0; i < length; i++) {
+          const randomIndex = Math.floor(Math.random() * charset.length);
+          password += charset[randomIndex];
         }
+        return password;
+      }
 
-        document.getElementById("add-mdfield-form").addEventListener("submit", async function (event) {
-            event.preventDefault();
+      document
+        .getElementById("add-mdfield-form")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
 
-            const full_name = document.getElementById("fullNameInput").value;
-            const email = document.getElementById("emailInput").value.trim();
-            const phone = document.getElementById("phoneInput").value;
-            const roleSelect = document.getElementById("user-role");
-            const role = roleSelect.options[roleSelect.selectedIndex].value;
-            const password = generateRandomPassword();  // סיסמה רנדומלית
+          const full_name = document.getElementById("fullNameInput").value;
+          const email = document.getElementById("emailInput").value.trim();
+          const phone = document.getElementById("phoneInput").value;
+          const roleSelect = document.getElementById("user-role");
+          const role = roleSelect.options[roleSelect.selectedIndex].value;
+          const password = generateRandomPassword(); // סיסמה רנדומלית
 
-            console.log("Generated Password:", password);
+          console.log("Generated Password:", password);
 
-            const errorMessage = document.getElementById("register-error-message");
-            const errorDiv = document.getElementById("register-error");
+          const errorMessage = document.getElementById(
+            "register-error-message"
+          );
+          const errorDiv = document.getElementById("register-error");
 
-            const minFullNameLengthRegex = /^.{5,}$/;
-            if (!minFullNameLengthRegex.test(full_name)) {
-                errorDiv.style.display = "block";
-                errorMessage.textContent = "שם המלא חייב להכיל לפחות 5 תווים.";
-                return;
+          // Ensures first and last name using only Hebrew or English letters, with at least two characters per name.
+          const nameRegex = /^[a-zA-Zא-ת]{2,}[\s'-][a-zA-Zא-ת]{2,}([\s'-][a-zA-Zא-ת]{2,})*$/;
+
+          if (!nameRegex.test(full_name)) {
+            errorDiv.style.display = "block";
+            errorMessage.textContent =
+              "יש להזין שם פרטי ושם משפחה באותיות עברית או אנגלית בלבד, עם לפחות שני תווים בכל שם";
+            return;
+          }
+
+          const emailRegex =
+            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
+          if (!emailRegex.test(email)) {
+            errorDiv.style.display = "block";
+            errorMessage.textContent =
+              "אימייל לא תקין. אנא הזן אימייל בפורמט תקין.";
+            return;
+          }
+
+          // Ensures valid Israeli number with the correct prefix and at least 7 digits.
+          const phoneRegex = /^(\+972[-\s]?|0)([23489]|5[0-9])[-\s]?\d{7}$/;
+          if (!phoneRegex.test(phone)) {
+            errorDiv.style.display = "block";
+            errorMessage.textContent =
+              "מספר הטלפון אינו תקין. יש להזין מספר ישראלי חוקי עם קידומת מתאימה ולפחות 7 ספרות.";
+            return;
+          }
+
+          const registerData = {
+            full_name,
+            email,
+            password,
+            phone,
+            role, // הוספת תפקיד
+          };
+
+          try {
+            const response = await fetch(
+              "http://localhost:3000/api/auth/AdminAddUser",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(registerData),
+              }
+            );
+
+            if (!response.ok) {
+              errorDiv.style.display = "block";
+              errorMessage.textContent = "אנא בדוק את הפרטים שוב..";
             }
-
-            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
-            if (!emailRegex.test(email)) {
-                errorDiv.style.display = "block";
-                errorMessage.textContent = "אימייל לא תקין. אנא הזן אימייל בפורמט תקין.";
-                return;
-            }
-
-            const minPhoneLengthRegex = /^.{7,}$/;
-            if (!minPhoneLengthRegex.test(phone)) {
-                errorDiv.style.display = "block";
-                errorMessage.textContent = "מספר הטלפון חייב להכיל לפחות 7 תווים.";
-                return;
-            }
-
-            const registerData = {
-                full_name,
-                email,
-                password,
-                phone,
-                role, // הוספת תפקיד
-            };
-
-            try {
-                const response = await fetch("http://localhost:3000/api/auth/AdminAddUser", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(registerData),
-                });
-
-                if (!response.ok) {
-                    errorDiv.style.display = "block";
-                    errorMessage.textContent = "אנא בדוק את הפרטים שוב..";
-                 } 
-                 //else {
-                //     window.location.href = "../users/users.html";
-                // }
-            } catch (error) {
-                console.error(error);
-                errorDiv.style.display = "block";
-                errorMessage.textContent = "לא ניתן להתחבר לשרת. אנא נסה שנית";
-            }
+            //else {
+            //     window.location.href = "../users/users.html";
+            // }
+          } catch (error) {
+            console.error(error);
+            errorDiv.style.display = "block";
+            errorMessage.textContent = "לא ניתן להתחבר לשרת. אנא נסה שנית";
+          }
         });
     </script>
-</body>
-
+  </body>
 </html>

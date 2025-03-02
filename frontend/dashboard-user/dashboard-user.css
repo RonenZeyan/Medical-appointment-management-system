@@ -110,4 +110,8 @@
     width: 170px;
     height: 150px;
   }
+
+  .dashboard-user-main{
+    height: 100%;
+  }
 }

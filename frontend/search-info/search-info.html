@@ -10,11 +10,32 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
+    <link rel="stylesheet" href="../navbar.css">
   </head>
 
   <body>
     <!-- Header -->
-    <header></header>
+    <header>
+      <div id="navbar-container">
+        <nav>
+          <div class="navbar-container">
+            <img src="/frontend/logo.png" alt="Logo" class="navbar-logo" />
+            <div class="navbar-links">
+              <a href="/frontend/user-info/user-info.html">חשבון </a>
+              <a href="/frontend/dashboard-user/dashboard-user.html">לוח</a>
+              <a href="/frontend/appointment-details/appointment-details.html">תורים</a>
+              <a href="/frontend/search-info/search-info.html">חיפוש</a>
+              <a href="/frontend/history/history.html">היסטוריה</a>
+              <a href="/frontend/">המלצות</a>
+              <a href="/frontend/dashboard-user/myContact.html">פניות</a>
+              <a href="/frontend/ai-bot/bot.html">צאט בוט</a>
+
+              <button id="logout-button" onclick="logout()">Logout</button>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
 
     <!-- Main -->
     <main class="search-info" id="search-info">
@@ -154,7 +175,11 @@
     </main>
 
     <!-- Footer -->
-    <footer></footer>
+    <footer>
+      <p>
+        <a href="/frontend/dashboard-user/contact.html">צור קשר</a>
+      </p>
+    </footer>
     <script src="search-info.js" defer></script>
   </body>
 </html>

@@ -30,6 +30,7 @@
     </style>
   </head>
   <body>
+    
     <nav>
       <img src="/frontend/logo.png">
       <button id="logout-button" onclick="logout()" style="  background-color: #f44336;
@@ -86,9 +87,9 @@
             <span>*היסטוריה אחרונה </span>
           </div>
         </div>
-        <div class="dashboard-user-recommended-box" id="dashboard-user-box">
+        <div class="dashboard-user-recommended-box" id="dashboard-user-box" onclick="window.location.href='/frontend/dashboard-user/contact.html'">
           <div id="dashboard-user-box-info-top">
-            <i class="bi bi-lightbulb"></i> המלצות
+            <i class="bi bi-lightbulb"></i> צור קשר 
           </div>
           <div id="dashboard-user-box-info-bottom">
             <span>*המלצה אחרונה </span>
@@ -106,8 +107,6 @@
           </div>
     </main>
 
-    <!-- Footer -->
-    <footer></footer>
     <script src="../auth.js"></script>
     <script src="dashboard-user.js" defer></script>
   </body>

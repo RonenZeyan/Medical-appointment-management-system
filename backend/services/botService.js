@@ -7,19 +7,19 @@ const sessionHistory = {};
 async function run(userMessage, userId, medicalFields) {
     // The Gemini 1.5 models are versatile and work with multi-turn conversations (like chat)
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    const medicalFieldsText = medicalFields.map(field => {        
+    const medicalFieldsText = medicalFields.map(field => {
         // אם יש רופאים, ניצור רשימה עם שמות הרופאים ותחום ההתמחות
-        const doctors = field.doctors.length > 0 
-            ? field.doctors.map(doctor => `${doctor.doctor_name} - ${doctor.medical_field}- ${doctor.description}`).join(", ") 
+        const doctors = field.doctors.length > 0
+            ? field.doctors.map(doctor => `${doctor.doctor_name} - ${doctor.medical_field}- ${doctor.description}`).join(", ")
             : "No doctors available";
-    
+
         return `
             Medical Field: ${field.name}
             Description: ${field.doctors.description}
             Doctors: ${doctors}
         `;
     }).join("\n\n");
-    
+
 
     // ההנחיות הקבועות לבוט
     const botInstructions = `
@@ -265,12 +265,12 @@ async function run(userMessage, userId, medicalFields) {
     const recommendations = extractRecommendations(botMessage);
 
     // שמירת השיחה וההמלצות ב-ChatLogs
-    await saveChatLog(userId, sessionHistory[userId], recommendations);
+    await saveChatLog(userId, { senderName: "user", messageContent: userMessage }, { senderName: "gemini", messageContent: botMessage }, recommendations);
     return botMessage;
 }
 
 
-async function saveChatLog(userId, chatHistory, recommendations) {
+async function saveChatLog(userId, userMessage, botMessage, recommendations) {
     try {
         // קבלת התאריך של היום בלי שעות (00:00:00) כדי לחפש מסמך מהיום
         const today = new Date();
@@ -284,13 +284,17 @@ async function saveChatLog(userId, chatHistory, recommendations) {
 
         if (chatLog) {
             // אם נמצא מסמך מהיום, נוסיף לו את ההיסטוריה החדשה ואת ההמלצות
-            chatLog.chatHistory.push(...chatHistory);
-            chatLog.recommendations.push(...recommendations);
+            chatLog.chatHistory.push(userMessage);
+            chatLog.chatHistory.push(botMessage);
+            // chatLog.recommendations.push(...recommendations);
         } else {
             // אם אין מסמך מהיום, ניצור חדש
             chatLog = new ChatLog({
                 userId: userId,
-                chatHistory: chatHistory,
+                chatHistory: [
+                    userMessage,
+                    botMessage,
+                ],
                 recommendations: recommendations
             });
         }

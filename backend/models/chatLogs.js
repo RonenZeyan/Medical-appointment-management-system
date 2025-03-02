@@ -8,13 +8,14 @@ const chatLogSchema = new mongoose.Schema({
         required: true
     },
     chatHistory: [{
-        role: {
+        senderName: {
             type: String,
             required: true
-        }, // 'user' or 'model'
-        parts: [{
-            text: String
-        }]
+        }, // שם השולח ('user' עבור המשתמש, 'bot' עבור הבוט)
+        messageContent: {
+            type: String,
+            required: true
+        } // תוכן ההודעה
     }],
     recommendations: [{
         text: String,
